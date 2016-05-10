@@ -1,7 +1,0 @@
-F:\task\BeekooSite\BeekooWebSite\Log4Net\bin\Debug\Log4Net.exe.config
-F:\task\BeekooSite\BeekooWebSite\Log4Net\bin\Debug\Log4Net.exe
-F:\task\BeekooSite\BeekooWebSite\Log4Net\bin\Debug\Log4Net.pdb
-F:\task\BeekooSite\BeekooWebSite\Log4Net\bin\Debug\log4net.dll
-F:\task\BeekooSite\BeekooWebSite\Log4Net\obj\Debug\Log4Net.exe
-F:\task\BeekooSite\BeekooWebSite\Log4Net\obj\Debug\Log4Net.pdb
-F:\task\BeekooSite\BeekooWebSite\Log4Net\obj\Debug\Log4Net.csprojResolveAssemblyReference.cache
