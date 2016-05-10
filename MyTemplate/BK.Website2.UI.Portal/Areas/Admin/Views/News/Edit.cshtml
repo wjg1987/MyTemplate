@@ -1,0 +1,152 @@
+﻿@model My.Template.Model.News
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+
+@section Head{
+    <!-- PAGE LEVEL STYLES -->
+<link href="/areas/admin/assets/css/jquery-ui.css" rel="stylesheet" />
+    <!-- END PAGE LEVEL  STYLES -->
+
+}
+
+
+       <!--PAGE CONTENT -->
+        <div id="content">
+
+            <div class="inner">
+                 <div class="row">
+                    <div class="col-lg-12">
+                        <h3> 编辑新闻 </h3>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="box dark">
+                            <header>
+                                <div class="icons"><i class="icon-edit"></i>
+                                </div>
+                                <h5>编辑信息</h5>
+                            </header>
+                            <div id="div-1" class="accordion-body collapse in body">
+                                @using (Html.BeginForm("Edit", "News", FormMethod.Post, new { @class = "form-horizontal" }))
+                                {
+                                    <input type="hidden" name="pageNum" value="@ViewBag.pageNum" />
+                                      @Html.ValidationSummary(true)
+                                    @Html.HiddenFor(u => u.ID)
+                                    @Html.HiddenFor(u => u.AddTime)
+                                    @Html.HiddenFor(u => u.IsDelete)
+                                    @Html.HiddenFor(u => u.NewsTypeID)
+                                    <div class="form-group">
+                                        @Html.LabelFor(u => u.Title, "标题", new { @class = "control-label col-lg-4" })
+                                        <div class="col-lg-8">
+                                            @Html.ValidationMessageFor(u => u.Title)
+                                            @Html.TextBoxFor(u => u.Title, new { placeholder = "标题", @class = "form-control" })
+
+                                        </div>
+                                    </div>
+
+                                    
+                           
+                                    
+                                   <div class="form-group">
+                                         @Html.LabelFor(u => u.SeoKeywords, "SEO关键字", new { @class = "control-label col-lg-4" })
+                                       <div class="col-lg-8">
+                                           @Html.ValidationMessageFor(u => u.SeoKeywords)
+                                           @Html.TextBoxFor(u => u.SeoKeywords, new { placeholder = "SEO关键字", @class = "form-control", maxlength = 128 })
+                                       </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(u => u.SeoDescription, "SEO描述", new { @class = "control-label col-lg-4" })
+                                        <div class="col-lg-8">
+                                            @Html.ValidationMessageFor(u => u.SeoDescription)
+                                            @Html.TextBoxFor(u => u.SeoDescription, new { placeholder = "SEO描述", @class = "form-control", maxlength = 512 })
+
+                                        </div>
+                                    </div>
+
+                                   
+                                 
+                                    <div class="form-group">
+                                        @Html.LabelFor(u => u.IsView, "是否显示", new { @class = "control-label col-lg-4" })
+                                        <div class="col-lg-8">
+                                               @Html.ValidationMessageFor(u => u.IsView)
+                                            @Html.CheckBoxFor(u => u.IsView)
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(u => u.Sequence, "排序", new { @class = "control-label col-lg-4" })
+                                        <div class="col-lg-8">
+                                            @Html.ValidationMessageFor(u => u.Sequence)
+                                            @Html.TextBoxFor(u => u.Sequence, new { placeholder = "数字越小排越前", @class = "form-control", @style = "max-width: 20%;display:inline;" }) <span style="color: red;">数字越小排越前</span>                             
+                                            
+                                        </div>
+                                    </div>
+                                            <div class="form-group">
+                                         @Html.LabelFor(u => u.ClickNum, "点击数", new { @class = "control-label col-lg-4" })
+                                           <div class="col-lg-8">
+                                                @Html.ValidationMessageFor(u => u.ClickNum)
+                                               @Html.TextBoxFor(u => u.ClickNum, new { placeholder = "点击数", @class = "form-control", @style = "max-width: 20%;display:inline;" })                           
+                                            
+                                           </div>
+                                    </div>
+                                
+                                 <div class="form-group">
+                                         @Html.LabelFor(u => u.Content, "内容", new { @class = "control-label col-lg-4" })
+                                     <div class="col-lg-8">
+                                         @Html.ValidationMessageFor(u => u.Content)
+                                         @Html.TextAreaFor(u => u.Content, new { @class = "form-control", style = "height: 350px;" })
+
+                                     </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-8 divsure">
+
+                                            <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl"/>
+                                         <a href="@ViewBag.returnUrl" class="btn  btn-default btn-rect">取消</a>
+                                            <input type="submit" value="确认" class="btn btn-success btn-rect"/>
+                                        </div>
+                                         </div>
+                                }
+                             
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            </div>
+@section Foot{
+        <!-- PAGE LEVEL SCRIPTS -->
+    <script src='@Url.Content("~/Scripts/jquery/jquery.validate.js")'></script>
+    <script src="/Scripts/jquery/jquery.validate.unobtrusive.min.js"></script>
+         <!-- END PAGE LEVEL SCRIPTS -->
+
+     @*编辑器*@
+    <link href='@Url.Content("~/Scripts/kindeditor/themes/default/default.css")' rel="stylesheet" />
+    <script src='@Url.Content("~/Scripts/kindeditor/kindeditor.js")'></script>
+    <script src='@Url.Content("~/Scripts/kindeditor/lang/zh_CN.js")'></script>
+
+    <script>
+        //详细内容
+        KindEditor.ready(function (K) {
+            var editor1 = K.create('#Content', {
+                items: [
+						'source', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+						'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+						'insertunorderedlist', '|', 'emoticons', 'image', 'media', 'link', 'fullscreen'],
+                uploadJson: '/admin/KindEditorUpload/ProcessFile',
+                fileManagerJson: "/admin/KindEditorUpload/ProcessFileManger",
+                filterMode: false,
+                allowFileManager: true,
+            })
+        });
+    </script>
+  
+
+}

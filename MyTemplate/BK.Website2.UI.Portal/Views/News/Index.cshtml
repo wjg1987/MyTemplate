@@ -1,0 +1,53 @@
+﻿@{
+    Layout = "/Views/Shared/_LayoutPage.cshtml";
+}
+@model List<My.Template.Model.News>
+@section Head{
+
+}
+
+  <div class="news_content">
+        <div class="inner">
+                    <div class="title">
+                <div class="zhuti">
+                    <p>新闻动态</p>
+                </div>
+            </div>
+            <ul class="news_middle">
+            @foreach (var item in Model)
+            {
+                string str = My.Template.Common.Tools.RemoveHTML(item.Content);
+
+                <li class="news">
+                    <a class="news_a" target="_blank" href="@Url.Action("Detail", "News", new {id = @item.ID})">
+                    <div class="biaoti">
+                        <h1>@My.Template.Common.Tools.StrLen(item.Title,90)</h1>
+                        <span class="time"> @item.AddTime.ToString("yyyy-MM-dd")</span>
+                    </div>
+                    <div class="main">
+                        <div class="pic">
+                            <img class="left_img" src="@My.Template.Common.Tools.getImgUrl(item.Content)"/>
+                        </div>
+                        <div class="text">
+                           @My.Template.Common.Tools.StrLen(str, 670)
+                        </div>
+                    </div>
+                        </a>
+                </li>
+            }
+
+            </ul>
+             <div class="pagination">
+                @Html.Raw(ViewBag.pageStr)
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+@section Foot{
+   
+    }
+

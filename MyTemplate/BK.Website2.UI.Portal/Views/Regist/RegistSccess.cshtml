@@ -1,0 +1,118 @@
+﻿@{
+    Layout = "/Views/Shared/_LoginLayoutPage.cshtml";
+}
+@model My.Template.Model.DisCardType
+
+@section Head{
+  
+  
+    }
+
+    <div class="zhucesuccess">
+        <div class="inner">
+            <div class="content">
+                <h2>注册成功!</h2>
+                
+                <div class="success">
+                    <div class="wrap">
+                    <div class="left">
+                        <h3>￥<span>@Model.Value</span></h3>
+                              <p class="p1">@Model.AddTime.ToShortDateString()-@Model.ExpireTime.ToShortDateString()</p>
+                        <div class="quan_jieshao">
+                             <p>券编码：<span>548123596</span></p>
+                              <p>限购品类：<span>@Model.MarketGoods.GName</span> </p>
+                              <p>限购平台：<span>蜂巢家居商城</span></p>
+                        </div>
+                             
+                    </div>
+                    <div class="right">
+
+                        @{
+                            var user = new My.Template.UI.Portal.CommClass.Comms().IsVipLogin();        
+                            }
+                       
+                        <p class="p1"><span>欢迎您！</span><span class="sp1">@user.Account</span><a href="/My/MyInfo"><span class="sp2">完善个人资料</span><img src="/images/jiantou04.png"/></a></p>
+                        <p class="p2"><span>首次登陆用户输入优惠码后可获得 @Model.Value 元专属 @Model.MarketGoods.MGoodsType.TName 券</span></p>
+                        <p class="p3"><input type="text" placeholder="输入优惠码" id="command"/><a href="javascript:;" id="queren">确认领取</a></p>
+                        <p class="p4"><a href="/beeKooInfo/CommonProblem">如何获取优惠码?</a></p>
+                    </div>
+                </div>
+                    </div>
+                <div class="tanchukuang" id="tanchukuang">
+                    <h3>已领取</h3>
+                    <p class="tiaozhuan">系统将在<span>10S</span>跳转至我的优惠券页面</p>
+                    <p class="lianjie"><a href="/Default/Index" class="shouye">返回本站首页</a><a class="youhui"  href="/My/MyDisCard">进入我的优惠券</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    
+
+
+@section Foot{
+      <script type="text/javascript">
+          $(function () {
+              $('#queren').click(function () {
+                 
+                  var sec = 10;
+                  var command = $("#command").val();
+                  //发送异步领取优惠券 
+                  $.ajax({
+                      url: "/API/GetData/CreateDisCard",
+                      type :"post",
+                      data: { "commandWord": command },
+                      datatype: "text",
+                      success: function (data) {
+                          if (data == "1") {
+                              $('#tanchukuang').addClass('cur');
+                              var miao = $('.tiaozhuan span').text();
+                              var dingshiqi = setInterval(function () {
+                                  if (sec >= 2) {
+                                      sec--;
+                                      $('.tiaozhuan span').text(sec + 's');
+                                  }
+                                  else {
+
+                                      clearInterval(dingshiqi);
+                                      window.location.href = '/My/MyDisCard';
+                                  }
+                              }, 1000)
+                          }else if(data =="-1")
+                          {
+                              alert("优惠码不对哦");
+                          }else if(data == "-2")
+                          {
+                              alert("你已经领取过了");
+                              window.location.href = '/My/MyDisCard';
+                          }
+                          else if (data == "-3") {
+                              alert("优惠券已经领完了哦");
+                          } else if (data == "-4") {
+                              alert("你还没有登录哦");
+                              window.location.href = '/Login/Index';
+                          } else {
+                              alert("领取失败，请重试");
+                          }
+                      },
+                      error: function () {
+                          alert("领取失败，请重试");
+                      }
+
+
+                  });
+
+                
+
+              });
+          });
+
+    </script>
+    }

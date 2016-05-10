@@ -1,0 +1,405 @@
+﻿@model My.Template.Model.SiteInfo
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+
+@section Head{
+    <!-- PAGE LEVEL STYLES -->
+    <link href="/areas/admin/assets/css/jquery-ui.css" rel="stylesheet" />
+    <!-- END PAGE LEVEL  STYLES -->
+         <link href="/Scripts/uploadify3.2.1/uploadify.css" rel="stylesheet" />
+    <link href="/Areas/Admin/css/myuploadify.css" rel="stylesheet"/>
+        <link href="/Areas/Admin/css/myuploadify.css" rel="stylesheet" />
+           <style type="text/css">
+         .wrap_uploadImg2{height: 300px;width: 185px;}
+        .upload_container{height: 300px;width: 185px;}
+        .del_img img { width:20px; height:20px;}
+    </style>
+}
+
+
+       <!--PAGE CONTENT -->
+        <div id="content">
+
+            <div class="inner">
+                 <div class="row">
+                    <div class="col-lg-12">
+                        <h3> 编辑网站信息 </h3>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="box dark">
+                            <header>
+                                <div class="icons"><i class="icon-edit"></i>
+                                </div>
+                                <h5>编辑信息</h5>
+                            </header>
+                            <div id="div-1" class="accordion-body collapse in body">
+                                @using (Html.BeginForm("Edit", "SiteInfo", FormMethod.Post, new { @class = "form-horizontal" }))
+                                {
+                                    <input type="hidden" name="pageNum" value="@ViewBag.pageNum" />
+                                    @Html.HiddenFor(u => u.ID)
+                                  <div class="form-group">
+                                        @Html.LabelFor(u => u.SiteName, "网站名称", new { @class = "control-label col-lg-4" })
+                                        <div class="col-lg-8">
+                                            @Html.TextBoxFor(u => u.SiteName, new { placeholder = "网站名称", @class = "form-control" })
+                                            @Html.ValidationMessageFor(u => u.SiteName)
+                                        </div>
+                                    </div>
+                                     <div class="form-group">
+                                        @Html.LabelFor(u => u.SiteUrl, "网站地址", new { @class = "control-label col-lg-4" })
+                                        <div class="col-lg-8">
+                                            @Html.TextBoxFor(u => u.SiteUrl, new { placeholder = "网站地址", @class = "form-control" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(u => u.CompanyName, "公司名称", new {@class = "control-label col-lg-4"})
+                                        <div class="col-lg-8">
+                                            @Html.TextBoxFor(u => u.CompanyName, new {placeholder = "公司名称", @class = "form-control"})
+                                        </div>
+                                    </div>
+                                    
+                                      <div class="form-group">
+                                        @Html.LabelFor(u => u.Address, "公司地址", new { @class = "control-label col-lg-4" })
+                                        <div class="col-lg-8">
+                                            @Html.TextBoxFor(u => u.Address, new { placeholder = "公司地址", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(u => u.Email, "邮箱", new {@class = "control-label col-lg-4"})
+                                        <div class="col-lg-8">
+                                            @Html.TextBoxFor(u => u.Email, new {placeholder = "邮箱", @class = "form-control"})
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(u => u.Telephone, "电话", new {@class = "control-label col-lg-4"})
+                                        <div class="col-lg-8">
+                                            @Html.TextBoxFor(u => u.Telephone, new {placeholder = "电话", @class = "form-control"})
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(u => u.ZipCode, "邮编", new {@class = "control-label col-lg-4"})
+                                        <div class="col-lg-8">
+                                            @Html.TextBoxFor(u => u.ZipCode, new {placeholder = "邮编", @class = "form-control"})
+                                        </div>
+                                    </div>
+                                       <div class="form-group">
+                                        @Html.LabelFor(u => u.Fax, "传真", new { @class = "control-label col-lg-4" })
+                                        <div class="col-lg-8">
+                                            @Html.TextBoxFor(u => u.Fax, new { placeholder = "传真", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    
+                                   <div class="form-group">
+                                         @Html.LabelFor(u => u.SeoKeyWords, "SEO关键字", new { @class = "control-label col-lg-4" })
+                                        <div class="col-lg-8">
+                                           @Html.TextBoxFor(u => u.SeoKeyWords, new { placeholder = "SEO关键字", @class = "form-control", maxlength = 128 }) 
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                         @Html.LabelFor(u => u.SeoDescription, "SEO描述", new { @class = "control-label col-lg-4" })
+                                        <div class="col-lg-8">
+                                            @Html.TextBoxFor(u => u.SeoDescription, new { placeholder = "SEO描述", @class = "form-control", maxlength = 512 })
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(u => u.IcpNumber, "备案号", new {@class = "control-label col-lg-4"})
+                                        <div class="col-lg-8">
+                                            @Html.TextBoxFor(u => u.IcpNumber, new {placeholder = "备案号", @class = "form-control"})
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        @Html.LabelFor(u => u.IsViewInfo, "是否显示", new {@class = "control-label col-lg-4"})
+                                        <div class="col-lg-8">
+                                            @Html.CheckBoxFor(u => u.IsViewInfo)
+                                        </div>
+                                    </div>
+                                    
+                                     <div class="form-group">
+                                        <label class="control-label col-lg-4">我要给利图片</label>
+                                        <div class="col-lg-8">
+                                            @Html.ValidationMessageFor(u => u.Img0)
+                                            @if (string.IsNullOrEmpty(Model.Img0))
+                                            {
+                                                <div class="wrap_uploadImg2">
+                                                <div id="upload_con_0" class="upload_container">
+                                                    <div id="Img0" class="upload_btn"></div>
+                                                    <div class="loading off"><img src="/images/uploadloading.gif"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="wrap_uploadImg2">
+                                                    <div id="upload_con_0" class="upload_container"><img src="@Model.Img0"><a class="del_img" cuisineId="@Model.ID" href="javascript:;" onclick=" del_uploadimg(this, '@Path.GetFileName(Model.Img0)', 'Img0') "><img src="/Images/morelist_del.png"></a><input name="Img0" type="hidden" value="@Model.Img0">
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-lg-4"></label><span style="color: red;padding-left: 10px;">PC尺寸:822*245</span>                                              </div>
+                                    
+                                    
+                                      <div class="form-group">
+                                        <label class="control-label col-lg-4">筑巢日志图片</label>
+                                        <div class="col-lg-8">
+                                            @Html.ValidationMessageFor(u => u.Img1)
+                                             @if (string.IsNullOrEmpty(Model.Img1))
+                                            {
+                                                <div class="wrap_uploadImg1">
+                                                <div id="upload_con_1" class="upload_container">
+                                                    <div id="Img1" class="upload_btn"></div>
+                                                    <div class="loading off"><img src="/images/uploadloading.gif"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="wrap_uploadImg1">
+                                                    <div id="upload_con_1" class="upload_container"><img src="@Model.Img1"><a class="del_img" cuisineId="@Model.ID" href="javascript:;" onclick=" del_uploadimg(this, '@Path.GetFileName(Model.Img1)', 'Img1') "><img src="/Images/morelist_del.png"></a><input name="Img1" type="hidden" value="@Model.Img1">
+                                                    </div>
+                                                </div>
+                                            }
+
+                                        </div>
+                                    </div>
+                                     <div class="form-group">
+                                        <label class="control-label col-lg-4"></label><span style="color: red;padding-left: 10px;">PC尺寸:822*245</span>                                              </div>
+                            
+                                    
+                                     <div class="form-group">
+                                        <label class="control-label col-lg-4">样板房图片1</label>
+                                        <div class="col-lg-8">
+                                            @Html.ValidationMessageFor(u => u.Img2)
+                                             @if (string.IsNullOrEmpty(Model.Img2))
+                                            {
+                                                <div class="wrap_uploadImg1">
+                                                <div id="upload_con_2" class="upload_container">
+                                                    <div id="Img2" class="upload_btn"></div>
+                                                    <div class="loading off"><img src="/images/uploadloading.gif"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="wrap_uploadImg1">
+                                                    <div id="upload_con_2" class="upload_container"><img src="@Model.Img2"><a class="del_img" cuisineId="@Model.ID" href="javascript:;" onclick=" del_uploadimg(this, '@Path.GetFileName(Model.Img2)', 'Img2') "><img src="/Images/morelist_del.png"></a><input name="Img2" type="hidden" value="@Model.Img2">
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>  
+                                     </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-lg-4"></label><span style="color: red;padding-left: 10px;">PC尺寸:818*512</span>                                 </div>
+                                    
+                                    
+                                     <div class="form-group">
+                                        <label class="control-label col-lg-4">样板房图片2</label>
+                                        <div class="col-lg-8">
+                                            @Html.ValidationMessageFor(u => u.Img3)
+                                            @if (string.IsNullOrEmpty(Model.Img3))
+                                            {
+                                                <div class="wrap_uploadImg1">
+                                                <div id="upload_con_3" class="upload_container">
+                                                    <div id="Img3" class="upload_btn"></div>
+                                                    <div class="loading off"><img src="/images/uploadloading.gif"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="wrap_uploadImg1">
+                                                    <div id="upload_con_3" class="upload_container"><img src="@Model.Img3"><a class="del_img" cuisineId="@Model.ID" href="javascript:;" onclick=" del_uploadimg(this, '@Path.GetFileName(Model.Img3)', 'Img3') "><img src="/Images/morelist_del.png"></a><input name="Img3" type="hidden" value="@Model.Img3">
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-lg-4"></label><span style="color: red;padding-left: 10px;">PC尺寸:392*426</span>                                 </div>
+                                    
+                                    
+                                    
+                                        <div class="form-group">
+                                        <label class="control-label col-lg-4">样板房图片3</label>
+                                        <div class="col-lg-8">
+                                            @Html.ValidationMessageFor(u => u.Img4)
+                                              @if (string.IsNullOrEmpty(Model.Img4))
+                                            {
+                                                <div class="wrap_uploadImg1">
+                                                <div id="upload_con_4" class="upload_container">
+                                                    <div id="Img4" class="upload_btn"></div>
+                                                    <div class="loading off"><img src="/images/uploadloading.gif"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="wrap_uploadImg1">
+                                                    <div id="upload_con_4" class="upload_container"><img src="@Model.Img4"><a class="del_img" cuisineId="@Model.ID" href="javascript:;" onclick=" del_uploadimg(this, '@Path.GetFileName(Model.Img4)', 'Img4') "><img src="/Images/morelist_del.png"></a><input name="Img4" type="hidden" value="@Model.Img4">
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-lg-4"></label><span style="color: red;padding-left: 10px;">PC尺寸:361*408</span>                                 </div>
+                                    
+                                    
+                                    
+                                        <div class="form-group">
+                                        <label class="control-label col-lg-4">样板房图片4</label>
+                                        <div class="col-lg-8">
+                                            @Html.ValidationMessageFor(u => u.Img5)
+                                             @if (string.IsNullOrEmpty(Model.Img5))
+                                            {
+                                                <div class="wrap_uploadImg1">
+                                                <div id="upload_con_5" class="upload_container">
+                                                    <div id="Img5" class="upload_btn"></div>
+                                                    <div class="loading off"><img src="/images/uploadloading.gif"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="wrap_uploadImg1">
+                                                    <div id="upload_con_5" class="upload_container"><img src="@Model.Img5"><a class="del_img" cuisineId="@Model.ID" href="javascript:;" onclick=" del_uploadimg(this, '@Path.GetFileName(Model.Img5)', 'Img5') "><img src="/Images/morelist_del.png"></a><input name="Img5" type="hidden" value="@Model.Img5">
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                     <div class="form-group">
+                                        <label class="control-label col-lg-4"></label><span style="color: red;padding-left: 10px;">PC尺寸:427*408</span>                                 </div>
+                                    
+                                    
+                                        <div class="form-group">
+                                        <label class="control-label col-lg-4">样板房图片5</label>
+                                        <div class="col-lg-8">
+                                            @Html.ValidationMessageFor(u => u.Img6)
+                                                @if (string.IsNullOrEmpty(Model.Img6))
+                                            {
+                                                <div class="wrap_uploadImg1">
+                                                <div id="upload_con_6" class="upload_container">
+                                                    <div id="Img6" class="upload_btn"></div>
+                                                    <div class="loading off"><img src="/images/uploadloading.gif"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="wrap_uploadImg1">
+                                                    <div id="upload_con_6" class="upload_container"><img src="@Model.Img6"><a class="del_img" cuisineId="@Model.ID" href="javascript:;" onclick=" del_uploadimg(this, '@Path.GetFileName(Model.Img6)', 'Img6') "><img src="/Images/morelist_del.png"></a><input name="Img6" type="hidden" value="@Model.Img6">
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-lg-4"></label><span style="color: red;padding-left: 10px;">PC尺寸:392*491</span>                                 </div>
+                                    
+                                    
+                                    
+                                        <div class="form-group">
+                                        <label class="control-label col-lg-4">样板房图片6</label>
+                                        <div class="col-lg-8">
+                                            @Html.ValidationMessageFor(u => u.Img7)
+                                               @if (string.IsNullOrEmpty(Model.Img7))
+                                            {
+                                                <div class="wrap_uploadImg1">
+                                                <div id="upload_con_7" class="upload_container">
+                                                    <div id="Img7" class="upload_btn"></div>
+                                                    <div class="loading off"><img src="/images/uploadloading.gif"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="wrap_uploadImg1">
+                                                    <div id="upload_con_7" class="upload_container"><img src="@Model.Img7"><a class="del_img" cuisineId="@Model.ID" href="javascript:;" onclick=" del_uploadimg(this, '@Path.GetFileName(Model.Img7)', 'Img7') "><img src="/Images/morelist_del.png"></a><input name="Img7" type="hidden" value="@Model.Img7">
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-lg-4"></label><span style="color: red;padding-left: 10px;">PC尺寸:394*529</span>                                 </div>
+                                    
+                                    
+                                    
+                                        <div class="form-group">
+                                        <label class="control-label col-lg-4">样板房图片7</label>
+                                        <div class="col-lg-8">
+                                            @Html.ValidationMessageFor(u => u.Img8)
+                                              @if (string.IsNullOrEmpty(Model.Img8))
+                                            {
+                                                <div class="wrap_uploadImg1">
+                                                <div id="upload_con_8" class="upload_container">
+                                                    <div id="Img8" class="upload_btn"></div>
+                                                    <div class="loading off"><img src="/images/uploadloading.gif"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="wrap_uploadImg1">
+                                                    <div id="upload_con_8" class="upload_container"><img src="@Model.Img8"><a class="del_img" cuisineId="@Model.ID" href="javascript:;" onclick=" del_uploadimg(this, '@Path.GetFileName(Model.Img8)', 'Img8') "><img src="/Images/morelist_del.png"></a><input name="Img8" type="hidden" value="@Model.Img8">
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                     <div class="form-group">
+                                        <label class="control-label col-lg-4"></label><span style="color: red;padding-left: 10px;">PC尺寸:815*530</span>                                 </div>
+                                    
+                                    
+                                    <div class="form-group">
+                                        <div class="col-lg-8 divsure">
+
+                                            <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl"/>
+                                         <a href="@ViewBag.returnUrl" class="btn  btn-default btn-rect">取消</a>
+                                            <input type="submit" value="确认" class="btn btn-success btn-rect"/>
+                                        </div>
+                                         </div>
+                                }
+                             
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            </div>
+@section Foot{
+        <!-- PAGE LEVEL SCRIPTS -->
+    <script src='@Url.Content("~/Scripts/jquery/jquery.validate.js")'></script>
+    <script src="/Scripts/jquery/jquery.validate.unobtrusive.min.js"></script>
+    
+      <script src="/Scripts/uploadify3.2.1/jquery.uploadify.min.js?ver=@(new Random().Next(0, 99999).ToString())"></script>
+    <script type="text/javascript">
+        var uploadbtn = "/images/up_img2.jpg";
+        var uploadheight = 300;
+        var uploadwhidth = 185;
+    </script>
+    <script src="/Areas/Admin/js/myuploadify.js"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+}

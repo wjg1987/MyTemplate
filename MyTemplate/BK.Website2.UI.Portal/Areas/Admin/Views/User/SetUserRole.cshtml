@@ -1,0 +1,131 @@
+﻿@using My.Template.Model
+@model My.Template.Model.User
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+
+@section Head{
+        <!-- PAGE LEVEL STYLES -->
+     <link href="/areas/admin/assets/css/jquery-ui.css" rel="stylesheet" />
+}
+
+
+       <!--PAGE CONTENT -->
+        <div id="content">
+
+            <div class="inner">
+                 <div class="row">
+                    <div class="col-lg-12">
+                        <h3> 设置用户角色 </h3>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="box dark">
+                            <header>
+                                <div class="icons"><i class="icon-edit"></i>
+                                </div>
+                                <h5>设置信息</h5>
+                            </header>
+                            <div id="div-1" class="accordion-body collapse in body">
+                                @using (Html.BeginForm("SetUserRole", "User", FormMethod.Post, new { @class = "form-horizontal", id = "AddForm" }))
+                                {
+                                    <input type="hidden" name="pageNum" value="@ViewBag.pageNum" />
+                                    @Html.ValidationSummary(true)
+                                    @Html.HiddenFor(u=>u.ID)
+                                    <div class="form-group">
+                                        @Html.LabelFor(u => u.Account, "账号", new {@class = "control-label col-lg-4",@readonly="readonly"})
+
+                                        <div class="col-lg-8">
+                                            @Html.ValidationMessageFor(u => u.Account)
+                                            @Html.TextBoxFor(u => u.Account, new {placeholder = "账号", @class = "form-control"})
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="RoleIDs" class="control-label col-lg-4">角色列表</label>
+                                        <div class="col-lg-8">
+                                            @{
+                                                var roleInts = ViewBag.rolInts as List<int>;
+                                            }
+                                            @foreach (var item in  (ViewBag.RoleIDs as List<Role>))
+                                            {
+
+
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input @if(roleInts.Contains(item.ID)){@("checked=checked")} class="uniform" data-rid="@item.ID" data-uid="@Model.ID" name="roleids" type="checkbox" value="@item.ID">@item.RCNName
+                                                    </label>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+
+                                  
+                             
+                                    <div class="form-group">
+                                        <div class="col-lg-8 divsure">
+
+                                         <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl"/>
+                                         <a href="@ViewBag.returnUrl" class="btn  btn-default btn-rect">取消</a>
+                                        </div>
+                                         </div>
+                                }
+                             
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            </div>
+@section Foot{
+    <!-- PAGE LEVEL SCRIPTS -->
+    <script src='@Url.Content("~/Scripts/jquery/jquery.validate.js")'></script>
+    <script src="/Scripts/jquery/jquery.validate.unobtrusive.min.js"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <script type="text/javascript">
+        $(function() {
+            $('.uniform').click(function() {
+                var ischecked = $(this).attr('checked');
+                var rid = $(this).data('rid');
+                var uid = $(this).data('uid');
+                var setOrDelete;
+                if (ischecked) {
+                    setOrDelete = false;
+                } else {
+                    setOrDelete = true;
+                }
+                var issuccess = false;
+                $.ajax({
+                    url: '/admin/user/setuserrole',
+                    data: { roleID: rid, userID: uid, setOrDelete: setOrDelete },
+                    dataType: 'text',
+                    type: 'post',
+                    success: function (data) {
+                        if (data == 1) {
+                            issuccess = true;
+                            if (setOrDelete) {
+                                $(this).attr('checked', 'checked');
+                            } else {
+                                $(this).attr('checked', '');
+                            }
+                            
+                        } 
+                    },
+                    error: function () {
+
+                    }
+                })
+
+                if (!issuccess) {
+                    return;
+                }
+            })
+        })
+    </script>
+}

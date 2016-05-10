@@ -1,0 +1,76 @@
+﻿@{
+    Layout = "/Views/Shared/_LoginLayoutPage.cshtml";
+}
+@model My.Template.Model.User
+@section Head{
+   
+}
+
+ <div class="forgetpass">
+<div id="getpassword">
+    <div class="getpassword_left">
+    </div>
+    <div class="getpassword_right">
+
+        <form class="get" action="/Login/FindPwd" method="post" id="GetForm">
+            <p class="p1">找回密码</p>
+
+            <label>
+                账户名 
+                        @Html.TextBoxFor(u => u.Account, new { placeholder = "已验证手机/用户名", id = "phone", name = "Account" })
+            </label>
+            @{
+                string status="";
+                if (ViewBag.res != null && ViewBag.res == 1)
+           {
+                status = "visible";
+           }
+           else
+           {
+                status = "hidden";
+           }
+                }
+           
+         <p style="color:red; font-size:12px;visibility:@status; height:30px; width:150px;line-height:30px;" id="phoneError">@ViewBag.ErrorInfo</p>          
+            <label class="label02">验证码<input type="text" name="validateCode" id="checkcode" /></label>
+             
+            <div class="matu">
+                <img id="checkImg" />   
+                 @if (ViewBag.res != null && ViewBag.res == 2 || ViewBag.res != null && ViewBag.res == 3)
+                 {
+                     status = "visible";
+                 }
+                 else 
+                 {
+                     status = "hidden";
+                 }
+               
+              <span style="visibility:@status;" id="checkcodeError">@ViewBag.ErrorInfo</span>
+                   
+            </div>
+           <div style="clear:both; "></div>
+            <input class="tijiao" type="button" value="提交" id="sub" />
+                
+        </form>
+
+
+    </div>
+</div>
+     </div>
+
+<div id="mask">
+    <div id="indexg0">
+        <img src="/images/mask_bg.jpg" />
+        
+    </div>
+</div>
+
+
+	
+@section Foot{
+    <script src="/js/jquery.mousewheel.js"></script>
+    <script src="/js/web2js/picscroll.js"></script>
+    <script src="/js/web2js/findpwd.js"></script>
+}
+
+

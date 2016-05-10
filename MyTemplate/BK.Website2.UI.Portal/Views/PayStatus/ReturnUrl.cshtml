@@ -1,0 +1,48 @@
+﻿@{
+    Layout = "/Views/Shared/_LayoutPage.cshtml";
+}
+@model  List<My.Template.Model.MarketGoods>
+@section Head{
+       <style>
+
+    </style>
+
+ 
+}
+    <div class="orderuccess">
+        <div class="inner">
+            <img src="/images/order.png"/>
+            <p><a href="@Url.Action("index","Default")" class="shouye">回到首页</a>
+@*                <a href="javascript:;" id="return">返回上一页</a></p>*@
+        </div>
+
+        <div class="recommend">
+            <div class="inrecommend">
+                <p>相关推荐</p>
+                <div class="more_pictures">
+                    <ul>
+                       @for (int i = 0; i < Model.Count; i++)
+                        {
+                             <li @if(i == Model.Count-1){@("class=right")} >
+                            <a target="_blank" href="/market/detail/@Model[i].ID">
+
+                                <img  src="@Model[i].GPics"/>
+                                <div class="zhezhao"></div>
+                                <div class="tubiao">
+                                    <img src="/images/Ytubiao.png"/>
+                                </div>
+                            </a>
+
+                        </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+@section Foot{
+
+}

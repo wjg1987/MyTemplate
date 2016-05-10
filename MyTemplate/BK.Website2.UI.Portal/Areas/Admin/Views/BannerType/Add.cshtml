@@ -1,0 +1,77 @@
+﻿@using System.Runtime.InteropServices
+@model My.Template.Model.BannerType
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+
+@section Head{
+        <!-- PAGE LEVEL STYLES -->
+     <link href="/areas/admin/assets/css/jquery-ui.css" rel="stylesheet" />
+
+}
+
+
+       <!--PAGE CONTENT -->
+        <div id="content">
+
+            <div class="inner">
+                 <div class="row">
+                    <div class="col-lg-12">
+                        <h3> 添加楼盘销售 </h3>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="box dark">
+                            <header>
+                                <div class="icons"><i class="icon-edit"></i>
+                                </div>
+                                <h5>添加信息</h5>
+                            </header>
+                            <div id="div-1" class="accordion-body collapse in body">
+                                @using (Html.BeginForm("Add", "BannerType", FormMethod.Post, new { @class = "form-horizontal", id = "AddForm" }))
+                                {
+                                    <input type="hidden" name="pageNum" value="@ViewBag.pageNum" />
+                                    @Html.ValidationSummary(true)
+                                    <div class="form-group">
+                                        @Html.LabelFor(c=>c.TName, "Banner类型名称", new {@class = "control-label col-lg-4"})
+                                        <div class="col-lg-8">
+                                            @Html.ValidationMessageFor(c => c.TName)
+                                            @Html.TextBoxFor(c=>c.TName, new {placeholder = "Banner类型名称", @class = "form-control"})
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(c=>c.Remark, "备注", new {@class = "control-label col-lg-4"})
+                                        <div class="col-lg-8">
+                                            @Html.ValidationMessageFor(c => c.Remark)
+                                            @Html.TextBoxFor(c=>c.Remark, new {placeholder = "备注", @class = "form-control"})
+                                        </div>
+                                    </div>                                   
+                                    <div class="form-group">
+                                        <div class="col-lg-8 divsure">
+
+                                            <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl"/>
+                                         <a href="@ViewBag.returnUrl" class="btn  btn-default btn-rect">取消</a>
+                                            <input type="submit" value="确认" class="btn btn-success btn-rect"/>
+                                        </div>
+                                         </div>
+                                }
+                             
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            </div>
+@section Foot{
+    <!-- PAGE LEVEL SCRIPTS -->
+    <script src='@Url.Content("~/Scripts/jquery/jquery.validate.js")'></script>
+    <script src="/Scripts/jquery/jquery.validate.unobtrusive.min.js"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+
+   
+}

@@ -1,0 +1,58 @@
+﻿@{
+    Layout = "/Views/Shared/_LoginLayoutPage.cshtml";
+}
+@model My.Template.Model.User
+@section Head{
+
+}
+   <div class="forgettwo">
+      <div id="password">
+            <div class="password_left">                                        
+            </div>
+            <div class="password_right">
+
+                <form class="get02" action="/Login/FindPwdStep2" method="post" id="checkForm">
+                    <p class="p1">找回密码</p>
+                    <p>请选择验证方式</p>
+                     <select>
+                         <option selected="selected">手机验证码</option>
+                     </select>
+                    <p class="p2">手机号码
+                          <input type="hidden" value="@ViewBag.account" id="phone"  name="account"/>
+                        <span class="sp1">@ViewBag.mobile</span></p>
+                    @{
+                        string status = "";
+                        if(ViewBag.res !=null && ViewBag.res ==1)
+                    {
+                        status = "visible";
+                    }
+                    else
+                    {
+                        status = "hidden";
+                    }
+                      }
+                   
+                  
+                  <p style="visibility:@status;" class="p4" >@ViewBag.ErrorInfo</p>
+                    <p class="p3"><input type="text" class="yanzhenma"  placeholder = "填写验证码" id="checkcode" name="validateCode"/><input  class="huoqu" id="getcheckcode" value="获取验证码" /></p>
+                    <input class="tijiao" type="button" value="提交" id="sub"/>
+                </form>
+            </div>
+        </div>
+          </div>
+
+        <div id="mask">
+             <div id="indexg0"> 
+                 <img src="/images/mask_bg.jpg" />
+             </div>
+        </div>
+
+
+	
+@section Foot{
+    <script src="/js/jquery.mousewheel.js"></script>
+    <script src="/js/web2js/picscroll.js"></script>
+    <script src="/js/web2js/findpwdstep2.js"></script>
+}
+
+

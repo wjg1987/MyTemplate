@@ -1,0 +1,1175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="DataModelStoreContainer">
+    <EntitySet Name="User" EntityType="DataModel.Store.User" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserInfo" EntityType="DataModel.Store.UserInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Role" EntityType="DataModel.Store.Role" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="User_Role" EntityType="DataModel.Store.User_Role" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Action" EntityType="DataModel.Store.Action" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="User_Action" EntityType="DataModel.Store.User_Action" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Role_Action" EntityType="DataModel.Store.Role_Action" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ActionType" EntityType="DataModel.Store.ActionType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Banner" EntityType="DataModel.Store.Banner" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SinglePage" EntityType="DataModel.Store.SinglePage" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="News" EntityType="DataModel.Store.News" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SiteInfo" EntityType="DataModel.Store.SiteInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="NewsType" EntityType="DataModel.Store.NewsType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Videos" EntityType="DataModel.Store.Videos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QAInfos" EntityType="DataModel.Store.QAInfos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BannerType" EntityType="DataModel.Store.BannerType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Notice" EntityType="DataModel.Store.Notice" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="UserUser_Role" Association="DataModel.Store.UserUser_Role">
+      <End Role="User" EntitySet="User" />
+      <End Role="User_Role" EntitySet="User_Role" />
+    </AssociationSet>
+    <AssociationSet Name="RoleUser_Role" Association="DataModel.Store.RoleUser_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="User_Role" EntitySet="User_Role" />
+    </AssociationSet>
+    <AssociationSet Name="UserUser_Action" Association="DataModel.Store.UserUser_Action">
+      <End Role="User" EntitySet="User" />
+      <End Role="User_Action" EntitySet="User_Action" />
+    </AssociationSet>
+    <AssociationSet Name="ActionUser_Action" Association="DataModel.Store.ActionUser_Action">
+      <End Role="Action" EntitySet="Action" />
+      <End Role="User_Action" EntitySet="User_Action" />
+    </AssociationSet>
+    <AssociationSet Name="RoleRole_Action" Association="DataModel.Store.RoleRole_Action">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Role_Action" EntitySet="Role_Action" />
+    </AssociationSet>
+    <AssociationSet Name="ActionRole_Action" Association="DataModel.Store.ActionRole_Action">
+      <End Role="Action" EntitySet="Action" />
+      <End Role="Role_Action" EntitySet="Role_Action" />
+    </AssociationSet>
+    <AssociationSet Name="ActionActionType" Association="DataModel.Store.ActionActionType">
+      <End Role="Action" EntitySet="Action" />
+      <End Role="ActionType" EntitySet="ActionType" />
+    </AssociationSet>
+    <AssociationSet Name="NewsNewsType" Association="DataModel.Store.NewsNewsType">
+      <End Role="News" EntitySet="News" />
+      <End Role="NewsType" EntitySet="NewsType" />
+    </AssociationSet>
+    <AssociationSet Name="UserUserInfo" Association="DataModel.Store.UserUserInfo">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserInfo" EntitySet="UserInfo" />
+    </AssociationSet>
+    <AssociationSet Name="BannerBannerType" Association="DataModel.Store.BannerBannerType">
+      <End Role="Banner" EntitySet="Banner" />
+      <End Role="BannerType" EntitySet="BannerType" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Account" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="Email" Type="nvarchar" Nullable="true" MaxLength="64" />
+    <Property Name="Mobile" Type="nvarchar" Nullable="true" MaxLength="16" />
+    <Property Name="WxOpenod" Type="nvarchar" Nullable="true" MaxLength="64" />
+    <Property Name="SinaWBOpenid" Type="nvarchar" Nullable="true" MaxLength="64" />
+    <Property Name="QQNum" Type="nvarchar" Nullable="true" MaxLength="64" />
+    <Property Name="Pwd" Type="nvarchar" Nullable="false" MaxLength="64" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="IsFrozen" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+    <Property Name="Balance" Type="decimal" Nullable="false" />
+    <Property Name="FrozenBlance" Type="decimal" Nullable="false" />
+    <Property Name="AlipayAccount" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="BankNumber" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="BankName" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="UserInfo_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" Nullable="true" MaxLength="32" />
+    <Property Name="NickName" Type="nvarchar" Nullable="true" MaxLength="32" />
+    <Property Name="HeadPic" Type="nvarchar" Nullable="true" MaxLength="512" />
+    <Property Name="WXHeadPic" Type="nvarchar" Nullable="true" MaxLength="512" />
+    <Property Name="QQHeadPic" Type="nvarchar" Nullable="true" MaxLength="512" />
+    <Property Name="SinaWBHeadPic" Type="nvarchar" Nullable="true" MaxLength="512" />
+    <Property Name="Age" Type="int" Nullable="false" DefaultValue="0" />
+    <Property Name="City" Type="nvarchar" Nullable="true" MaxLength="64" />
+    <Property Name="Address" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="QQNum" Type="nvarchar" Nullable="true" MaxLength="16" />
+    <Property Name="Email" Type="nvarchar" Nullable="true" MaxLength="64" />
+    <Property Name="Sex" Type="bit" Nullable="true" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RCNName" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="REnName" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="RRemark" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="IsFrozen" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User_Role">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="RoleID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Action">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AName" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="AUrl" Type="nvarchar" Nullable="false" MaxLength="512" />
+    <Property Name="AIcon" Type="nvarchar" Nullable="true" MaxLength="512" />
+    <Property Name="ASequence" Type="int" Nullable="false" DefaultValue="0" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="IsFrozen" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="ParentID" Type="int" Nullable="false" DefaultValue="0" />
+    <Property Name="ActionTypeID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User_Action">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="ActionID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Role_Action">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleID" Type="int" Nullable="false" />
+    <Property Name="ActionID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ActionType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TName" Type="nvarchar" Nullable="false" MaxLength="64" />
+    <Property Name="Remark" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Banner">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="64" />
+    <Property Name="ImgPic" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="LinkUrl" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="IsView" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+    <Property Name="Sequence" Type="int" Nullable="false" />
+    <Property Name="IsUse4Phone" Type="bit" Nullable="false" />
+    <Property Name="BannerTypeID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SinglePage">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PageName" Type="nvarchar" Nullable="false" MaxLength="64" />
+    <Property Name="PageContent" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SeoKeyWord" Type="nvarchar" Nullable="true" MaxLength="128" />
+    <Property Name="SeoDescription" Type="nvarchar" Nullable="true" MaxLength="512" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="Sequence" Type="int" Nullable="false" />
+    <Property Name="IsView" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsView" Type="bit" Nullable="false" DefaultValue="true" />
+    <Property Name="Sequence" Type="int" Nullable="false" DefaultValue="0" />
+    <Property Name="ClickNum" Type="int" Nullable="false" DefaultValue="0" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="SeoKeywords" Type="nvarchar" Nullable="true" MaxLength="128" />
+    <Property Name="SeoDescription" Type="nvarchar" Nullable="true" MaxLength="512" />
+    <Property Name="NewsTypeID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SiteInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SiteName" Type="nvarchar" Nullable="true" MaxLength="64" />
+    <Property Name="SiteUrl" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="CompanyName" Type="nvarchar" Nullable="true" MaxLength="128" />
+    <Property Name="Address" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="ZipCode" Type="nvarchar" Nullable="true" MaxLength="16" />
+    <Property Name="Telephone" Type="nvarchar" Nullable="true" MaxLength="32" />
+    <Property Name="Fax" Type="nvarchar" Nullable="true" MaxLength="32" />
+    <Property Name="Email" Type="nvarchar" Nullable="true" MaxLength="64" />
+    <Property Name="SeoKeyWords" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="SeoDescription" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="IcpNumber" Type="nvarchar" Nullable="true" MaxLength="64" />
+    <Property Name="IsViewInfo" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="Img0" Type="nvarchar" Nullable="false" MaxLength="512" />
+    <Property Name="Img1" Type="nvarchar" Nullable="false" MaxLength="512" />
+    <Property Name="Img2" Type="nvarchar" Nullable="false" MaxLength="512" />
+    <Property Name="Img3" Type="nvarchar" Nullable="false" MaxLength="512" />
+    <Property Name="Img4" Type="nvarchar" Nullable="false" MaxLength="512" />
+    <Property Name="Img5" Type="nvarchar" Nullable="false" MaxLength="512" />
+    <Property Name="Img6" Type="nvarchar" Nullable="false" MaxLength="512" />
+    <Property Name="Img7" Type="nvarchar" Nullable="false" MaxLength="512" />
+    <Property Name="Img8" Type="nvarchar" Nullable="false" MaxLength="512" />
+  </EntityType>
+  <EntityType Name="NewsType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeName" Type="nvarchar" Nullable="false" MaxLength="64" />
+    <Property Name="ParentID" Type="int" Nullable="false" DefaultValue="0" />
+    <Property Name="TypePath" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Videos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VName" Type="nvarchar" Nullable="false" MaxLength="64" />
+    <Property Name="ThemPic" Type="nvarchar" Nullable="false" MaxLength="512" />
+    <Property Name="MPEG4Url" Type="nvarchar" Nullable="true" MaxLength="512" />
+    <Property Name="OggUrl" Type="nvarchar" Nullable="true" MaxLength="512" />
+    <Property Name="WebMUrl" Type="nvarchar" Nullable="true" MaxLength="512" />
+    <Property Name="IsView" Type="bit" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+    <Property Name="Sequence" Type="int" Nullable="false" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="QAInfos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Question" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="Answer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Sequence" Type="int" Nullable="false" />
+    <Property Name="IsView" Type="bit" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BannerType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TName" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="Remark" Type="nvarchar" Nullable="false" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="Notice">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LinkUrl" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NDetails" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+    <Property Name="ExpireTime" Type="datetime" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+    <Property Name="Sequence" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="UserUser_Role">
+    <End Role="User" Type="DataModel.Store.User" Multiplicity="1" />
+    <End Role="User_Role" Type="DataModel.Store.User_Role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User_Role">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RoleUser_Role">
+    <End Role="Role" Type="DataModel.Store.Role" Multiplicity="1" />
+    <End Role="User_Role" Type="DataModel.Store.User_Role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User_Role">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserUser_Action">
+    <End Role="User" Type="DataModel.Store.User" Multiplicity="1" />
+    <End Role="User_Action" Type="DataModel.Store.User_Action" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User_Action">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ActionUser_Action">
+    <End Role="Action" Type="DataModel.Store.Action" Multiplicity="1" />
+    <End Role="User_Action" Type="DataModel.Store.User_Action" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Action">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User_Action">
+        <PropertyRef Name="ActionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RoleRole_Action">
+    <End Role="Role" Type="DataModel.Store.Role" Multiplicity="1" />
+    <End Role="Role_Action" Type="DataModel.Store.Role_Action" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Role_Action">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ActionRole_Action">
+    <End Role="Action" Type="DataModel.Store.Action" Multiplicity="1" />
+    <End Role="Role_Action" Type="DataModel.Store.Role_Action" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Action">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Role_Action">
+        <PropertyRef Name="ActionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ActionActionType">
+    <End Role="Action" Type="DataModel.Store.Action" Multiplicity="*" />
+    <End Role="ActionType" Type="DataModel.Store.ActionType" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ActionType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Action">
+        <PropertyRef Name="ActionTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="NewsNewsType">
+    <End Role="News" Type="DataModel.Store.News" Multiplicity="*" />
+    <End Role="NewsType" Type="DataModel.Store.NewsType" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="NewsType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="News">
+        <PropertyRef Name="NewsTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserUserInfo">
+    <End Role="User" Type="DataModel.Store.User" Multiplicity="*" />
+    <End Role="UserInfo" Type="DataModel.Store.UserInfo" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="UserInfo_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BannerBannerType">
+    <End Role="Banner" Type="DataModel.Store.Banner" Multiplicity="*" />
+    <End Role="BannerType" Type="DataModel.Store.BannerType" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="BannerType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Banner">
+        <PropertyRef Name="BannerTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DataModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" >
+        <EntityContainer Name="DataModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="User" EntityType="DataModel.User" />
+          <EntitySet Name="UserInfo" EntityType="DataModel.UserInfo" />
+          <EntitySet Name="Role" EntityType="DataModel.Role" />
+          <EntitySet Name="User_Role" EntityType="DataModel.User_Role" />
+          <EntitySet Name="Action" EntityType="DataModel.Action" />
+          <EntitySet Name="User_Action" EntityType="DataModel.User_Action" />
+          <EntitySet Name="Role_Action" EntityType="DataModel.Role_Action" />
+          <AssociationSet Name="UserUser_Role" Association="DataModel.UserUser_Role">
+            <End Role="User" EntitySet="User" />
+            <End Role="User_Role" EntitySet="User_Role" />
+          </AssociationSet>
+          <AssociationSet Name="RoleUser_Role" Association="DataModel.RoleUser_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User_Role" EntitySet="User_Role" />
+          </AssociationSet>
+          <AssociationSet Name="UserUser_Action" Association="DataModel.UserUser_Action">
+            <End Role="User" EntitySet="User" />
+            <End Role="User_Action" EntitySet="User_Action" />
+          </AssociationSet>
+          <AssociationSet Name="ActionUser_Action" Association="DataModel.ActionUser_Action">
+            <End Role="Action" EntitySet="Action" />
+            <End Role="User_Action" EntitySet="User_Action" />
+          </AssociationSet>
+          <AssociationSet Name="RoleRole_Action" Association="DataModel.RoleRole_Action">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Role_Action" EntitySet="Role_Action" />
+          </AssociationSet>
+          <AssociationSet Name="ActionRole_Action" Association="DataModel.ActionRole_Action">
+            <End Role="Action" EntitySet="Action" />
+            <End Role="Role_Action" EntitySet="Role_Action" />
+          </AssociationSet>
+          <EntitySet Name="ActionType" EntityType="DataModel.ActionType" />
+          <AssociationSet Name="ActionActionType" Association="DataModel.ActionActionType">
+            <End Role="Action" EntitySet="Action" />
+            <End Role="ActionType" EntitySet="ActionType" />
+          </AssociationSet>
+          <EntitySet Name="Banner" EntityType="DataModel.Banner" />
+          <EntitySet Name="SinglePage" EntityType="DataModel.SinglePage" />
+          <EntitySet Name="News" EntityType="DataModel.News" />
+          <EntitySet Name="SiteInfo" EntityType="DataModel.SiteInfo" />
+          <EntitySet Name="NewsType" EntityType="DataModel.NewsType" />
+          <AssociationSet Name="NewsNewsType" Association="DataModel.NewsNewsType">
+            <End Role="News" EntitySet="News" />
+            <End Role="NewsType" EntitySet="NewsType" />
+          </AssociationSet>
+          <AssociationSet Name="UserUserInfo" Association="DataModel.UserUserInfo">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserInfo" EntitySet="UserInfo" />
+          </AssociationSet>
+          <EntitySet Name="Videos" EntityType="DataModel.Videos" />
+          <EntitySet Name="QAInfos" EntityType="DataModel.QAInfos" />
+          <EntitySet Name="BannerType" EntityType="DataModel.BannerType" />
+          <AssociationSet Name="BannerBannerType" Association="DataModel.BannerBannerType">
+            <End Role="Banner" EntitySet="Banner" />
+            <End Role="BannerType" EntitySet="BannerType" />
+          </AssociationSet>
+          <EntitySet Name="Notice" EntityType="DataModel.Notice" />
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Account" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="Email" MaxLength="64" Nullable="true" />
+          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="WxOpenod" MaxLength="64" Nullable="true" />
+          <Property Type="String" Name="SinaWBOpenid" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="QQNum" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="Pwd" Nullable="false" MaxLength="64" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" DefaultValue="false" />
+          <Property Type="Boolean" Name="IsFrozen" Nullable="false" DefaultValue="false" />
+          <Property Type="DateTime" Name="CreateTime" Nullable="false" />
+          <NavigationProperty Name="User_Role" Relationship="DataModel.UserUser_Role" FromRole="User" ToRole="User_Role" />
+          <NavigationProperty Name="User_Action" Relationship="DataModel.UserUser_Action" FromRole="User" ToRole="User_Action" />
+          <NavigationProperty Name="UserInfo" Relationship="DataModel.UserUserInfo" FromRole="User" ToRole="UserInfo" />
+          <Property Type="Decimal" Name="Balance" Nullable="false" />
+          <Property Type="Decimal" Name="FrozenBlance" Nullable="false" >
+            <Documentation>
+              <LongDescription>冻结余额。可提现金额</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="AlipayAccount" Nullable="true" />
+          <Property Type="String" Name="BankNumber" Nullable="true" />
+          <Property Type="String" Name="BankName" Nullable="true" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="NickName" MaxLength="32" Nullable="true" />
+          <Property Type="String" Name="HeadPic" MaxLength="512" Nullable="true" />
+          <Property Type="String" Name="WXHeadPic" Nullable="true" MaxLength="512" />
+          <Property Type="String" Name="QQHeadPic" Nullable="true" MaxLength="512" />
+          <Property Type="String" Name="SinaWBHeadPic" MaxLength="512" Nullable="true" />
+          <Property Type="Int32" Name="Age" Nullable="false" DefaultValue="0" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="Address" MaxLength="256" Nullable="true" />
+          <Property Type="String" Name="QQNum" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="Email" MaxLength="64" Nullable="true" />
+          <Property Type="Boolean" Name="Sex" Nullable="true" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="DataModel.UserUserInfo" FromRole="UserInfo" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="User_Role" Relationship="DataModel.RoleUser_Role" FromRole="Role" ToRole="User_Role" />
+          <NavigationProperty Name="Role_Action" Relationship="DataModel.RoleRole_Action" FromRole="Role" ToRole="Role_Action" />
+          <Property Type="String" Name="RCNName" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="REnName" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="RRemark" Nullable="true" MaxLength="256" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" DefaultValue="false" />
+          <Property Type="Boolean" Name="IsFrozen" Nullable="false" DefaultValue="false" />
+          <Property Type="DateTime" Name="CreateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="User" Relationship="DataModel.UserUser_Role" FromRole="User_Role" ToRole="User" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="DataModel.RoleUser_Role" FromRole="User_Role" ToRole="Role" />
+          <Property Type="Int32" Name="RoleID" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Action">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="User_Action" Relationship="DataModel.ActionUser_Action" FromRole="Action" ToRole="User_Action" />
+          <NavigationProperty Name="Role_Action" Relationship="DataModel.ActionRole_Action" FromRole="Action" ToRole="Role_Action" />
+          <Property Type="String" Name="AName" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="AUrl" Nullable="false" MaxLength="512" />
+          <Property Type="String" Name="AIcon" Nullable="true" MaxLength="512" />
+          <Property Type="Int32" Name="ASequence" Nullable="false" DefaultValue="0" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" DefaultValue="false" />
+          <Property Type="Boolean" Name="IsFrozen" Nullable="false" DefaultValue="false" />
+          <Property Type="Int32" Name="ParentID" Nullable="false" DefaultValue="0" />
+          <NavigationProperty Name="ActionType" Relationship="DataModel.ActionActionType" FromRole="Action" ToRole="ActionType" />
+          <Property Type="Int32" Name="ActionTypeID" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Action">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="User" Relationship="DataModel.UserUser_Action" FromRole="User_Action" ToRole="User" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <NavigationProperty Name="Action" Relationship="DataModel.ActionUser_Action" FromRole="User_Action" ToRole="Action" />
+          <Property Type="Int32" Name="ActionID" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role_Action">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Role" Relationship="DataModel.RoleRole_Action" FromRole="Role_Action" ToRole="Role" />
+          <Property Type="Int32" Name="RoleID" Nullable="false" />
+          <NavigationProperty Name="Action" Relationship="DataModel.ActionRole_Action" FromRole="Role_Action" ToRole="Action" />
+          <Property Type="Int32" Name="ActionID" Nullable="false" />
+        </EntityType>
+        <Association Name="UserUser_Role">
+          <End Type="DataModel.User" Role="User" Multiplicity="1" />
+          <End Type="DataModel.User_Role" Role="User_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Role">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RoleUser_Role">
+          <End Type="DataModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="DataModel.User_Role" Role="User_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Role">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserUser_Action">
+          <End Type="DataModel.User" Role="User" Multiplicity="1" />
+          <End Type="DataModel.User_Action" Role="User_Action" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Action">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ActionUser_Action">
+          <End Type="DataModel.Action" Role="Action" Multiplicity="1" />
+          <End Type="DataModel.User_Action" Role="User_Action" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Action">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Action">
+              <PropertyRef Name="ActionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RoleRole_Action">
+          <End Type="DataModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="DataModel.Role_Action" Role="Role_Action" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Role_Action">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ActionRole_Action">
+          <End Type="DataModel.Action" Role="Action" Multiplicity="1" />
+          <End Type="DataModel.Role_Action" Role="Role_Action" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Action">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Role_Action">
+              <PropertyRef Name="ActionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ActionType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="TName" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="Remark" Nullable="false" MaxLength="256" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" DefaultValue="false" />
+          <Property Type="DateTime" Name="CreateTime" Nullable="false" />
+          <NavigationProperty Name="Action" Relationship="DataModel.ActionActionType" FromRole="ActionType" ToRole="Action" />
+        </EntityType>
+        <Association Name="ActionActionType">
+          <End Type="DataModel.Action" Role="Action" Multiplicity="*" />
+          <End Type="DataModel.ActionType" Role="ActionType" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="ActionType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Action">
+              <PropertyRef Name="ActionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Banner">
+          <Documentation>
+            <LongDescription>banner表</LongDescription>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="ImgPic" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="LinkUrl" MaxLength="256" Nullable="true" />
+          <Property Type="Boolean" Name="IsView" Nullable="false" DefaultValue="false" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" DefaultValue="false" />
+          <Property Type="DateTime" Name="AddTime" Nullable="false" />
+          <Property Type="Int32" Name="Sequence" Nullable="false" />
+          <Property Type="Boolean" Name="IsUse4Phone" Nullable="false" />
+          <NavigationProperty Name="BannerType" Relationship="DataModel.BannerBannerType" FromRole="Banner" ToRole="BannerType" />
+          <Property Type="Int32" Name="BannerTypeID" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SinglePage">
+          <Documentation>
+            <LongDescription>单页面 以及QA等</LongDescription>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="PageName" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="PageContent" Nullable="false" />
+          <Property Type="String" Name="SeoKeyWord" MaxLength="128" Nullable="true" />
+          <Property Type="String" Name="SeoDescription" Nullable="true" MaxLength="512" />
+          <Property Type="DateTime" Name="AddTime" Nullable="false" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" DefaultValue="false" />
+          <Property Type="Int32" Name="Sequence" Nullable="false" />
+          <Property Type="Boolean" Name="IsView" Nullable="false" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="Content" Nullable="false" />
+          <Property Type="Boolean" Name="IsView" Nullable="false" DefaultValue="true" />
+          <Property Type="Int32" Name="Sequence" Nullable="false" DefaultValue="0" />
+          <Property Type="Int32" Name="ClickNum" Nullable="false" DefaultValue="0" />
+          <Property Type="DateTime" Name="AddTime" Nullable="false" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" DefaultValue="false" />
+          <Property Type="String" Name="SeoKeywords" MaxLength="128" Nullable="true" />
+          <Property Type="String" Name="SeoDescription" Nullable="true" MaxLength="512" />
+          <NavigationProperty Name="NewsType" Relationship="DataModel.NewsNewsType" FromRole="News" ToRole="NewsType" />
+          <Property Type="Int32" Name="NewsTypeID" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SiteInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="SiteName" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="SiteUrl" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="CompanyName" MaxLength="128" Nullable="true" />
+          <Property Type="String" Name="Address" MaxLength="256" Nullable="true" />
+          <Property Type="String" Name="ZipCode" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="Telephone" MaxLength="32" Nullable="true" />
+          <Property Type="String" Name="Fax" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="Email" MaxLength="64" Nullable="true" />
+          <Property Type="String" Name="SeoKeyWords" MaxLength="256" Nullable="true" />
+          <Property Type="String" Name="SeoDescription" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="IcpNumber" Nullable="true" MaxLength="64" />
+          <Property Type="Boolean" Name="IsViewInfo" Nullable="false" DefaultValue="false" />
+          <Property Type="String" Name="Img0" Nullable="false" MaxLength="512" >
+            <Documentation>
+              <LongDescription>首页如何返利图</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="Img1" Nullable="false" MaxLength="512" >
+            <Documentation>
+              <LongDescription>首页蜂巢日志图</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="Img2" Nullable="false" MaxLength="512" >
+            <Documentation>
+              <LongDescription>首页线上样板房图1</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="Img3" Nullable="false" MaxLength="512" >
+            <Documentation>
+              <LongDescription>首页线上样板房图2</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="Img4" Nullable="false" MaxLength="512" >
+            <Documentation>
+              <LongDescription>首页线上样板房图3</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="Img5" Nullable="false" MaxLength="512" >
+            <Documentation>
+              <LongDescription>首页线上样板房图4</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="Img6" Nullable="false" MaxLength="512" >
+            <Documentation>
+              <LongDescription>首页线上样板房图5</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="Img7" Nullable="false" MaxLength="512" >
+            <Documentation>
+              <LongDescription>首页线上样板房图6</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="Img8" Nullable="false" MaxLength="512" >
+            <Documentation>
+              <LongDescription>首页线上样板房图7</LongDescription>
+            </Documentation>
+          </Property>
+        </EntityType>
+        <EntityType Name="NewsType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="TypeName" Nullable="false" MaxLength="64" />
+          <Property Type="Int32" Name="ParentID" Nullable="false" DefaultValue="0" />
+          <Property Type="String" Name="TypePath" Nullable="false" MaxLength="256" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" DefaultValue="false" />
+          <Property Type="DateTime" Name="AddTime" Nullable="false" />
+          <NavigationProperty Name="News" Relationship="DataModel.NewsNewsType" FromRole="NewsType" ToRole="News" />
+        </EntityType>
+        <Association Name="NewsNewsType">
+          <End Type="DataModel.News" Role="News" Multiplicity="*" />
+          <End Type="DataModel.NewsType" Role="NewsType" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="NewsType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="NewsTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserUserInfo">
+          <End Type="DataModel.User" Role="User" Multiplicity="1" />
+          <End Type="DataModel.UserInfo" Role="UserInfo" Multiplicity="1" />
+        </Association>
+        <EntityType Name="Videos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="VName" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="ThemPic" Nullable="false" MaxLength="512" />
+          <Property Type="String" Name="MPEG4Url" MaxLength="512" Nullable="true" />
+          <Property Type="String" Name="OggUrl" MaxLength="512" Nullable="true" />
+          <Property Type="String" Name="WebMUrl" MaxLength="512" Nullable="true" />
+          <Property Type="Boolean" Name="IsView" Nullable="false" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" />
+          <Property Type="Int32" Name="Sequence" Nullable="false" />
+          <Property Type="DateTime" Name="AddTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QAInfos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Question" Nullable="false" MaxLength="256" >
+            <Documentation>
+              <LongDescription>网站QA问答</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="Answer" Nullable="false" />
+          <Property Type="Int32" Name="Sequence" Nullable="false" />
+          <Property Type="Boolean" Name="IsView" Nullable="false" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BannerType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="TName" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="Remark" Nullable="false" MaxLength="256" />
+          <NavigationProperty Name="Banner" Relationship="DataModel.BannerBannerType" FromRole="BannerType" ToRole="Banner" />
+        </EntityType>
+        <Association Name="BannerBannerType">
+          <End Type="DataModel.Banner" Role="Banner" Multiplicity="*" />
+          <End Type="DataModel.BannerType" Role="BannerType" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="BannerType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Banner">
+              <PropertyRef Name="BannerTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Notice">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Title" Nullable="false" />
+          <Property Type="String" Name="LinkUrl" Nullable="false" />
+          <Property Type="String" Name="NDetails" Nullable="false" />
+          <Property Type="DateTime" Name="AddTime" Nullable="false" />
+          <Property Type="DateTime" Name="ExpireTime" Nullable="false" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" />
+          <Property Type="Int32" Name="Sequence" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DataModelStoreContainer" CdmEntityContainer="DataModelContainer">
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.User)">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Account" ColumnName="Account" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="WxOpenod" ColumnName="WxOpenod" />
+          <ScalarProperty Name="SinaWBOpenid" ColumnName="SinaWBOpenid" />
+          <ScalarProperty Name="QQNum" ColumnName="QQNum" />
+          <ScalarProperty Name="Pwd" ColumnName="Pwd" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsFrozen" ColumnName="IsFrozen" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+          <ScalarProperty Name="FrozenBlance" ColumnName="FrozenBlance" />
+          <ScalarProperty Name="AlipayAccount" ColumnName="AlipayAccount" />
+          <ScalarProperty Name="BankNumber" ColumnName="BankNumber" />
+          <ScalarProperty Name="BankName" ColumnName="BankName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.UserInfo)">
+        <MappingFragment StoreEntitySet="UserInfo">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="NickName" ColumnName="NickName" />
+          <ScalarProperty Name="HeadPic" ColumnName="HeadPic" />
+          <ScalarProperty Name="WXHeadPic" ColumnName="WXHeadPic" />
+          <ScalarProperty Name="QQHeadPic" ColumnName="QQHeadPic" />
+          <ScalarProperty Name="SinaWBHeadPic" ColumnName="SinaWBHeadPic" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="QQNum" ColumnName="QQNum" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Role">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Role)">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="RCNName" ColumnName="RCNName" />
+          <ScalarProperty Name="REnName" ColumnName="REnName" />
+          <ScalarProperty Name="RRemark" ColumnName="RRemark" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsFrozen" ColumnName="IsFrozen" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_Role">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.User_Role)">
+        <MappingFragment StoreEntitySet="User_Role">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Action">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Action)">
+        <MappingFragment StoreEntitySet="Action">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AName" ColumnName="AName" />
+          <ScalarProperty Name="AUrl" ColumnName="AUrl" />
+          <ScalarProperty Name="AIcon" ColumnName="AIcon" />
+          <ScalarProperty Name="ASequence" ColumnName="ASequence" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsFrozen" ColumnName="IsFrozen" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+          <ScalarProperty Name="ActionTypeID" ColumnName="ActionTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_Action">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.User_Action)">
+        <MappingFragment StoreEntitySet="User_Action">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ActionID" ColumnName="ActionID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Role_Action">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Role_Action)">
+        <MappingFragment StoreEntitySet="Role_Action">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="ActionID" ColumnName="ActionID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActionType">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.ActionType)">
+        <MappingFragment StoreEntitySet="ActionType">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TName" ColumnName="TName" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Banner">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Banner)">
+        <MappingFragment StoreEntitySet="Banner">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="ImgPic" ColumnName="ImgPic" />
+          <ScalarProperty Name="LinkUrl" ColumnName="LinkUrl" />
+          <ScalarProperty Name="IsView" ColumnName="IsView" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+          <ScalarProperty Name="IsUse4Phone" ColumnName="IsUse4Phone" />
+          <ScalarProperty Name="BannerTypeID" ColumnName="BannerTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SinglePage">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.SinglePage)">
+        <MappingFragment StoreEntitySet="SinglePage">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PageName" ColumnName="PageName" />
+          <ScalarProperty Name="PageContent" ColumnName="PageContent" />
+          <ScalarProperty Name="SeoKeyWord" ColumnName="SeoKeyWord" />
+          <ScalarProperty Name="SeoDescription" ColumnName="SeoDescription" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+          <ScalarProperty Name="IsView" ColumnName="IsView" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="News">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.News)">
+        <MappingFragment StoreEntitySet="News">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="IsView" ColumnName="IsView" />
+          <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+          <ScalarProperty Name="ClickNum" ColumnName="ClickNum" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="SeoKeywords" ColumnName="SeoKeywords" />
+          <ScalarProperty Name="SeoDescription" ColumnName="SeoDescription" />
+          <ScalarProperty Name="NewsTypeID" ColumnName="NewsTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SiteInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.SiteInfo)">
+        <MappingFragment StoreEntitySet="SiteInfo">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+          <ScalarProperty Name="SiteUrl" ColumnName="SiteUrl" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="SeoKeyWords" ColumnName="SeoKeyWords" />
+          <ScalarProperty Name="SeoDescription" ColumnName="SeoDescription" />
+          <ScalarProperty Name="IcpNumber" ColumnName="IcpNumber" />
+          <ScalarProperty Name="IsViewInfo" ColumnName="IsViewInfo" />
+          <ScalarProperty Name="Img0" ColumnName="Img0" />
+          <ScalarProperty Name="Img1" ColumnName="Img1" />
+          <ScalarProperty Name="Img2" ColumnName="Img2" />
+          <ScalarProperty Name="Img3" ColumnName="Img3" />
+          <ScalarProperty Name="Img4" ColumnName="Img4" />
+          <ScalarProperty Name="Img5" ColumnName="Img5" />
+          <ScalarProperty Name="Img6" ColumnName="Img6" />
+          <ScalarProperty Name="Img7" ColumnName="Img7" />
+          <ScalarProperty Name="Img8" ColumnName="Img8" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NewsType">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.NewsType)">
+        <MappingFragment StoreEntitySet="NewsType">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+          <ScalarProperty Name="TypePath" ColumnName="TypePath" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Videos">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Videos)">
+        <MappingFragment StoreEntitySet="Videos">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="VName" ColumnName="VName" />
+          <ScalarProperty Name="ThemPic" ColumnName="ThemPic" />
+          <ScalarProperty Name="MPEG4Url" ColumnName="MPEG4Url" />
+          <ScalarProperty Name="OggUrl" ColumnName="OggUrl" />
+          <ScalarProperty Name="WebMUrl" ColumnName="WebMUrl" />
+          <ScalarProperty Name="IsView" ColumnName="IsView" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QAInfos">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.QAInfos)">
+        <MappingFragment StoreEntitySet="QAInfos">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Question" ColumnName="Question" />
+          <ScalarProperty Name="Answer" ColumnName="Answer" />
+          <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+          <ScalarProperty Name="IsView" ColumnName="IsView" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BannerType">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.BannerType)">
+        <MappingFragment StoreEntitySet="BannerType">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="TName" ColumnName="TName" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Notice">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Notice)">
+        <MappingFragment StoreEntitySet="Notice">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="LinkUrl" ColumnName="LinkUrl" />
+          <ScalarProperty Name="NDetails" ColumnName="NDetails" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="ExpireTime" ColumnName="ExpireTime" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="UserUserInfo" TypeName="DataModel.UserUserInfo" StoreEntitySet="User">
+      <EndProperty Name="UserInfo">
+        <ScalarProperty Name="ID" ColumnName="UserInfo_ID" />
+      </EndProperty>
+      <EndProperty Name="User">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

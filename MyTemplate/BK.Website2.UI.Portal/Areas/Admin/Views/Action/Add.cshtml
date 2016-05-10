@@ -1,0 +1,144 @@
+﻿@model My.Template.Model.Action
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+
+@section Head{
+        <!-- PAGE LEVEL STYLES -->
+      <link href="/areas/admin/assets/css/jquery-ui.css" rel="stylesheet" />
+     <link href="/Scripts/uploadify3.2.1/uploadify.css" rel="stylesheet" />
+    <link href="/Areas/Admin/css/myuploadify.css" rel="stylesheet"/>
+           <style type="text/css">
+             .wrap_uploadImg1{height: 75px;width: 75px;}
+        .upload_container{height: 75px;width: 75px;}
+        .del_img img { width:10px; height:10px;}
+    </style>
+    <!-- END PAGE LEVEL  STYLES -->
+}
+
+
+       <!--PAGE CONTENT -->
+        <div id="content">
+
+            <div class="inner">
+                 <div class="row">
+                    <div class="col-lg-12">
+                        <h3> 添加权限 </h3>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="box dark">
+                            <header>
+                                <div class="icons"><i class="icon-edit"></i>
+                                </div>
+                                <h5>添加信息</h5>
+                            </header>
+                            <div id="div-1" class="accordion-body collapse in body">
+                                @using(Html.BeginForm("Add", "Action", FormMethod.Post,new {@class="form-horizontal",id="AddForm"}))
+                                {  
+                                     <input type="hidden" name="pageNum" value="@ViewBag.pageNum" />
+                                    @Html.ValidationSummary(true)
+                                    <div class="form-group">
+                                        @Html.LabelFor(u => u.AName, "名称", new {@class = "control-label col-lg-4"})
+                                        <div class="col-lg-8">
+                                              @Html.ValidationMessageFor(u=>u.AName)
+                                            @Html.TextBoxFor(u => u.AName, new {placeholder = "名称", @class = "form-control"})
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(u => u.ActionTypeID, "类型", new {@class = "control-label col-lg-4"})
+
+                                        <div class="col-lg-8">
+                                            @Html.ValidationMessageFor(u => u.ActionTypeID)
+                                            @Html.DropDownList("ActionTypeID",ViewBag.ActionTypeID as IEnumerable<SelectListItem>,new{@class="form-control"})
+
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                     <div class="form-group ">
+                                        @Html.LabelFor(u => u.ParentID, "上级权限", new {@class = "control-label col-lg-4"})
+                                        <div class="col-lg-8">
+                                           @Html.ValidationMessageFor(u=>u.ParentID)
+                                          @Html.DropDownList("ParentID",ViewBag.ParentID as IEnumerable<SelectListItem>,new{@class="form-control"})
+                                         </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                <label class="control-label col-lg-4">图片</label>
+                                        <div class="col-lg-8">
+                                              @Html.ValidationMessageFor(u=>u.AIcon)
+                                            <div class="wrap_uploadImg1">
+                                                <div id="upload_con_0" class="upload_container">
+                                                    <div id="AIcon" class="upload_btn"></div>
+                                                    <div class="loading off"><img src="/images/uploadloading.gif"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                            </div>
+                                    
+                                   <div class="form-group">
+                                         @Html.LabelFor(u=>u.AUrl,"链接",new{@class="control-label col-lg-4"})
+                                        <div class="col-lg-8">
+                                           @Html.TextBoxFor(u=>u.AUrl,new {placeholder="链接",@class="form-control"}) 
+                                        </div>
+                                    </div>
+
+                              
+                                
+                                    <div class="form-group">
+                                        @Html.LabelFor(u => u.IsFrozen, "是否冻结", new {@class = "control-label col-lg-4"})
+                                        <div class="col-lg-8">
+                                           @Html.ValidationMessageFor(u=>u.IsFrozen)
+                                        @Html.CheckBoxFor(u => u.IsFrozen)
+                                         </div>
+                                    </div>
+
+                                      <div class="form-group">
+                                         @Html.LabelFor(u=>u.ASequence,"排序",new{@class="control-label col-lg-4"})
+                                          <div class="col-lg-8">
+                                                 @Html.ValidationMessageFor(u=>u.ASequence)
+                                              @Html.TextBoxFor(u => u.ASequence, new {placeholder = "数字越小排越前", @class = "form-control", @style = "max-width: 20%;display:inline;"}) <span style="color: red;">数字越小排越前</span>
+                                           
+                                          </div>
+                                    </div>
+
+                                  
+
+                                    <div class="form-group">
+                                        <div class="col-lg-8 divsure">
+                                            <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl"/>
+                                         <a href="@ViewBag.returnUrl" class="btn  btn-default btn-rect">取消</a>
+                                            <input type="submit" value="确认" class="btn btn-success btn-rect"/>
+                                        </div>
+                                         </div>
+                                }
+                             
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            </div>
+@section Foot{
+    <!-- PAGE LEVEL SCRIPTS -->
+    <script src='@Url.Content("~/Scripts/jquery/jquery.validate.js")'></script>
+    <script src="/Scripts/jquery/jquery.validate.unobtrusive.min.js"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+
+    <script src="/Scripts/uploadify3.2.1/jquery.uploadify.min.js?ver=@(new Random().Next(0, 99999).ToString())"></script>
+    <script type="text/javascript">
+        var uploadbtn = "/images/up_img3.jpg";
+        var uploadheight = 75;
+        var uploadwhidth = 75;
+    </script>
+    <script src="/Areas/Admin/js/myuploadify.js"></script>
+  
+}

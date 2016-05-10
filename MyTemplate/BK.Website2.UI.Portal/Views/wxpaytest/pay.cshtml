@@ -1,0 +1,54 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>pay</title>
+        <script type="text/javascript">
+           
+            //调用微信JS api 支付
+            function jsApiCall()
+            {
+                WeixinJSBridge.invoke(
+                'getBrandWCPayRequest',
+                 @Html.Raw(ViewData["wxJsApiParam"]),//josn串
+                 function (res)
+                 {
+                     WeixinJSBridge.log(res.err_msg);
+                     alert(res.err_code + res.err_desc + res.err_msg);
+                 }
+                 );
+            }
+
+            function callpay()
+            {
+                if (typeof WeixinJSBridge == "undefined")
+                {
+                    if (document.addEventListener)
+                    {
+                        document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                    }
+                    else if (document.attachEvent)
+                    {
+                        document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                        document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                    }
+                }
+                else
+                {
+                    jsApiCall();
+                }
+            }
+               
+	    </script>
+</head>
+<body>
+    <div>
+        <input type="button" value="立即支付" onclick="callpay()" />
+    </div>
+</body>
+</html>

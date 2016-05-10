@@ -1,0 +1,47 @@
+﻿@{
+    Layout = "/Views/Shared/_LoginLayoutPage.cshtml";
+}
+@model My.Template.Model.User
+@section Head{
+
+}
+
+<div id="denglu">
+    <div class="denglu_left">
+        <h2 class="biaoti">预见蜂巢 meet beekoo</h2>
+        <p>
+            <img src="/images/yuandian.png" /><span>蜂巢为业主提供免费一对一场景设计师服务，帮助业主对接</span>
+        </p>
+        <p>
+            <img src="/images/yuandian.png" /><span>最高性价比的优质家居供应商，一站式解决空间难题。</span>
+        </p>
+    </div>
+    <div class="denglu_right">
+        @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { @class = "for_denglu", id = "LoginForm" }))
+        {
+                     
+            <p class="top_txt"><span class="sp1">账号密码登录</span><span class="sp2">手机动态码登录</span></p>               
+            @Html.TextBoxFor(u => u.Account, "请输入手机号/邮箱/昵称", new { id = "Account", @class = "phone", placeholder = "请输入手机号/邮箱/昵称"  })     
+                <p  class="p1">请输入正确的手机号</p>
+                                  
+            @Html.TextBoxFor(u => u.Pwd, "请输入密码", new { id = "Pwd", type = "password", @class = "phone", placeholder = "密码" })      
+            @Html.ValidationMessageFor(u => u.Account)
+            <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl"/>
+            <span id="ErrorMsg" style=" visibility: visible ;color:red; width:150px; height:30px; line-height:30px; float:left;" >@ViewBag.ErrorInfo</span>
+            <p class="wji"><a href="@Url.Action("FindPwd", "Login")" id="wangji">忘记密码</a><a  href="@Url.Action("Index", "Regist")" id="mianfei">免费注册</a></p>   
+                <div style="clear:both;"></div>
+                <a href="javascript:;" class="submit" id="login_btn">登录</a>
+        }
+
+    </div>
+</div>
+<div id="mask">
+    <div id="indexg0">
+        <img src="/images/mask_bg.jpg" />
+    </div>
+</div>
+@section Foot{
+    <script src="/js/jquery.mousewheel.js"></script>
+    <script src="/js/web2js/picscroll.js"></script>
+    <script src="/js/web2js/login.js"></script>
+}   

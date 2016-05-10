@@ -1,0 +1,107 @@
+﻿@{
+    Layout = null;
+}
+@model My.Template.Model.User
+
+<!DOCTYPE html>
+
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+
+<!-- BEGIN HEAD -->
+<head>
+     <meta charset="UTF-8" />
+    <title>Beekoo网站后台管理系统 | 登录页</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+     <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <!-- GLOBAL STYLES -->
+     <!-- PAGE LEVEL STYLES -->
+     <link rel="stylesheet" href="/areas/admin/assets/plugins/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="/areas/admin/assets/css/login.css" />
+    <link rel="stylesheet" href="/areas/admin/assets/plugins/magic/magic.css" />
+     <!-- END PAGE LEVEL STYLES -->
+   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <style>
+           .error { color: red; }
+    .field-validation-error{color: red;display: block; }
+    </style>
+</head>
+    <!-- END HEAD -->
+
+    <!-- BEGIN BODY -->
+<body >
+
+   <!-- PAGE CONTENT --> 
+    <div class="container">
+    <div class="text-center">
+        <img src="/areas/admin/assets/img/Beekoologo.png" id="logoimg" alt=" Logo" />
+    </div>
+    <div class="tab-content">
+        <div id="login" class="tab-pane active">
+            <form action="@Url.Action("Index", "Login")" class="form-signin" method="post">
+                  @Html.ValidationSummary(true)
+                <p class="text-muted text-center btn-block btn btn-primary btn-rect">
+                    请输入您的用户名和密码
+                </p>
+                <input type="text" placeholder="用户名" name="Account" class="form-control"/>
+                @Html.ValidationMessage("Account")
+                <input type="password" placeholder="密码" name="Pwd" class="form-control"/>
+                 @Html.ValidationMessage("Pwd")
+                <input type="text" placeholder="验证码" name="validatecode" class="form-control"/>
+                <img src="/admin/login/ShowValidateCode?id=1" class="validateImg" title="点击图片换一张" id="validateImg" alt="点击图片换一张"/><a href="javascript:void(0);" id="aVCode">换一张</a>
+                <button class="btn text-muted text-center btn-danger" type="submit">登录</button>
+            </form>
+        </div>
+        <div id="forgot" class="tab-pane">
+            <form action="@Url.Action("Index","Login")" class="form-signin">
+                <p class="text-muted text-center btn-block btn btn-primary btn-rect">验证邮箱</p>
+                <input type="email"  required="required" placeholder="注册邮箱"  class="form-control" />
+                <br />
+                <button class="btn text-muted text-center btn-success" type="submit">找回密码</button>
+            </form>
+        </div>
+        <div id="signup" class="tab-pane">
+            <form action="@Url.Action("RecoverPwd","Login")" class="form-signin">
+                <p class="text-muted text-center btn-block btn btn-primary btn-rect">注册资料</p>
+                <input type="text" placeholder="用户名" class="form-control" />
+                <input type="email" placeholder="邮箱" class="form-control" />
+                <input type="password" placeholder="密码" class="form-control" />
+                <input type="password" placeholder="重复密码" class="form-control" />
+                <button class="btn text-muted text-center btn-success" type="submit">注册</button>
+            </form>
+        </div>
+    </div>
+    <div class="text-center">
+        <ul class="list-inline">
+            <li><a class="text-muted" href="#login" data-toggle="tab">登录</a></li>
+            <li><a class="text-muted" href="#forgot" data-toggle="tab">忘记密码</a></li>
+            <li><a class="text-muted" href="#signup" data-toggle="tab">注册</a></li>
+        </ul>
+    </div>
+
+
+</div>
+
+	  <!--END PAGE CONTENT -->     
+	      
+      <!-- PAGE LEVEL SCRIPTS -->
+      <script src="/areas/admin/assets/plugins/jquery-2.0.3.min.js"></script>
+      <script src="/areas/admin/assets/plugins/bootstrap/js/bootstrap.js"></script>
+            <script src="/areas/admin/assets/js/login.js"></script>
+        <script src='@Url.Content("~/Scripts/jquery/jquery.validate.js")'></script>
+    <script src="/Scripts/jquery/jquery.validate.unobtrusive.min.js"></script>
+      <!--END PAGE LEVEL SCRIPTS -->
+
+</body>
+    <!-- END BODY -->
+</html>
+

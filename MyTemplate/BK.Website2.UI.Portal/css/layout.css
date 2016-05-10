@@ -1,0 +1,41 @@
+﻿/*分页*/
+.pagination{ margin: 10px 0 5px 0;}
+.pagination.right{float: right;}
+.pagination > a {position: relative;float: left;padding: 6px 12px;margin-left: -1px;line-height: 1.428571429;text-decoration: none; background-color: #ffffff;border: 1px solid #dddddd;color: #898989;}
+.pagination a.act {z-index: 2;color: white;cursor: default;background-color:#CE1D41;border-color: #DFE3E2;}
+.newsdetail{ width: 1000px;margin: 0 auto;}
+.newsdetail .pagination { float: right;}
+.f_width p span{vertical-align: middle;}
+
+/**新闻列表**/
+.news_content {width:100%;background-color:white;}
+.news_content .inner {width:1012px;margin: 0 auto 80px auto;}
+.news_content .inner .title {width:1012px;height:138px;background:url(/images/news01.png) no-repeat;background-size:cover;position:relative}
+.news_content .inner .title .zhuti {position:absolute;right:22px;bottom:17px;border-bottom:2px solid white }
+.news_content .inner .title .zhuti p {font:bold 24px/24px "微软雅黑";color:white;padding:10px 10px;border-bottom:4px solid white;margin-bottom:8px}
+
+.news_content .inner .news_middle .news {border-bottom:1px solid #C9C9C9;margin-top:30px}
+.news_content .inner .news_middle .news .biaoti {overflow:hidden}
+.news_content .inner .news_middle .news .biaoti h1 {font:bold 18px/20px "微软雅黑";float:left;color:#4B4B4B }
+.news_content .inner .news_middle .news .biaoti span {float:right;color:#4B4B4B}
+
+.news_content .inner .news_middle .news .main {overflow:hidden;margin-top:20px}
+.news_content .inner .news_middle .news .main .pic {float:left;width:183px;height:124px;margin:0px 15px 30px 5px}
+.news_content .inner .news_middle .news .main .text { float: left;width: 724px;}
+.news_content .inner .news_middle .news .main .text p{font:normal 14px/20px "微软雅黑"; }
+
+.news_middle .left_img{ height: 124px;width: 183px;}
+.news_content .news .news_a{ color: black;}
+.news_content .inner .pagination{ float: right;}
+
+/**新闻内页**/
+.news_w{width:100%;background:#f9f9f9;padding:145px 0 80px;}
+.news_t{width:1000px;margin:0 auto;padding-bottom:15px;border-bottom:1px solid #e7e5e5;color:#202020;font:normal 24px/45px "微软雅黑";}
+.news_t span{display:block;font:normal 14px/25px Arial;padding-top:5px;}
+.news{width:1000px;margin:0 auto;padding:20px 0;}
+.news p{font-size:14px;}
+.news img{max-width:1000px;display:block;margin: 0 auto;}
+
+
+/*loding*/
+.lodinddiv{ display: none;position: absolute;}

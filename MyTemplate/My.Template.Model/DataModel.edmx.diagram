@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="aaefef95e045432683a0992df545eacc" Name="关系图1" ZoomLevel="67" >
+        <EntityTypeShape EntityType="DataModel.User" Width="1.75" PointX="0.5" PointY="1.5" />
+        <EntityTypeShape EntityType="DataModel.UserInfo" Width="1.5" PointX="3.5" PointY="8" />
+        <EntityTypeShape EntityType="DataModel.Role" Width="1.5" PointX="6.875" PointY="0.625" />
+        <EntityTypeShape EntityType="DataModel.User_Role" Width="1.5" PointX="3.75" PointY="1.125" />
+        <EntityTypeShape EntityType="DataModel.Action" Width="1.5" PointX="6.5" PointY="4.75" />
+        <EntityTypeShape EntityType="DataModel.User_Action" Width="1.5" PointX="3.625" PointY="4.75" />
+        <EntityTypeShape EntityType="DataModel.Role_Action" Width="1.5" PointX="10.375" PointY="0.75" />
+        <AssociationConnector Association="DataModel.UserUser_Role" />
+        <AssociationConnector Association="DataModel.RoleUser_Role" />
+        <AssociationConnector Association="DataModel.UserUser_Action" />
+        <AssociationConnector Association="DataModel.ActionUser_Action" />
+        <AssociationConnector Association="DataModel.RoleRole_Action" />
+        <AssociationConnector Association="DataModel.ActionRole_Action" />
+        <EntityTypeShape EntityType="DataModel.ActionType" Width="1.5" PointX="10.75" PointY="8.875" />
+        <AssociationConnector Association="DataModel.ActionActionType" />
+        <EntityTypeShape EntityType="DataModel.Banner" Width="1.5" PointX="28.5" PointY="0.75" />
+        <EntityTypeShape EntityType="DataModel.SinglePage" Width="1.5" PointX="33" PointY="0.875" />
+        <EntityTypeShape EntityType="DataModel.News" Width="1.5" PointX="34.625" PointY="7.75" />
+        <EntityTypeShape EntityType="DataModel.SiteInfo" Width="1.5" PointX="26.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DataModel.NewsType" Width="1.5" PointX="34.625" PointY="4.5" />
+        <AssociationConnector Association="DataModel.NewsNewsType" />
+        <AssociationConnector Association="DataModel.UserUserInfo" />
+        <EntityTypeShape EntityType="DataModel.Videos" Width="1.5" PointX="30.375" PointY="4.5" />
+        <EntityTypeShape EntityType="DataModel.QAInfos" Width="1.5" PointX="32.5" PointY="4.5" />
+        <EntityTypeShape EntityType="DataModel.BannerType" Width="1.5" PointX="30.5" PointY="0.75" />
+        <AssociationConnector Association="DataModel.BannerBannerType" />
+        <EntityTypeShape EntityType="DataModel.Notice" Width="2.375" PointX="35.25" PointY="1.125" IsExpanded="true" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

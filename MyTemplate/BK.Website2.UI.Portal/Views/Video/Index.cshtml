@@ -1,0 +1,73 @@
+﻿@{
+    Layout = "/Views/Shared/_LayoutPage.cshtml";
+}
+@using System.Activities.Statements
+@using My.Template.Model
+@model List<My.Template.Model.Videos>
+@section Head{
+    <style type="text/css">
+
+    </style>
+}
+<div  class="Helping_wrap warp_resvideo">
+    <div class="flash_inner">
+    <div class="flash_bg">
+        <img src="/images/flash_bg.png" />
+    </div>
+    <div class="flash_content">
+
+        @{
+            var video = new Videos();
+        }
+        <ul class="right">
+             @foreach (var item in Model)
+              {
+                  if (video.ID == 0)
+                  {
+                      video = item;
+                  }
+                  <li>
+                        <img src="@item.ThemPic"/>
+                        <div class="zhezhao"></div>
+                        <div class="button play_video" data-srcimg="@item.ThemPic" data-mp4src="@item.MPEG4Url" data-oggurl="@item.OggUrl" data-webmurl="@item.WebMUrl" >
+                            <img src="/images/but01.png"/>
+                            <p class="v_title">@item.VName</p>
+                        </div>
+                  </li>
+              }
+
+        </ul>
+
+        <div class="left">
+            <video id="video_play" controls="controls" width="920px" height="auto" src="@video.MPEG4Url">
+                <source id="mp4src" type="video/mp4" src="@video.MPEG4Url"/>
+                <source id="websrc" type="video/webm" src="@video.WebMUrl"/>
+                <source id="oggurl" type="video/ogg" src="@video.OggUrl"/>
+                <img id="video_bg" src="@video.ThemPic"/>
+            </video>
+        </div>
+
+       
+
+    </div>
+
+    </div>
+</div>
+
+@section Foot{
+    <script type="text/javascript">
+        $(function() {
+            $('.play_video').click(function() {
+                var srcimg = $(this).data('srcimg');
+                var mp4src = $(this).data('mp4src');
+                var oggurl = $(this).data('oggurl');
+                var webmurl = $(this).data('webmurl');
+                $('#video_play').attr('src', mp4src);
+                $('#mp4src').attr('src', mp4src);
+                $('#websrc').attr('src', webmurl);
+                $('#oggurl').attr('src', oggurl);
+                $('#video_bg').attr('src', srcimg);
+            })
+        })
+    </script>
+}

@@ -1,0 +1,127 @@
+﻿@model My.Template.Model.User
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+
+@section Head{
+        <!-- PAGE LEVEL STYLES -->
+<link href="/areas/admin/assets/css/jquery-ui.css" rel="stylesheet" />
+      <link href="/Scripts/uploadify3.2.1/uploadify.css" rel="stylesheet"/>
+     <link href="/Areas/Admin/css/myuploadify.css" rel="stylesheet" />
+    <!-- END PAGE LEVEL STYLES -->
+          <style type="text/css">
+         .wrap_uploadImg1{height: 150px;width: 150px;}
+        .upload_container{height: 150px;width: 150px;}
+    </style>
+
+}
+
+
+       <!--PAGE CONTENT -->
+        <div id="content">
+
+            <div class="inner">
+                 <div class="row">
+                    <div class="col-lg-12">
+                        <h3> 编辑用户信息 </h3>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="box dark">
+                            <header>
+                                <div class="icons"><i class="icon-edit"></i>
+                                </div>
+                                <h5>编辑信息</h5>
+                            </header>
+                            <div id="div-1" class="accordion-body collapse in body">
+                                @using (Html.BeginForm("Edit", "User", FormMethod.Post, new { @class = "form-horizontal" }))
+                                {
+                                    <input type="hidden" name="pageNum" value="@ViewBag.pageNum" />
+                                    @Html.HiddenFor(u => u.ID)
+                                    @Html.HiddenFor(u => u.CreateTime)
+                                    @Html.HiddenFor(u => u.IsDelete)
+                                 @Html.ValidationSummary(true)
+                                    <div class="form-group">
+                                        @Html.LabelFor(u => u.Account, "账号", new {@class = "control-label col-lg-4"})
+
+                                        <div class="col-lg-8">
+                                            @Html.ValidationMessageFor(u => u.Account)
+                                            @Html.TextBoxFor(u => u.Account, new {placeholder = "账号", @class = "form-control", @readonly = "readonly"})
+
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <div class="form-group">
+                                        <label class="control-label col-lg-4">头像</label>
+                                        <div class="col-lg-8">
+                                         @Html.ValidationMessage("HeadPic","")
+                                            @if (string.IsNullOrEmpty(Model.UserInfo.HeadPic))
+                                            {
+                                                <div class="wrap_uploadImg1">
+                                                    <div id="upload_con_0" class="upload_container">
+                                                        <div id="HeadPic" class="upload_btn"></div>
+                                                        <div class="loading off"><img src="/images/uploadloading.gif"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="wrap_uploadImg1">
+                                                    <div id="upload_con_0" class="upload_container"><img src="@Model.UserInfo.HeadPic"><a class="del_img" cuisineId="@Model.ID" href="javascript:;" onclick=" del_uploadimg(this, '@Path.GetFileName(Model.UserInfo.HeadPic)', 'HeadPic') "><img src="/Images/morelist_del.png"></a><input name="HeadPic" type="hidden" value="@Model.UserInfo.HeadPic">
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                       <div class="form-group">
+                                        @Html.Label( "昵称", new {@class = "control-label col-lg-4"})
+                                     <div class="col-lg-8">
+                                         <input type="text" placeholder="昵称" class="form-control" value="@Model.UserInfo.NickName" name="NickName" />
+                                     </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(u => u.IsFrozen, "是否冻结", new { @class = "control-label col-lg-4" })
+                                        <div class="col-lg-8">
+                                            @Html.ValidationMessageFor(u => u.IsFrozen)
+                                            @Html.CheckBoxFor(u => u.IsFrozen)
+
+                                        </div>
+                                    </div>
+                                      
+                                    <div class="form-group">
+                                        <div class="col-lg-8 divsure">
+
+                                            <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl"/>
+                                         <a href="@ViewBag.returnUrl" class="btn  btn-default btn-rect">取消</a>
+                                            <input type="submit" value="确认" class="btn btn-success btn-rect"/>
+                                        </div>
+                                         </div>
+                                }
+                             
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            </div>
+@section Foot{
+        <!-- PAGE LEVEL SCRIPTS -->
+    <script src='@Url.Content("~/Scripts/jquery/jquery.validate.js")'></script>
+    <script src="/Scripts/jquery/jquery.validate.unobtrusive.min.js"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <script src="/Scripts/uploadify3.2.1/jquery.uploadify.min.js?ver=@(new Random().Next(0, 99999).ToString())"></script>
+
+         <script type="text/javascript">
+             var uploadbtn = "/images/up_img.jpg";
+             var uploadheight = 150;
+             var uploadwhidth = 150;
+    </script>
+    <script src="/Areas/Admin/js/myuploadify.js"></script>
+}

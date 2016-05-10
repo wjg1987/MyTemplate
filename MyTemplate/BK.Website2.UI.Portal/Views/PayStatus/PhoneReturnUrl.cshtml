@@ -1,0 +1,23 @@
+﻿@{
+    Layout = "/Views/Shared/_LayoutPage.cshtml";
+}
+@model My.Template.Model.OrderInfo
+@section Head{
+    <style type="text/css">
+        p{ text-align: center;margin: 20px;}
+        .warp_res{ height: 600px;}
+    </style>
+}
+<div  class=" Helping_wrap warp_res">
+<p>当前订单号:@Model.OrderNum</p> 
+<p>应付款:@Model.CurPrice</p> 
+<p>实际付款:@Model.PayMoney</p> 
+<p>备注:@Model.BeekooRemark</p> 
+    </div>
+
+@section Foot{
+    
+}
+
+
+

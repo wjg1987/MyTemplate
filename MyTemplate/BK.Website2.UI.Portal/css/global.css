@@ -1,0 +1,33 @@
+/* CSS Document */
+body, div, p, ol, ul, li, a, p, span, b, h1, h2, h3, h4, h5, h6, img, dl, dt, dd, input, textarea{padding:0; margin:0;}
+html, body{-webkit-text-size-adjust: none !important;}
+h1, h2, h3, h4, h5, h6 {font-size: 100%;font-weight: normal;}
+body {font:normal 12px/1.7 "方正兰亭细黑_GBK_M", "微软雅黑", "宋体";}
+   
+html {color:#535353;background: #FFF;}
+ul{list-style-type: none;
+  -webkit-margin-before: 0em;
+  -webkit-margin-after: 0em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  -webkit-padding-start: 0px;}
+a{text-decoration:none;}
+li{list-style:none;padding-top:0;}
+img{ border:none;}
+h1, h2, h3, h4, h5, h6{-webkit-margin-before: 0em;-webkit-margin-after: 0em;}
+dd{-webkit-margin-start: 0px;}
+input, textarea,button,select{border:none; outline:none;}
+body{background-color:#fff;}
+.clear{clear:both;}
+
+.f_width{width:100%;}
+
+.fancybox-lock-test {overflow-y: hidden !important;}
+.huatiao-margin{overflow-y: hidden !important;}
+.field-validation-error{ color: red;display: inline-block;margin-left: 3px;}
+
+.loading{display:none;text-align:center;padding-top:20px;}
+
+.pagination{  margin: 10px 0 5px 0;}
+.pagination > a {position: relative;float: left;padding: 6px 12px;margin-left: -1px;line-height: 1.428571429;text-decoration: none; background-color: #ffffff;border: 1px solid #dddddd;color: #428bca;}
+.pagination a.act {z-index: 2;color: #ffffff;cursor: default;background-color: #428bca;border-color: #428bca;}

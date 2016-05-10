@@ -1,0 +1,24 @@
+﻿.Upload_Dashed_1 li span {padding-left:0;text-align:left;
+}
+
+.wrap_uploadImg1{position: relative;width:190px;height:300px;float: left;}
+.uploadify-button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    border-radius:0;
+}
+.uploadify:hover .uploadify-button {
+    background-color: transparent;
+}
+.upload_container {width:190px;height:300px;margin: 0 20px 20px 0;position: relative;/*overflow: hidden;*/display: inline-block;}
+.upload_container > img { /*width:100%;*/ height:100%;position:absolute;left:0;top:0;}
+.upload_container .del_img { position:absolute; left:6px; top:6px;}
+.del_img img { width:20px; height:20px;}
+.upload_container .loading { display:none; }
+.upload_container .loading img { width:26px; height:auto;}
+.upload_container .on{ display:block;}
+
+.uploadify-queue { display:none;}
+.uploadify {}
+.uploadify object { left:0;}

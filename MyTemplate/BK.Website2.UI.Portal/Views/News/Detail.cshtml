@@ -1,0 +1,17 @@
+﻿@{
+    Layout = "/Views/Shared/_LayoutPage.cshtml";
+}
+@model My.Template.Model.News
+@section Head{
+
+}
+	<div class="news_w">
+		<h2 class="news_t">@Model.Title<span>@Model.AddTime.ToString("yyyy/MM/dd hh:mm:ss") </span></h2>		
+		<div class="news">
+			@Html.Raw(Model.Content)
+		</div>
+	</div>
+@section Foot{
+   
+    }
+

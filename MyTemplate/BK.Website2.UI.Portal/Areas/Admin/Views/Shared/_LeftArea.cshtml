@@ -1,0 +1,150 @@
+﻿<!-- MENU SECTION -->
+<div id="left">
+    <!-- UserInfo -->
+<div class="media user-media well-small">
+    <a class="user-link" href="#">
+        <img class="media-object img-thumbnail user-img"  alt="User Picture" style="width: 74px; height: 74px;" src="@Session["curLoginAdminHeadImg"]"/>
+    </a>
+    <br/>
+    <div class="media-body">
+        <h5 class="media-heading">@Session["curLoginAdminAccount"]</h5>
+        <ul class="list-unstyled user-info">
+
+            <li>
+                <a class="btn btn-success btn-xs btn-circle" style="width: 10px; height: 12px;"></a> Online
+
+            </li>
+
+        </ul>
+    </div>
+    <br/>
+</div>
+    <!-- MENU List -->
+<ul id="menu" class="collapse">
+
+    <li class="panel">
+        <a href="@Url.Action("Index", "Home")" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#component-nav" >
+            <i class="icon-table"></i> 首页
+        </a>
+    </li>
+
+    <li class="panel ">
+        <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#component-nav1">
+            <i class="icon-tasks"> </i> 样板房
+        </a>
+        <ul class="@if (ViewBag.pageNum == 2)
+                   {
+                       @("in")
+                   }
+                   else
+                   {
+                       @("collapse")
+                   }" id="component-nav1">
+            
+          @*  <li class=""><a href="@Url.Action("Index", "CityInfo",new {pageNum=2})"><i class="icon-angle-right"></i>城市列表</a> </li>
+            <li class=""><a href="@Url.Action("Index", "CityAreas",new {pageNum=2})"><i class="icon-angle-right"></i>城市区域</a> </li>
+            <li class=""><a href="@Url.Action("Index", "Community",new {pageNum=2})"><i class="icon-angle-right"></i>楼盘列表</a> </li>
+             <li class=""><a href="@Url.Action("Index", "CommunityType",new {pageNum=2})"><i class="icon-angle-right"></i>楼盘类型</a> </li>
+            <li class=""><a href="@Url.Action("Index", "HouseArea",new {pageNum=2})"><i class="icon-angle-right"></i>房间区域</a> </li>
+            <li class=""><a href="@Url.Action("Index", "SampleHouse",new {pageNum=2})"><i class="icon-angle-right"></i>样板房列表</a> </li>
+            <li class=""><a href="@Url.Action("Index", "SampleHouseAreaStyle",new {pageNum=2})"><i class="icon-angle-right"></i>风格列表</a> </li>*@
+            
+        </ul>
+    </li>
+
+
+    <li class="panel">
+        <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#component-nav2">
+            <i class="icon-tasks"> </i> 商城
+        </a>
+         <ul class="@if (ViewBag.pageNum == 3)
+                   {
+                       @("in")
+                   }
+                   else
+                   {
+                       @("collapse")
+                   }" id="component-nav2">
+            @*  <li class=""><a href="@Url.Action("Index", "Market",new {pageNum=3})"><i class="icon-angle-right"></i>商品列表</a> </li>
+             <li class=""><a href="@Url.Action("Index", "MType",new {pageNum=3})"><i class="icon-angle-right"></i>商品分类</a> </li>
+           <li class=""><a href="@Url.Action("Index", "MarketGoodsLabel",new {pageNum=3})"><i class="icon-angle-right"></i>商品标签</a> </li>
+             <li class=""><a href="@Url.Action("Index", "Order",new {pageNum=3})"><i class="icon-angle-right"></i>订单管理</a> </li>*@
+         </ul>
+    </li>
+    
+        <li class="panel">
+        <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#component-nav6">
+            <i class="icon-tasks"> </i> 商家/店铺
+        </a>
+            <ul class="@if(ViewBag.pageNum == 7)
+                       {
+                           @("in")
+                       }
+                       else
+                       {
+                           @("collapse")
+                       }" id="component-nav6">
+             @*   <li class=""><a href="@Url.Action("Index", "AgentInfo",new {pageNum=7})"><i class="icon-angle-right"></i>商家信息</a> </li>
+                <li class=""><a href="@Url.Action("Index", "ShopStore",new {pageNum=7})"><i class="icon-angle-right"></i>商家店铺</a> </li>
+                <li class=""><a href="@Url.Action("Index", "AgentType",new {pageNum=7})"><i class="icon-angle-right"></i>产品类型</a> </li>
+                <li class=""><a href="@Url.Action("Index", "AgentLevel",new {pageNum=7})"><i class="icon-angle-right"></i>品牌等级</a> </li>
+                <li class=""><a href="@Url.Action("Index", "AgentLabel",new {pageNum=7})"><i class="icon-angle-right"></i>商家标签</a> </li>*@
+            </ul>
+    </li>
+
+    
+    <li class="panel">
+        <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#component-nav5">
+            <i class="icon-tasks"> </i> 账号/权限
+        </a>
+         <ul class="@if (ViewBag.pageNum == 6)
+                   {
+                       @("in")
+                   }
+                   else
+                   {
+                       @("collapse")
+                   }" id="component-nav5">
+             <li class=""><a href="@Url.Action("Index", "User",new {pageNum=6})"><i class="icon-angle-right"></i>用户管理</a> </li>
+             <li class=""><a href="@Url.Action("Index", "Role",new {pageNum=6})"><i class="icon-angle-right"></i>角色管理</a> </li>
+             <li class=""><a href="@Url.Action("Index", "Action",new {pageNum=6})"><i class="icon-angle-right"></i>权限管理</a> </li>
+             @*    <li class=""><a href="@Url.Action("Index", "CommSaler",new {pageNum=6})"><i class="icon-angle-right"></i>楼盘销售</a></li> 
+             <li class=""><a href="@Url.Action("Index", "RechargeCard",new {pageNum=6})"><i class="icon-angle-right"></i>充值卡</a></li>   
+             <li class=""><a href="@Url.Action("Index", "Recharge_History",new {pageNum=6})"><i class="icon-angle-right"></i>充值记录</a></li>
+         <li class=""><a href="@Url.Action("Index", "ApplySake",new {pageNum=6})"><i class="icon-angle-right"></i>申请提现</a></li> 
+             <li class=""><a href="@Url.Action("Index", "CashHistory",new {pageNum=6})"><i class="icon-angle-right"></i>提现记录</a></li>
+             <li class=""><a href="@Url.Action("Index", "ActivityInfo",new {pageNum=6})"><i class="icon-angle-right"></i>活动列表</a> </li>
+              <li class=""><a href="@Url.Action("Index", "DesignerCommnet",new {pageNum=6})"><i class="icon-angle-right"></i>评论列表</a> </li>
+             <li class=""><a href="@Url.Action("Index", "YuYue",new {pageNum=6})"><i class="icon-angle-right"></i>预约记录</a></li>  *@
+         </ul>
+    </li>
+    
+    
+    
+    <li class="panel">
+        <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#component-nav3">
+            <i class="icon-tasks"> </i> QA/Banner/单页/新闻
+        </a>
+        <ul class="@if (ViewBag.pageNum == 4)
+                   {
+                       @("in")
+                   }
+                   else
+                   {
+                       @("collapse")
+                   }" id="component-nav3">
+            <li class=""><a href="@Url.Action("Edit", "SiteInfo",new{id=1,pageNum=4})"><i class="icon-angle-right"></i>网站信息</a></li>
+            <li class=""><a href="@Url.Action("Index", "Banner",new {pageNum=4})"><i class="icon-angle-right"></i>Banner管理</a></li>
+            <li class=""><a href="@Url.Action("Index", "QAInfos",new {pageNum=4})"><i class="icon-angle-right"></i>QA问答</a></li>
+            <li class=""><a href="@Url.Action("Index", "Notice",new {pageNum=4})"><i class="icon-angle-right"></i>公告管理</a></li>
+            <li class=""><a href="@Url.Action("Index", "SinglePage",new {pageNum=4})"><i class="icon-angle-right"></i>单页管理</a></li>
+            <li class=""><a href="@Url.Action("Index", "News",new {pageNum=4})"><i class="icon-angle-right"></i>新闻管理</a></li>
+            <li class=""><a href="@Url.Action("Index", "Videos",new {pageNum=4})"><i class="icon-angle-right"></i>视频管理</a></li>
+@*            <li class=""><a href="@Url.Action("Index", "DesignerInfo",new {pageNum=4})"><i class="icon-angle-right"></i>设计师</a></li>*@
+   
+        </ul>
+    </li>
+</ul>
+
+</div>
+    <!--END MENU SECTION -->

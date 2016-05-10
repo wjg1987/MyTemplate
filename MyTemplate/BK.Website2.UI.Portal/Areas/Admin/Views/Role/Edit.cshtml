@@ -1,0 +1,93 @@
+﻿@model My.Template.Model.Role
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+
+@section Head{
+        <!-- PAGE LEVEL STYLES -->
+<link href="/areas/admin/assets/css/jquery-ui.css" rel="stylesheet" />
+
+
+}
+
+
+       <!--PAGE CONTENT -->
+        <div id="content">
+
+            <div class="inner">
+                 <div class="row">
+                    <div class="col-lg-12">
+                        <h3> 编辑标签</h3>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="box dark">
+                            <header>
+                                <div class="icons"><i class="icon-edit"></i>
+                                </div>
+                                <h5>编辑信息</h5>
+                            </header>
+                            <div id="div-1" class="accordion-body collapse in body">
+                                @using (Html.BeginForm("Edit", "Role", FormMethod.Post, new { @class = "form-horizontal" }))
+                                {  
+                                    <input type="hidden" name="pageNum" value="@ViewBag.pageNum" />
+                                    @Html.ValidationSummary(true)
+                                    @Html.HiddenFor(u => u.ID)
+                                     @Html.HiddenFor(u => u.IsDelete)
+                                       @Html.HiddenFor(u => u.CreateTime)
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(u => u.RCNName, "中文名称", new {@class = "control-label col-lg-4"})
+                                        <div class="col-lg-8">
+                                            @Html.ValidationMessageFor(u => u.RCNName)
+                                            @Html.TextBoxFor(u => u.RCNName, new {placeholder = "中文名称", @class = "form-control"})
+                                        </div>
+                                    </div>
+                                        <div class="form-group">
+                                        @Html.LabelFor(u => u.REnName, "英文名称", new {@class = "control-label col-lg-4"})
+                                        <div class="col-lg-8">
+                                            @Html.ValidationMessageFor(u => u.REnName)
+                                            @Html.TextBoxFor(u => u.REnName, new {placeholder = "英文名称", @class = "form-control"})
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(u => u.RRemark, "备注", new {@class = "control-label col-lg-4"})
+                                        <div class="col-lg-8">
+                                            @Html.ValidationMessageFor(u => u.RRemark)
+                                            @Html.TextBoxFor(u => u.RRemark, new {placeholder = "备注", @class = "form-control"})
+                                        </div>
+                                    </div>
+                                        <div class="form-group">
+                                        @Html.LabelFor(u => u.IsFrozen, "是否冻结", new {@class = "control-label col-lg-4"})                                 <div class="col-lg-8">
+                                        @Html.ValidationMessageFor(u=>u.IsFrozen)
+                                        @Html.CheckBoxFor(u => u.IsFrozen)
+                                         </div>
+                                    </div>
+                                  
+                                    <div class="form-group">
+                                        <div class="col-lg-8 divsure">
+
+                                            <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl"/>
+                                         <a href="@ViewBag.returnUrl" class="btn  btn-default btn-rect">取消</a>
+                                            <input type="submit" value="确认" class="btn btn-success btn-rect"/>
+                                        </div>
+                                         </div>
+                                }
+                             
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            </div>
+@section Foot{
+        <!-- PAGE LEVEL SCRIPTS -->
+    <script src='@Url.Content("~/Scripts/jquery/jquery.validate.js")'></script>
+    <script src="/Scripts/jquery/jquery.validate.unobtrusive.min.js"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+}

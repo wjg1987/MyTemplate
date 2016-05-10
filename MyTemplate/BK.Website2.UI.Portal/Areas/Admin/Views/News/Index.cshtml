@@ -1,0 +1,236 @@
+﻿@model List<My.Template.Model.News>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+@section Head{
+     <!-- PAGE LEVEL STYLES -->
+    <link href="/areas/admin/assets/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet"/>
+    <link href="/Areas/Admin/css/gloable.css" rel="stylesheet" />
+    <!-- END PAGE LEVEL  STYLES -->
+   
+}
+       <!--PAGE CONTENT -->
+        <div id="content">
+
+            <div class="inner">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h3> 新闻 </h3>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           新闻管理
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                                <!--记录条数-->
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="dataTables_length" id="dataTables-example_length"><label>
+                                                <select id="pageselect" name="dataTables-example_length" aria-controls="dataTables-example" class="form-control input-sm">
+                                                    @{
+                                                        string str = "selected=true";
+                                                        }
+                                                    <option @if(ViewBag.pageSize==10){@str} value="10">10</option>
+                                                    <option @if(ViewBag.pageSize==20){@str}  value="20">20</option>
+                                                    <option @if(ViewBag.pageSize==30){@str} value="30">30</option>
+                                                </select> / 页
+                                            </label>
+                                        </div>
+                                        <a href="@Url.Action("Add", "News", new {pageNum=ViewBag.pageNum})" class="btn btn-success btn-rect">添加</a>
+                                    </div>
+                                <div class="col-sm-6">
+                                    <div id="dataTables-example_filter" class="dataTables_filter"><label>搜索:<input type="search" id="searchBtn" value="@ViewBag.searchWords" class="form-control input-sm" aria-controls="dataTables-example"></label>
+                                    </div>
+                                </div>
+
+
+                                      <!--分页开始-->
+                              
+                                        <div class="col-sm-6">
+                                            <div class="pagination">
+                                                @Html.Raw(ViewBag.pageStr)
+                                            </div>
+                                        </div>
+                                  
+                                     <!--分页结束-->
+                                       </div>
+
+                                  <!--列表数据开始-->
+                                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>标题</th>
+                                    <th>SEO关键字</th>
+                                    <th>SEO描述</th>
+                                    <th>是否显示</th>
+                                    <th>排序</th>
+                                    <th>点击数</th>
+                                    <th>添加时间</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @{
+                                    for (int i = 0; i < Model.Count(); i++)
+                                    {
+                                        <tr >
+                                            <td>@Model[i].ID</td>
+                                            <td>@Model[i].Title</td>
+                                            <td>@Model[i].SeoKeywords</td>
+                                             <td>@Model[i].SeoDescription</td>
+                                            <td>@if (Model[i].IsView)
+                                                {
+                                                    <span style="color: green; font-weight: bold;">√</span>
+                                                }
+                                                else
+                                                {
+                                                    <span style="color: red; font-weight: bold;">×</span>
+                                                }</td>
+                                            <td>@Model[i].Sequence</td>
+                                            <td>@Model[i].ClickNum</td>
+                                            <td>@Model[i].AddTime.ToString("yyyy-MM-dd")</td>
+                                            <td><a href="@Url.Action("Edit", "News", new {id = Model[i].ID,pageNum=ViewBag.pageNum})" class="btn btn-success btn-rect">编辑</a>
+                                                <input type="button" value="删除" data-delid="@Model[i].ID" class="btn btn-danger btn-rect btn-del" data-toggle="modal" data-target="#buttonedModal"/>
+
+                                            </td>
+                                        </tr>
+
+                                    }
+                                }
+                                </tbody>
+                            </table>
+                                      <!--列表数据结束-->
+
+                                   <!--分页开始-->
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="pagination">
+                                                @Html.Raw(ViewBag.pageStr)
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <!--分页结束-->
+
+                                    </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <!--信息提示区-->
+                <div class="row">
+                      <div class="col-lg-12">
+                        <div class="modal fade" id="buttonedModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="H1">提示消息</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                           确认删除吗?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" id="btn-canceldel" class="btn btn-default" data-dismiss="modal">取消</button>
+                                            <button type="button" id="btn-confirmdel" class="btn btn-primary" data-dismiss="modal">删除</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                      <div class="col-lg-12">
+                        <div class="modal fade" id="ayncerror" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" >错误消息</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                         发送异步请求失败.请重试!
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button"  class="btn btn-default" data-dismiss="modal">关闭</button>         
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+       <!--END PAGE CONTENT -->
+
+
+
+   
+
+@section Foot{
+    <!-- PAGE LEVEL SCRIPTS -->
+    <script>
+        $(document).ready(function() {
+           
+
+            /*删除相关 前台代码和框架弹出提示框结合*/
+            var delid = 0;
+            $('.btn-del').click(function () {
+                delid = $(this).data('delid');
+            })
+            
+            $('#btn-canceldel').click(function () {
+                delid = 0;
+            })
+
+            $('#btn-confirmdel').click(function () {
+                $.ajax({
+                    url: '@Url.Action("Delete","News")',
+                    data: { id: delid },
+                    type: 'post',
+                    dataType: 'text',
+                    success: function(data) {
+                        if (data == 1) {
+                            $('#pageselect').change();
+                        }
+                    },
+                    error: function () {
+                        alert("aync错误");
+                    }
+                })
+            })
+
+            //------------搜索事件
+            $('body').keydown(function () {
+                var searchwords = $('#searchBtn').val();
+                if (event.keyCode == 13)//按Enter键的键值为13  
+                    reFresh(1,'@ViewBag.pageSize',searchwords);
+            })
+
+            $('#pageselect').change(function () {
+                //
+                var pageSize = $(this).val();
+                var searchwords = $('#searchBtn').val();
+                reFresh(1, pageSize, searchwords);
+            });
+        });
+
+
+        //刷新
+        function reFresh(pageIndex,pageSize,searchwords) {
+            window.location.href = "/admin/News/Index?pageIndex=" + pageIndex + "&pageSize=" + pageSize + "&searchWords=" + encodeURIComponent(searchwords) + "&pageNum=@ViewBag.pageNum";
+        }
+
+    </script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+
+    
+}

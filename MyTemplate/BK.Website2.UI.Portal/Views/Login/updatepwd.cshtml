@@ -1,0 +1,60 @@
+﻿@{
+    Layout = "/Views/Shared/_LoginLayoutPage.cshtml";
+}
+@model My.Template.Model.User
+@section Head{
+
+}
+<div class="forgetthree">
+    <div id="set_password">
+        <div class="set_left">
+        </div>
+        <div class="set_right">
+
+            <form class="get03" action="/Login/updatepwd" method="post">
+                <p class="p1">找回密码</p>
+                <input type="hidden" value="@ViewBag.account" name="account" />
+                <label>设置新密码<input type="password" id="newpassword" name="pwd1" /></label>
+
+                <div id="level" class="pw-strength">
+                    <div class="pw-bar"></div>
+                    <div class="pw-bar-on"></div>
+                    <div class="pw-txt">
+                        <span>弱</span>
+                        <span>中</span>
+                        <span>强</span>
+                    </div>
+                </div>
+                <label>重新输入密码<input type="password" id="againpassword" name="pwd2" /></label>
+                @{
+                    string status = "";
+                    if (ViewBag.res != null && ViewBag.res == 0)
+                    {
+                        status = "visible";
+                    }
+                    else
+                    {
+                        status = "hidden";
+                    }
+                }
+                <p class="p2" style="visibility:@status;">@ViewBag.ErrorInfo</p>
+                <input class="tijiao" type="submit" value="提交" />
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+<div id="mask">
+    <div id="indexg0">
+        <img src="/images/mask_bg.jpg" />
+    </div>
+</div>
+@section Foot{
+    <script src="/js/jquery.mousewheel.js"></script>
+    <script src="/js/web2js/picscroll.js"></script>
+    <script src="/js/web2js/findpwdsuccess.js"></script>
+}
+
+

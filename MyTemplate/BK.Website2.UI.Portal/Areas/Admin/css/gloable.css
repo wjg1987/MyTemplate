@@ -1,0 +1,24 @@
+﻿.row{margin: 5px;}
+.pagination{  margin: 10px 0 5px 0;}
+.pagination > a {position: relative;float: left;padding: 6px 12px;margin-left: -1px;line-height: 1.428571429;text-decoration: none; background-color: #ffffff;border: 1px solid #dddddd;color: #428bca;}
+.pagination a.act {z-index: 2;color: #ffffff;cursor: default;background-color: #428bca;border-color: #428bca;}
+
+/*Chorme下滚动条样式设置*/
+::-webkit-scrollbar { width: 20px; height: 20px;}   
+::-webkit-scrollbar-track-piece { background-color: #666;}   
+::-webkit-scrollbar-thumb{height: 50px; background-color: #666; -webkit-border-radius: 3px;}
+
+/*IE下滚动条样式设置*/
+HTML {   
+scrollbar-base-color: #666;   
+scrollbar-base-color: #666;   
+scrollbar-3dlight-color: #666;   
+scrollbar-highlight-color: #666;   
+scrollbar-track-color: #EBEBEB;   
+scrollbar-arrow-color: black;   
+scrollbar-shadow-color: #C0C0C0;   
+}  
+
+.form-control.mininput{ width: 50%;}
+
+ 

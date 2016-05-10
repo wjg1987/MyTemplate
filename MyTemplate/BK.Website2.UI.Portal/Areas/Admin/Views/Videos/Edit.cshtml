@@ -1,0 +1,215 @@
+﻿@model My.Template.Model.Videos
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+
+@section Head{
+    <!-- PAGE LEVEL STYLES -->
+  <link href="/areas/admin/assets/css/jquery-ui.css" rel="stylesheet" />
+  <link href="/Scripts/uploadify3.2.1/uploadify.css" rel="stylesheet" />
+    <link href="/Areas/Admin/css/myuploadify.css" rel="stylesheet"/>
+     <script src="/Scripts/ckfinder/ckfinder.js"></script>
+    <script type="text/javascript">
+
+        function BrowseServer(startupPath, functionData) {
+            // You can use the "CKFinder" class to render CKFinder in a page:
+            var finder = new CKFinder();
+
+            // The path for the installation of CKFinder (default = "/ckfinder/").
+            finder.basePath = '../../';
+
+            //Startup path in a form: "Type:/path/to/directory/"
+            finder.startupPath = startupPath;
+
+            // Name of a function which is called when a file is selected in CKFinder.
+            finder.selectActionFunction = SetFileField;
+
+            // Additional data to be passed to the selectActionFunction in a second argument.
+            // We'll use this feature to pass the Id of a field that will be updated.
+            finder.selectActionData = functionData;
+
+            // Name of a function which is called when a thumbnail is selected in CKFinder.
+            //finder.selectThumbnailActionFunction = ShowThumbnails;
+
+            // Launch CKFinder
+            finder.popup();
+        }
+
+        // This is a sample function which is called when a file is selected in CKFinder.
+        function SetFileField(fileUrl, data) {
+            document.getElementById(data["selectActionData"]).value = fileUrl;
+        }
+    </script>
+  <style type="text/css">
+         .wrap_uploadImg1{height: 273px;width:400px;}
+        .upload_container{height: 273px;width:400px;}
+        .del_img img { width:10px; height:10px;}
+         .col-lg-8 select{ width: 50%;display: inline;height: 34px;padding: 6px 12px;font-size: 14px;line-height: 1.428571429;color: #555555;vertical-align: middle;background-color: #ffffff;background-image: none;border: 1px solid #cccccc;border-radius: 4px;}
+          .form-control.min_width{width: 80%;}
+    </style>
+
+}
+
+
+       <!--PAGE CONTENT -->
+        <div id="content">
+
+            <div class="inner">
+                 <div class="row">
+                    <div class="col-lg-12">
+                        <h3> 编辑视频 </h3>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="box dark">
+                            <header>
+                                <div class="icons"><i class="icon-edit"></i>
+                                </div>
+                                <h5>编辑信息</h5>
+                            </header>
+                            <div id="div-1" class="accordion-body collapse in body">
+                                @using (Html.BeginForm("Edit", "Videos", FormMethod.Post, new { @class = "form-horizontal" }))
+                                {
+                                    <input type="hidden" name="pageNum" value="@ViewBag.pageNum" />
+                                    @Html.ValidationSummary(true)
+                                    @Html.HiddenFor(u => u.ID)
+                                    @Html.HiddenFor(u => u.IsDelete)
+
+                                   <div class="form-group">
+                                        @Html.LabelFor(u => u.VName, "名称", new { @class = "control-label col-lg-4" })
+                                        <div class="col-lg-8">
+                                            @Html.ValidationMessageFor(u => u.VName)
+                                            @Html.TextBoxFor(u => u.VName, new { placeholder = "名称", @class = "form-control" })
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-lg-4">图片</label>
+                                        <div class="col-lg-8">
+                                            @Html.ValidationMessageFor(u => u.ThemPic)
+                                            @if (string.IsNullOrEmpty(Model.ThemPic))
+                                            {
+                                                <div class="wrap_uploadImg1">
+                                                    <div id="upload_con_0" class="upload_container">
+                                                        <div id="ThemPic" class="upload_btn"></div>
+                                                        <div class="loading off"><img src="/images/uploadloading.gif"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="wrap_uploadImg1">
+                                                    <div id="upload_con_0" class="upload_container"><img src="@Model.ThemPic"><a class="del_img" cuisineId="@Model.ID" href="javascript:;" onclick=" del_uploadimg(this, '@Path.GetFileName(Model.ThemPic)', 'ThemPic') "><img src="/Images/morelist_del.png"></a><input name="ThemPic" type="hidden" value="@Model.ThemPic">
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                     <div class="form-group">
+                                          <label class="control-label col-lg-4"></label><span style="color: red;padding-left: 10px;">尺寸:307*165</span>
+                                     </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(u => u.MPEG4Url, "MPEG4地址", new { @class = "control-label col-lg-4" })
+                                        <div class="col-lg-8">
+                                            @Html.TextBoxFor(u => u.MPEG4Url, new { placeholder = "MPEG4地址", @class = "form-control min_width", maxlength = 128 })
+                                              <a href="javascript:void();" onclick="BrowseServer( 'Files:/', 'MPEG4Url' );" class='bn_adda'>+点此上传</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(u => u.OggUrl, "Ogg地址", new { @class = "control-label col-lg-4" })
+                                        <div class="col-lg-8">
+                                            @Html.TextBoxFor(u => u.OggUrl, new { placeholder = "Ogg地址", @class = "form-control min_width", maxlength = 128 })
+                                              <a href="javascript:void();" onclick="BrowseServer( 'Files:/', 'OggUrl' );" class='bn_adda'>+点此上传</a>
+                                        </div>
+                                    </div>
+                                    
+                                     <div class="form-group">
+                                         @Html.LabelFor(u => u.WebMUrl, "WebM地址", new { @class = "control-label col-lg-4" })
+                                       <div class="col-lg-8">
+                                           @Html.TextBoxFor(u => u.WebMUrl, new { placeholder = "WebM地址", @class = "form-control min_width", maxlength = 128 })
+                                             <a href="javascript:void();" onclick="BrowseServer( 'Files:/', 'WebMUrl' );" class='bn_adda'>+点此上传</a>
+                                       </div>
+                                    </div>
+                                 
+                                    <div class="form-group">
+                                        @Html.LabelFor(u => u.IsView, "是否显示", new { @class = "control-label col-lg-4" })
+                                        <div class="col-lg-8">
+                                            @Html.ValidationMessageFor(u => u.IsView)
+                                            @Html.CheckBoxFor(u => u.IsView)
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(u => u.Sequence, "排序", new { @class = "control-label col-lg-4" })
+                                        <div class="col-lg-8">
+                                            @Html.ValidationMessageFor(u => u.Sequence)
+                                            @Html.TextBoxFor(u => u.Sequence, new { placeholder = "数字越小排越前", @class = "form-control", @style = "max-width: 20%;display:inline;" }) <span style="color: red;">数字越小排越前</span>                             
+                                        </div>
+                                    </div>
+                 
+                                    <div class="form-group">
+                                         @Html.LabelFor(u => u.AddTime, "添加时间", new { @class = "control-label col-lg-4" })
+                                     <div class="col-lg-8">
+                                         @Html.ValidationMessageFor(u => u.AddTime)
+                                         @Html.TextBoxFor(u => u.AddTime, new { placeholder = "添加时间", @class = "form-control", maxlength = 128 })
+                                     </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-8 divsure">
+                                            <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl"/>
+                                         <a href="@ViewBag.returnUrl" class="btn  btn-default btn-rect">取消</a>
+                                            <input type="submit" value="确认" class="btn btn-success btn-rect"/>
+                                        </div>
+                                    </div>
+                                }
+                             
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            </div>
+@section Foot{
+    <!-- PAGE LEVEL SCRIPTS -->
+    <script src='@Url.Content("~/Scripts/jquery/jquery.validate.js")'></script>
+    <script src="/Scripts/jquery/jquery.validate.unobtrusive.min.js"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+
+     @*编辑器*@
+    <link href='@Url.Content("~/Scripts/kindeditor/themes/default/default.css")' rel="stylesheet" />
+    <script src='@Url.Content("~/Scripts/kindeditor/kindeditor.js")'></script>
+    <script src='@Url.Content("~/Scripts/kindeditor/lang/zh_CN.js")'></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <script src="/Scripts/uploadify3.2.1/jquery.uploadify.min.js?ver=@(new Random().Next(0, 99999).ToString())"></script>
+    <script type="text/javascript">
+             var uploadbtn = "/images/up_img5.jpg";
+             var uploadheight = 273;
+             var uploadwhidth = 400;
+    </script>
+    <script src="/Areas/Admin/js/myuploadify.js"></script>
+    <script>
+        //详细内容
+        KindEditor.ready(function (K) {
+            var editor1 = K.create('#Detail', {
+                items: [
+						'source', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+						'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+						'insertunorderedlist', '|', 'emoticons', 'image', 'media', 'link', 'fullscreen'],
+                uploadJson: '/admin/KindEditorUpload/ProcessFile',
+                fileManagerJson: "/admin/KindEditorUpload/ProcessFileManger",
+                filterMode: false,
+                allowFileManager: true,
+            })
+        });
+    </script>
+  
+
+}

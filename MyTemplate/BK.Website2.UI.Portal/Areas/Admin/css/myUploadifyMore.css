@@ -1,0 +1,8 @@
+﻿.wrap_uploadImg2{position: relative;width:600px;float: left;height: auto;margin-left: 20px;margin-bottom:10px;}
+.processbarDiv .picLoding {position:absolute;bottom:0;max-width:100%;background-color:green;height:20%;display:table;}
+.picLoding div{width:150px;padding-left:25px;display:table-cell;vertical-align:middle;}
+.wrap_uploadImg2 .upload_container {}
+.loading img{max-width:100%;}
+.delMore_img  {position:absolute;top:0;right:0;}
+.delMore_img img {width:15px;height:15px;}
+

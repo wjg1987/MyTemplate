@@ -1,0 +1,39 @@
+﻿@{
+    
+    Layout = "/Views/Shared/_LayoutPage.cshtml";
+ 
+}
+@section Head{
+
+}
+
+    <div class="error">
+    <div class="wrap">
+        <img src="/images/error.png"/>
+    </div>
+        <ul id="tiaozhuan">
+            <li>直接访问<a href="@Url.Action("Index","Default")">蜂巢首页</a></li>
+            <li>等待<span>15</span>秒跳转</li>
+        </ul>
+        </div>
+@section Foot{
+      <script>
+           $(function () {
+
+               var time = setInterval(function () {
+
+                   var number = $('#tiaozhuan').find('span').text();
+                   if (number > 1) {
+                       number--;
+                       $('#tiaozhuan').find('span').text(number);
+                   }
+                   else {
+                       clearInterval(time);
+                       history.go(-1);
+                   }
+
+
+               }, 1000);
+           });
+    </script>
+}

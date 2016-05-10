@@ -1,0 +1,149 @@
+﻿@model My.Template.Model.Banner
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+
+@section Head{
+        <!-- PAGE LEVEL STYLES -->
+<link href="/areas/admin/assets/css/jquery-ui.css" rel="stylesheet" />
+<link href="/Scripts/uploadify3.2.1/uploadify.css" rel="stylesheet" />
+    <link href="/Areas/Admin/css/myuploadify.css" rel="stylesheet"/>
+               <style type="text/css">
+         .wrap_uploadImg1{height: 300px;width: 185px;}
+        .upload_container{height: 300px;width: 185px;}
+        .del_img img { width:20px; height:20px;}
+    </style>
+    <!-- END PAGE LEVEL  STYLES -->
+
+}
+       <!--PAGE CONTENT -->
+        <div id="content">
+
+            <div class="inner">
+                 <div class="row">
+                    <div class="col-lg-12">
+                        <h3> 编辑Banner </h3>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="box dark">
+                            <header>
+                                <div class="icons"><i class="icon-edit"></i>
+                                </div>
+                                <h5>编辑信息</h5>
+                            </header>
+                            <div id="div-1" class="accordion-body collapse in body">
+                                @using(Html.BeginForm("Edit", "Banner", FormMethod.Post,new {@class="form-horizontal"}))
+                                {
+                                    <input type="hidden" name="pageNum" value="@ViewBag.pageNum" />
+                                    @Html.HiddenFor(u=>u.ID)
+                                    @Html.HiddenFor(u=>u.AddTime)
+                                    @Html.HiddenFor(u=>u.IsDelete)
+                                    
+                                    <div class="form-group">
+                                        @Html.LabelFor(u => u.Title, "标题", new {@class = "control-label col-lg-4"})
+                                        <div class="col-lg-8">
+                                              @Html.ValidationMessageFor(u=>u.Title)
+                                            @Html.TextBoxFor(u => u.Title, new {placeholder = "标题", @class = "form-control"})
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div class="form-group">
+                                        <label class="control-label col-lg-4">图片</label>
+                                        <div class="col-lg-8">
+                                            @Html.ValidationMessageFor(u => u.ImgPic)
+                                            @if (string.IsNullOrEmpty(Model.ImgPic))
+                                            {
+                                                <div class="wrap_uploadImg1">
+                                                    <div id="upload_con_0" class="upload_container">
+                                                        <div id="ImgPic" class="upload_btn"></div>
+                                                        <div class="loading off"><img src="/images/uploadloading.gif"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="wrap_uploadImg1">
+                                                    <div id="upload_con_0" class="upload_container"><img src="@Model.ImgPic"><a class="del_img" cuisineId="@Model.ID" href="javascript:;" onclick=" del_uploadimg(this, '@Path.GetFileName(Model.ImgPic)', 'ImgPic') "><img src="/Images/morelist_del.png"></a><input name="ImgPic" type="hidden" value="@Model.ImgPic">
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                   <div class="form-group">
+                                        <label class="control-label col-lg-4"></label><span style="color: red;padding-left: 10px;">PC尺寸:1920*558;手机尺寸:960*486</span>
+                                            </div>
+                                   <div class="form-group">
+                                         @Html.LabelFor(u=>u.LinkUrl,"链接",new{@class="control-label col-lg-4"})
+                                        <div class="col-lg-8">
+                                           @Html.TextBoxFor(u=>u.LinkUrl,new {placeholder="链接",@class="form-control"}) 
+                                        </div>
+                                    </div>
+
+                                    
+                                     <div class="form-group">
+                                        @Html.LabelFor(u => u.IsView, "是否用于手机", new {@class = "control-label col-lg-4"})
+                                        <div class="col-lg-8">
+                                           @Html.ValidationMessageFor(u=>u.IsUse4Phone)
+                                        @Html.CheckBoxFor(u => u.IsUse4Phone)
+                                         </div>
+                                    </div>
+                                
+                                    <div class="form-group">
+                               @Html.LabelFor(u => u.IsView, "是否显示", new {@class = "control-label col-lg-4"})  
+                                @Html.CheckBoxFor(u => u.IsView)                
+                                </div>
+
+                                      <div class="form-group">
+                                         @Html.LabelFor(u=>u.Sequence,"排序",new{@class="control-label col-lg-4"})
+                                        <div class="col-lg-8">
+                                          @Html.TextBoxFor(u => u.Sequence, new {placeholder = "数字越小排越前", @class = "form-control", @style = "max-width: 20%;display:inline;"}) <span style="color: red;">数字越小排越前</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(u => u.BannerTypeID, "Banner类型", new {@class = "control-label col-lg-4"})
+                                        <div class="col-lg-8">
+                                           @Html.ValidationMessageFor(u=>u.BannerTypeID)
+                                        @Html.DropDownList("BannerTypeID")
+                                         </div>
+                                    </div>
+                                    
+
+                                    <div class="form-group">
+                                        <div class="col-lg-8 divsure">
+                                         <input type="hidden" value="@ViewBag.returnUrl" name="returnUrl" />
+                                         <a href="@ViewBag.returnUrl" class="btn  btn-default btn-rect">取消</a>
+                                         <input type="submit" value="确认" class="btn btn-success btn-rect"/>
+                                        </div>
+                                         </div>
+                                }
+                             
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            </div>
+@section Foot{
+        <!-- PAGE LEVEL SCRIPTS -->
+    <script src='@Url.Content("~/Scripts/jquery/jquery.validate.js")'></script>
+      <script src="/Scripts/jquery/jquery.validate.unobtrusive.min.js"></script>
+         <!-- END PAGE LEVEL SCRIPTS -->
+
+    <script src="/Scripts/uploadify3.2.1/jquery.uploadify.min.js?ver=@(new Random().Next(0, 99999).ToString())"></script>
+        <script type="text/javascript">
+            var uploadbtn = "/images/up_img2.jpg";
+            var uploadheight = 300;
+            var uploadwhidth = 185;
+    </script>
+     <script src="/Areas/Admin/js/myuploadify.js"></script>
+}
