@@ -30,6 +30,15 @@ namespace My.Template.BLL
 
     }
 	
+	 public partial class AreaInfoServices:BaseServices<My.Template.Model.AreaInfo>,IAreaInfoServices
+    {
+        public override void SetCurrentDal()
+        {
+            this.CurrentDal = dbSession.AreaInfoDal;
+        }
+
+    }
+	
 	 public partial class BannerServices:BaseServices<My.Template.Model.Banner>,IBannerServices
     {
         public override void SetCurrentDal()
@@ -44,6 +53,69 @@ namespace My.Template.BLL
         public override void SetCurrentDal()
         {
             this.CurrentDal = dbSession.BannerTypeDal;
+        }
+
+    }
+	
+	 public partial class CityInfoServices:BaseServices<My.Template.Model.CityInfo>,ICityInfoServices
+    {
+        public override void SetCurrentDal()
+        {
+            this.CurrentDal = dbSession.CityInfoDal;
+        }
+
+    }
+	
+	 public partial class CommunityServices:BaseServices<My.Template.Model.Community>,ICommunityServices
+    {
+        public override void SetCurrentDal()
+        {
+            this.CurrentDal = dbSession.CommunityDal;
+        }
+
+    }
+	
+	 public partial class GoodsInfoServices:BaseServices<My.Template.Model.GoodsInfo>,IGoodsInfoServices
+    {
+        public override void SetCurrentDal()
+        {
+            this.CurrentDal = dbSession.GoodsInfoDal;
+        }
+
+    }
+	
+	 public partial class GoodsPropertyServices:BaseServices<My.Template.Model.GoodsProperty>,IGoodsPropertyServices
+    {
+        public override void SetCurrentDal()
+        {
+            this.CurrentDal = dbSession.GoodsPropertyDal;
+        }
+
+    }
+	
+	 public partial class GoodsPropertyDetailServices:BaseServices<My.Template.Model.GoodsPropertyDetail>,IGoodsPropertyDetailServices
+    {
+        public override void SetCurrentDal()
+        {
+            this.CurrentDal = dbSession.GoodsPropertyDetailDal;
+        }
+
+    }
+	
+	 public partial class GoodsTypeServices:BaseServices<My.Template.Model.GoodsType>,IGoodsTypeServices
+    {
+        public override void SetCurrentDal()
+        {
+            this.CurrentDal = dbSession.GoodsTypeDal;
+        }
+
+    }
+	
+	 public partial class HouseAreaServices:BaseServices<My.Template.Model.HouseArea>,IHouseAreaServices
+    {
+        public override void SetCurrentDal()
+        {
+            this.CurrentDal = dbSession.HouseAreaDal;
         }
 
     }
@@ -75,11 +147,47 @@ namespace My.Template.BLL
 
     }
 	
+	 public partial class OrderServices:BaseServices<My.Template.Model.Order>,IOrderServices
+    {
+        public override void SetCurrentDal()
+        {
+            this.CurrentDal = dbSession.OrderDal;
+        }
+
+    }
+	
+	 public partial class OrderGoodsServices:BaseServices<My.Template.Model.OrderGoods>,IOrderGoodsServices
+    {
+        public override void SetCurrentDal()
+        {
+            this.CurrentDal = dbSession.OrderGoodsDal;
+        }
+
+    }
+	
+	 public partial class OrderStatusServices:BaseServices<My.Template.Model.OrderStatus>,IOrderStatusServices
+    {
+        public override void SetCurrentDal()
+        {
+            this.CurrentDal = dbSession.OrderStatusDal;
+        }
+
+    }
+	
 	 public partial class QAInfosServices:BaseServices<My.Template.Model.QAInfos>,IQAInfosServices
     {
         public override void SetCurrentDal()
         {
             this.CurrentDal = dbSession.QAInfosDal;
+        }
+
+    }
+	
+	 public partial class RecAddressServices:BaseServices<My.Template.Model.RecAddress>,IRecAddressServices
+    {
+        public override void SetCurrentDal()
+        {
+            this.CurrentDal = dbSession.RecAddressDal;
         }
 
     }
@@ -102,6 +210,15 @@ namespace My.Template.BLL
 
     }
 	
+	 public partial class SampleHouseServices:BaseServices<My.Template.Model.SampleHouse>,ISampleHouseServices
+    {
+        public override void SetCurrentDal()
+        {
+            this.CurrentDal = dbSession.SampleHouseDal;
+        }
+
+    }
+	
 	 public partial class SinglePageServices:BaseServices<My.Template.Model.SinglePage>,ISinglePageServices
     {
         public override void SetCurrentDal()
@@ -116,6 +233,15 @@ namespace My.Template.BLL
         public override void SetCurrentDal()
         {
             this.CurrentDal = dbSession.SiteInfoDal;
+        }
+
+    }
+	
+	 public partial class SpHouse_HseAreaServices:BaseServices<My.Template.Model.SpHouse_HseArea>,ISpHouse_HseAreaServices
+    {
+        public override void SetCurrentDal()
+        {
+            this.CurrentDal = dbSession.SpHouse_HseAreaDal;
         }
 
     }
@@ -143,6 +269,15 @@ namespace My.Template.BLL
         public override void SetCurrentDal()
         {
             this.CurrentDal = dbSession.User_RoleDal;
+        }
+
+    }
+	
+	 public partial class User_ShoppingCartServices:BaseServices<My.Template.Model.User_ShoppingCart>,IUser_ShoppingCartServices
+    {
+        public override void SetCurrentDal()
+        {
+            this.CurrentDal = dbSession.User_ShoppingCartDal;
         }
 
     }

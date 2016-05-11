@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using My.Template.Model;
+using ServiceStack.Redis;
 using log4net;
 
 namespace My.Template.Common
@@ -30,7 +31,11 @@ namespace My.Template.Common
         public  static string IsTestAlipay =  ConfigurationManager.AppSettings["IsTestAlipay"];
 
         public static string ConnStr = ConfigurationManager.AppSettings["Connstr"];
-       
+
+        public static string Redisservicesipaddress = ConfigurationManager.AppSettings["redisservicesipaddress"];
+
+        public static RedisClient redisClient = new RedisClient(Redisservicesipaddress);
+
     }
 
 

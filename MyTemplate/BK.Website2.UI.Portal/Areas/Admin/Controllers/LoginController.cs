@@ -19,9 +19,12 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
         public ActionResult Index()
         {
             #region 测试 后台 不登陆使用
-            Session["curLoginAdminID"] = 1;
-            Session["curLoginAdminAccount"] = "admin";
-            Session["curLoginAdminHeadImg"] = "";
+            Common.Common.redisClient.SetValue("curLoginAdminID", "1");
+            Common.Common.redisClient.SetValue("curLoginAdminAccount", "admin");
+            Common.Common.redisClient.SetValue("curLoginAdminHeadImg", "/areas/admin/images/th.jpg");
+            //Session["curLoginAdminID"] = 1;
+            //Session["curLoginAdminAccount"] = "admin";
+            //Session["curLoginAdminHeadImg"] = "/areas/admin/images/th.jpg";
             return Redirect("/Admin/Home/index");
             #endregion
            

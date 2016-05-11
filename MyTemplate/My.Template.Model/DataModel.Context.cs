@@ -42,5 +42,20 @@ namespace My.Template.Model
         public DbSet<QAInfos> QAInfos { get; set; }
         public DbSet<BannerType> BannerType { get; set; }
         public DbSet<Notice> Notice { get; set; }
+        public DbSet<User_ShoppingCart> User_ShoppingCart { get; set; }
+        public DbSet<GoodsInfo> GoodsInfo { get; set; }
+        public DbSet<GoodsProperty> GoodsProperty { get; set; }
+        public DbSet<GoodsPropertyDetail> GoodsPropertyDetail { get; set; }
+        public DbSet<GoodsType> GoodsType { get; set; }
+        public DbSet<Order> Order { get; set; }
+        public DbSet<OrderStatus> OrderStatus { get; set; }
+        public DbSet<OrderGoods> OrderGoods { get; set; }
+        public DbSet<RecAddress> RecAddress { get; set; }
+        public DbSet<CityInfo> CityInfo { get; set; }
+        public DbSet<Community> Community { get; set; }
+        public DbSet<AreaInfo> AreaInfo { get; set; }
+        public DbSet<SampleHouse> SampleHouse { get; set; }
+        public DbSet<HouseArea> HouseArea { get; set; }
+        public DbSet<SpHouse_HseArea> SpHouse_HseArea { get; set; }
     }
 }

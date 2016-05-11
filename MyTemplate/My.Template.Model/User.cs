@@ -20,21 +20,23 @@ namespace My.Template.Model
             this.IsFrozen = false;
             this.User_Role = new HashSet<User_Role>();
             this.User_Action = new HashSet<User_Action>();
+            this.User_ShoppingCart = new HashSet<User_ShoppingCart>();
+            this.RecAddress = new HashSet<RecAddress>();
         }
     
         public int ID { get; set; }
         public string Account { get; set; }
         public string Email { get; set; }
         public string Mobile { get; set; }
-        public string WxOpenod { get; set; }
+        public string WxOpenid { get; set; }
         public string SinaWBOpenid { get; set; }
         public string QQNum { get; set; }
         public string Pwd { get; set; }
         public bool IsDelete { get; set; }
         public bool IsFrozen { get; set; }
         public System.DateTime CreateTime { get; set; }
-        public decimal Balance { get; set; }
-        public decimal FrozenBlance { get; set; }
+        public int Balance { get; set; }
+        public int FrozenBlance { get; set; }
         public string AlipayAccount { get; set; }
         public string BankNumber { get; set; }
         public string BankName { get; set; }
@@ -42,5 +44,7 @@ namespace My.Template.Model
         public virtual ICollection<User_Role> User_Role { get; set; }
         public virtual ICollection<User_Action> User_Action { get; set; }
         public virtual UserInfo UserInfo { get; set; }
+        public virtual ICollection<User_ShoppingCart> User_ShoppingCart { get; set; }
+        public virtual ICollection<RecAddress> RecAddress { get; set; }
     }
 }

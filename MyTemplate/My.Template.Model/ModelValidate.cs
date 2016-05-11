@@ -62,7 +62,7 @@ namespace My.Template.Model
         public string Account { get; set; }
         public string Email { get; set; }
         public string Mobile { get; set; }
-        public string WxOpenod { get; set; }
+        public string WxOpenid { get; set; }
         public string SinaWBOpenid { get; set; }
         public string QQNum { get; set; }
         [Required(ErrorMessage = "*")]

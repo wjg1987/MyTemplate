@@ -22,12 +22,52 @@ namespace My.Template.IDAL
    
 			
 	
+        IAreaInfoDal AreaInfoDal { get; }
+
+   
+			
+	
         IBannerDal BannerDal { get; }
 
    
 			
 	
         IBannerTypeDal BannerTypeDal { get; }
+
+   
+			
+	
+        ICityInfoDal CityInfoDal { get; }
+
+   
+			
+	
+        ICommunityDal CommunityDal { get; }
+
+   
+			
+	
+        IGoodsInfoDal GoodsInfoDal { get; }
+
+   
+			
+	
+        IGoodsPropertyDal GoodsPropertyDal { get; }
+
+   
+			
+	
+        IGoodsPropertyDetailDal GoodsPropertyDetailDal { get; }
+
+   
+			
+	
+        IGoodsTypeDal GoodsTypeDal { get; }
+
+   
+			
+	
+        IHouseAreaDal HouseAreaDal { get; }
 
    
 			
@@ -47,7 +87,27 @@ namespace My.Template.IDAL
    
 			
 	
+        IOrderDal OrderDal { get; }
+
+   
+			
+	
+        IOrderGoodsDal OrderGoodsDal { get; }
+
+   
+			
+	
+        IOrderStatusDal OrderStatusDal { get; }
+
+   
+			
+	
         IQAInfosDal QAInfosDal { get; }
+
+   
+			
+	
+        IRecAddressDal RecAddressDal { get; }
 
    
 			
@@ -62,12 +122,22 @@ namespace My.Template.IDAL
    
 			
 	
+        ISampleHouseDal SampleHouseDal { get; }
+
+   
+			
+	
         ISinglePageDal SinglePageDal { get; }
 
    
 			
 	
         ISiteInfoDal SiteInfoDal { get; }
+
+   
+			
+	
+        ISpHouse_HseAreaDal SpHouse_HseAreaDal { get; }
 
    
 			
@@ -83,6 +153,11 @@ namespace My.Template.IDAL
 			
 	
         IUser_RoleDal User_RoleDal { get; }
+
+   
+			
+	
+        IUser_ShoppingCartDal User_ShoppingCartDal { get; }
 
    
 			

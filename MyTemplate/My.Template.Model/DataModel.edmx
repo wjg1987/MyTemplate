@@ -23,6 +23,21 @@
     <EntitySet Name="QAInfos" EntityType="DataModel.Store.QAInfos" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="BannerType" EntityType="DataModel.Store.BannerType" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Notice" EntityType="DataModel.Store.Notice" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="User_ShoppingCart" EntityType="DataModel.Store.User_ShoppingCart" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GoodsInfo" EntityType="DataModel.Store.GoodsInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GoodsProperty" EntityType="DataModel.Store.GoodsProperty" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GoodsPropertyDetail" EntityType="DataModel.Store.GoodsPropertyDetail" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GoodsType" EntityType="DataModel.Store.GoodsType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Order" EntityType="DataModel.Store.Order" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OrderStatus" EntityType="DataModel.Store.OrderStatus" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OrderGoods" EntityType="DataModel.Store.OrderGoods" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RecAddress" EntityType="DataModel.Store.RecAddress" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CityInfo" EntityType="DataModel.Store.CityInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Community" EntityType="DataModel.Store.Community" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AreaInfo" EntityType="DataModel.Store.AreaInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SampleHouse" EntityType="DataModel.Store.SampleHouse" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HouseArea" EntityType="DataModel.Store.HouseArea" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SpHouse_HseArea" EntityType="DataModel.Store.SpHouse_HseArea" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="UserUser_Role" Association="DataModel.Store.UserUser_Role">
       <End Role="User" EntitySet="User" />
       <End Role="User_Role" EntitySet="User_Role" />
@@ -63,6 +78,54 @@
       <End Role="Banner" EntitySet="Banner" />
       <End Role="BannerType" EntitySet="BannerType" />
     </AssociationSet>
+    <AssociationSet Name="UserUser_ShoppingCart" Association="DataModel.Store.UserUser_ShoppingCart">
+      <End Role="User" EntitySet="User" />
+      <End Role="User_ShoppingCart" EntitySet="User_ShoppingCart" />
+    </AssociationSet>
+    <AssociationSet Name="GoodsInfoGoodsProperty" Association="DataModel.Store.GoodsInfoGoodsProperty">
+      <End Role="GoodsInfo" EntitySet="GoodsInfo" />
+      <End Role="GoodsProperty" EntitySet="GoodsProperty" />
+    </AssociationSet>
+    <AssociationSet Name="GoodsPropertyGoodsPropertyDetail" Association="DataModel.Store.GoodsPropertyGoodsPropertyDetail">
+      <End Role="GoodsProperty" EntitySet="GoodsProperty" />
+      <End Role="GoodsPropertyDetail" EntitySet="GoodsPropertyDetail" />
+    </AssociationSet>
+    <AssociationSet Name="GoodsInfoGoodsType" Association="DataModel.Store.GoodsInfoGoodsType">
+      <End Role="GoodsInfo" EntitySet="GoodsInfo" />
+      <End Role="GoodsType" EntitySet="GoodsType" />
+    </AssociationSet>
+    <AssociationSet Name="OrderOrderStatus" Association="DataModel.Store.OrderOrderStatus">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="OrderStatus" EntitySet="OrderStatus" />
+    </AssociationSet>
+    <AssociationSet Name="OrderOrderGoods" Association="DataModel.Store.OrderOrderGoods">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="OrderGoods" EntitySet="OrderGoods" />
+    </AssociationSet>
+    <AssociationSet Name="UserRecAddress" Association="DataModel.Store.UserRecAddress">
+      <End Role="User" EntitySet="User" />
+      <End Role="RecAddress" EntitySet="RecAddress" />
+    </AssociationSet>
+    <AssociationSet Name="OrderRecAddress" Association="DataModel.Store.OrderRecAddress">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="RecAddress" EntitySet="RecAddress" />
+    </AssociationSet>
+    <AssociationSet Name="CityInfoAreaInfo" Association="DataModel.Store.CityInfoAreaInfo">
+      <End Role="CityInfo" EntitySet="CityInfo" />
+      <End Role="AreaInfo" EntitySet="AreaInfo" />
+    </AssociationSet>
+    <AssociationSet Name="AreaInfoCommunity" Association="DataModel.Store.AreaInfoCommunity">
+      <End Role="AreaInfo" EntitySet="AreaInfo" />
+      <End Role="Community" EntitySet="Community" />
+    </AssociationSet>
+    <AssociationSet Name="SampleHouseSpHouse_HseArea" Association="DataModel.Store.SampleHouseSpHouse_HseArea">
+      <End Role="SampleHouse" EntitySet="SampleHouse" />
+      <End Role="SpHouse_HseArea" EntitySet="SpHouse_HseArea" />
+    </AssociationSet>
+    <AssociationSet Name="HouseAreaSpHouse_HseArea" Association="DataModel.Store.HouseAreaSpHouse_HseArea">
+      <End Role="HouseArea" EntitySet="HouseArea" />
+      <End Role="SpHouse_HseArea" EntitySet="SpHouse_HseArea" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="User">
     <Key>
@@ -72,15 +135,15 @@
     <Property Name="Account" Type="nvarchar" Nullable="false" MaxLength="32" />
     <Property Name="Email" Type="nvarchar" Nullable="true" MaxLength="64" />
     <Property Name="Mobile" Type="nvarchar" Nullable="true" MaxLength="16" />
-    <Property Name="WxOpenod" Type="nvarchar" Nullable="true" MaxLength="64" />
+    <Property Name="WxOpenid" Type="nvarchar" Nullable="true" MaxLength="64" />
     <Property Name="SinaWBOpenid" Type="nvarchar" Nullable="true" MaxLength="64" />
     <Property Name="QQNum" Type="nvarchar" Nullable="true" MaxLength="64" />
     <Property Name="Pwd" Type="nvarchar" Nullable="false" MaxLength="64" />
     <Property Name="IsDelete" Type="bit" Nullable="false" DefaultValue="false" />
     <Property Name="IsFrozen" Type="bit" Nullable="false" DefaultValue="false" />
     <Property Name="CreateTime" Type="datetime" Nullable="false" />
-    <Property Name="Balance" Type="decimal" Nullable="false" />
-    <Property Name="FrozenBlance" Type="decimal" Nullable="false" />
+    <Property Name="Balance" Type="int" Nullable="false" />
+    <Property Name="FrozenBlance" Type="int" Nullable="false" />
     <Property Name="AlipayAccount" Type="nvarchar(max)" Nullable="true" />
     <Property Name="BankNumber" Type="nvarchar(max)" Nullable="true" />
     <Property Name="BankName" Type="nvarchar" Nullable="true" MaxLength="256" />
@@ -295,6 +358,174 @@
     <Property Name="IsDelete" Type="bit" Nullable="false" />
     <Property Name="Sequence" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="User_ShoppingCart">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="GoodsInfoID" Type="int" Nullable="false" />
+    <Property Name="GoodsPropertyInfos" Type="nvarchar" Nullable="false" MaxLength="512" />
+    <Property Name="Count" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GoodsInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SkuNumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="GoodsTypeID" Type="int" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+    <Property Name="IsView" Type="bit" Nullable="false" />
+    <Property Name="IsView4HomePage" Type="bit" Nullable="false" />
+    <Property Name="GShortName" Type="nvarchar" Nullable="false" MaxLength="64" />
+    <Property Name="GFullName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="Price" Type="int" Nullable="false" />
+    <Property Name="ThumbPic" Type="nvarchar" Nullable="false" MaxLength="1024" />
+    <Property Name="DetailPics" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Sequence" Type="int" Nullable="false" />
+    <Property Name="DeliveryDate" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GoodsProperty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GoodsInfoID" Type="int" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+    <Property Name="GPName" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="Sequence" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GoodsPropertyDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GoodsPropertyID" Type="int" Nullable="false" />
+    <Property Name="GPDName" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="IsPic" Type="bit" Nullable="false" />
+    <Property Name="GPDPic" Type="nvarchar" Nullable="true" MaxLength="1024" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+    <Property Name="Sequence" Type="int" Nullable="false" />
+    <Property Name="IsOutlink" Type="bit" Nullable="false" />
+    <Property Name="OutLinkUrl" Type="nvarchar" Nullable="false" MaxLength="1024" />
+  </EntityType>
+  <EntityType Name="GoodsType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ParentID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+    <Property Name="GTName" Type="nvarchar" Nullable="false" MaxLength="64" />
+    <Property Name="Sequence" Type="int" Nullable="false" />
+    <Property Name="IsView" Type="bit" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar" Nullable="true" MaxLength="1024" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderNum" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DueMoney" Type="int" Nullable="false" />
+    <Property Name="ActualPay" Type="int" Nullable="false" />
+    <Property Name="BalanceChange" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CouponValue" Type="int" Nullable="false" />
+    <Property Name="OrderStatusID" Type="int" Nullable="false" />
+    <Property Name="RecAddressID" Type="int" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrderStatus">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OSName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="OSDetail" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrderGoods">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderID" Type="int" Nullable="false" />
+    <Property Name="GoodsInfoID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="GoodsPropertyInfos" Type="nvarchar" Nullable="false" MaxLength="512" />
+    <Property Name="Count" Type="int" Nullable="false" />
+    <Property Name="CurPrice" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RecAddress">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+    <Property Name="IsDefault" Type="bit" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="RecvicerName" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="Mobile" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="Province" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="City" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="Area" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="Detail" Type="nvarchar" Nullable="false" MaxLength="512" />
+    <Property Name="ZipCode" Type="nvarchar" Nullable="true" MaxLength="32" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CityInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CName" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+    <Property Name="IsView" Type="bit" Nullable="false" />
+    <Property Name="Sequence" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Community">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AreaInfoID" Type="int" Nullable="false" />
+    <Property Name="CName" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ThumbPic" Type="nvarchar" Nullable="false" MaxLength="1024" />
+    <Property Name="ThumbCirclePic" Type="nvarchar" Nullable="false" MaxLength="1024" />
+  </EntityType>
+  <EntityType Name="AreaInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AName" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+    <Property Name="IsView" Type="bit" Nullable="false" />
+    <Property Name="Sequence" Type="int" Nullable="false" />
+    <Property Name="CityInfoID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SampleHouse">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HouseArea">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SpHouse_HseArea">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SampleHouseID" Type="int" Nullable="false" />
+    <Property Name="HouseAreaID" Type="int" Nullable="false" />
+  </EntityType>
   <Association Name="UserUser_Role">
     <End Role="User" Type="DataModel.Store.User" Multiplicity="1" />
     <End Role="User_Role" Type="DataModel.Store.User_Role" Multiplicity="*" />
@@ -415,6 +646,150 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="UserUser_ShoppingCart">
+    <End Role="User" Type="DataModel.Store.User" Multiplicity="1" />
+    <End Role="User_ShoppingCart" Type="DataModel.Store.User_ShoppingCart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User_ShoppingCart">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GoodsInfoGoodsProperty">
+    <End Role="GoodsInfo" Type="DataModel.Store.GoodsInfo" Multiplicity="1" />
+    <End Role="GoodsProperty" Type="DataModel.Store.GoodsProperty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GoodsInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="GoodsProperty">
+        <PropertyRef Name="GoodsInfoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GoodsPropertyGoodsPropertyDetail">
+    <End Role="GoodsProperty" Type="DataModel.Store.GoodsProperty" Multiplicity="1" />
+    <End Role="GoodsPropertyDetail" Type="DataModel.Store.GoodsPropertyDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GoodsProperty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="GoodsPropertyDetail">
+        <PropertyRef Name="GoodsPropertyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GoodsInfoGoodsType">
+    <End Role="GoodsInfo" Type="DataModel.Store.GoodsInfo" Multiplicity="*" />
+    <End Role="GoodsType" Type="DataModel.Store.GoodsType" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="GoodsType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="GoodsInfo">
+        <PropertyRef Name="GoodsTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OrderOrderStatus">
+    <End Role="Order" Type="DataModel.Store.Order" Multiplicity="*" />
+    <End Role="OrderStatus" Type="DataModel.Store.OrderStatus" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="OrderStatus">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="OrderStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OrderOrderGoods">
+    <End Role="Order" Type="DataModel.Store.Order" Multiplicity="1" />
+    <End Role="OrderGoods" Type="DataModel.Store.OrderGoods" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderGoods">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserRecAddress">
+    <End Role="User" Type="DataModel.Store.User" Multiplicity="1" />
+    <End Role="RecAddress" Type="DataModel.Store.RecAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RecAddress">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OrderRecAddress">
+    <End Role="Order" Type="DataModel.Store.Order" Multiplicity="*" />
+    <End Role="RecAddress" Type="DataModel.Store.RecAddress" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="RecAddress">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="RecAddressID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CityInfoAreaInfo">
+    <End Role="CityInfo" Type="DataModel.Store.CityInfo" Multiplicity="1" />
+    <End Role="AreaInfo" Type="DataModel.Store.AreaInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CityInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AreaInfo">
+        <PropertyRef Name="CityInfoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AreaInfoCommunity">
+    <End Role="AreaInfo" Type="DataModel.Store.AreaInfo" Multiplicity="1" />
+    <End Role="Community" Type="DataModel.Store.Community" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AreaInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Community">
+        <PropertyRef Name="AreaInfoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SampleHouseSpHouse_HseArea">
+    <End Role="SampleHouse" Type="DataModel.Store.SampleHouse" Multiplicity="1" />
+    <End Role="SpHouse_HseArea" Type="DataModel.Store.SpHouse_HseArea" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SampleHouse">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SpHouse_HseArea">
+        <PropertyRef Name="SampleHouseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="HouseAreaSpHouse_HseArea">
+    <End Role="HouseArea" Type="DataModel.Store.HouseArea" Multiplicity="1" />
+    <End Role="SpHouse_HseArea" Type="DataModel.Store.SpHouse_HseArea" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HouseArea">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SpHouse_HseArea">
+        <PropertyRef Name="HouseAreaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -477,6 +852,69 @@
             <End Role="BannerType" EntitySet="BannerType" />
           </AssociationSet>
           <EntitySet Name="Notice" EntityType="DataModel.Notice" />
+          <EntitySet Name="User_ShoppingCart" EntityType="DataModel.User_ShoppingCart" />
+          <AssociationSet Name="UserUser_ShoppingCart" Association="DataModel.UserUser_ShoppingCart">
+            <End Role="User" EntitySet="User" />
+            <End Role="User_ShoppingCart" EntitySet="User_ShoppingCart" />
+          </AssociationSet>
+          <EntitySet Name="GoodsInfo" EntityType="DataModel.GoodsInfo" />
+          <EntitySet Name="GoodsProperty" EntityType="DataModel.GoodsProperty" />
+          <EntitySet Name="GoodsPropertyDetail" EntityType="DataModel.GoodsPropertyDetail" />
+          <AssociationSet Name="GoodsInfoGoodsProperty" Association="DataModel.GoodsInfoGoodsProperty">
+            <End Role="GoodsInfo" EntitySet="GoodsInfo" />
+            <End Role="GoodsProperty" EntitySet="GoodsProperty" />
+          </AssociationSet>
+          <AssociationSet Name="GoodsPropertyGoodsPropertyDetail" Association="DataModel.GoodsPropertyGoodsPropertyDetail">
+            <End Role="GoodsProperty" EntitySet="GoodsProperty" />
+            <End Role="GoodsPropertyDetail" EntitySet="GoodsPropertyDetail" />
+          </AssociationSet>
+          <EntitySet Name="GoodsType" EntityType="DataModel.GoodsType" />
+          <AssociationSet Name="GoodsInfoGoodsType" Association="DataModel.GoodsInfoGoodsType">
+            <End Role="GoodsInfo" EntitySet="GoodsInfo" />
+            <End Role="GoodsType" EntitySet="GoodsType" />
+          </AssociationSet>
+          <EntitySet Name="Order" EntityType="DataModel.Order" />
+          <EntitySet Name="OrderStatus" EntityType="DataModel.OrderStatus" />
+          <AssociationSet Name="OrderOrderStatus" Association="DataModel.OrderOrderStatus">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+          </AssociationSet>
+          <EntitySet Name="OrderGoods" EntityType="DataModel.OrderGoods" />
+          <AssociationSet Name="OrderOrderGoods" Association="DataModel.OrderOrderGoods">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderGoods" EntitySet="OrderGoods" />
+          </AssociationSet>
+          <EntitySet Name="RecAddress" EntityType="DataModel.RecAddress" />
+          <AssociationSet Name="UserRecAddress" Association="DataModel.UserRecAddress">
+            <End Role="User" EntitySet="User" />
+            <End Role="RecAddress" EntitySet="RecAddress" />
+          </AssociationSet>
+          <AssociationSet Name="OrderRecAddress" Association="DataModel.OrderRecAddress">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="RecAddress" EntitySet="RecAddress" />
+          </AssociationSet>
+          <EntitySet Name="CityInfo" EntityType="DataModel.CityInfo" />
+          <EntitySet Name="Community" EntityType="DataModel.Community" />
+          <EntitySet Name="AreaInfo" EntityType="DataModel.AreaInfo" />
+          <AssociationSet Name="CityInfoAreaInfo" Association="DataModel.CityInfoAreaInfo">
+            <End Role="CityInfo" EntitySet="CityInfo" />
+            <End Role="AreaInfo" EntitySet="AreaInfo" />
+          </AssociationSet>
+          <AssociationSet Name="AreaInfoCommunity" Association="DataModel.AreaInfoCommunity">
+            <End Role="AreaInfo" EntitySet="AreaInfo" />
+            <End Role="Community" EntitySet="Community" />
+          </AssociationSet>
+          <EntitySet Name="SampleHouse" EntityType="DataModel.SampleHouse" />
+          <EntitySet Name="HouseArea" EntityType="DataModel.HouseArea" />
+          <EntitySet Name="SpHouse_HseArea" EntityType="DataModel.SpHouse_HseArea" />
+          <AssociationSet Name="SampleHouseSpHouse_HseArea" Association="DataModel.SampleHouseSpHouse_HseArea">
+            <End Role="SampleHouse" EntitySet="SampleHouse" />
+            <End Role="SpHouse_HseArea" EntitySet="SpHouse_HseArea" />
+          </AssociationSet>
+          <AssociationSet Name="HouseAreaSpHouse_HseArea" Association="DataModel.HouseAreaSpHouse_HseArea">
+            <End Role="HouseArea" EntitySet="HouseArea" />
+            <End Role="SpHouse_HseArea" EntitySet="SpHouse_HseArea" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -486,7 +924,7 @@
           <Property Type="String" Name="Account" Nullable="false" MaxLength="32" />
           <Property Type="String" Name="Email" MaxLength="64" Nullable="true" />
           <Property Type="String" Name="Mobile" Nullable="true" MaxLength="16" />
-          <Property Type="String" Name="WxOpenod" MaxLength="64" Nullable="true" />
+          <Property Type="String" Name="WxOpenid" MaxLength="64" Nullable="true" />
           <Property Type="String" Name="SinaWBOpenid" Nullable="true" MaxLength="64" />
           <Property Type="String" Name="QQNum" Nullable="true" MaxLength="64" />
           <Property Type="String" Name="Pwd" Nullable="false" MaxLength="64" />
@@ -496,15 +934,21 @@
           <NavigationProperty Name="User_Role" Relationship="DataModel.UserUser_Role" FromRole="User" ToRole="User_Role" />
           <NavigationProperty Name="User_Action" Relationship="DataModel.UserUser_Action" FromRole="User" ToRole="User_Action" />
           <NavigationProperty Name="UserInfo" Relationship="DataModel.UserUserInfo" FromRole="User" ToRole="UserInfo" />
-          <Property Type="Decimal" Name="Balance" Nullable="false" />
-          <Property Type="Decimal" Name="FrozenBlance" Nullable="false" >
+          <Property Type="Int32" Name="Balance" Nullable="false" >
             <Documentation>
-              <LongDescription>冻结余额。可提现金额</LongDescription>
+              <LongDescription>单位 分</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="FrozenBlance" Nullable="false" >
+            <Documentation>
+              <LongDescription>冻结余额。可提现金额 单位分</LongDescription>
             </Documentation>
           </Property>
           <Property Type="String" Name="AlipayAccount" Nullable="true" />
           <Property Type="String" Name="BankNumber" Nullable="true" />
           <Property Type="String" Name="BankName" Nullable="true" MaxLength="256" />
+          <NavigationProperty Name="User_ShoppingCart" Relationship="DataModel.UserUser_ShoppingCart" FromRole="User" ToRole="User_ShoppingCart" />
+          <NavigationProperty Name="RecAddress" Relationship="DataModel.UserRecAddress" FromRole="User" ToRole="RecAddress" />
         </EntityType>
         <EntityType Name="UserInfo">
           <Key>
@@ -890,6 +1334,494 @@
           <Property Type="Boolean" Name="IsDelete" Nullable="false" />
           <Property Type="Int32" Name="Sequence" Nullable="false" />
         </EntityType>
+        <EntityType Name="User_ShoppingCart">
+          <Documentation>
+            <LongDescription> 用户和添加到购物车中的商品关联</LongDescription>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="User" Relationship="DataModel.UserUser_ShoppingCart" FromRole="User_ShoppingCart" ToRole="User" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="Int32" Name="GoodsInfoID" Nullable="false" />
+          <Property Type="String" Name="GoodsPropertyInfos" Nullable="false" MaxLength="512" >
+            <Documentation>
+              <Summary>1,2|3,7|8,13</Summary>
+              <LongDescription>添加到 购物车中的商品属性集合字符串，格式
+1,2|3,7|8,13
+1,2分别对应
+GoodsProperty 和 GoodsPropertyDetail 表主键ID
+</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="Count" Nullable="false" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" >
+            <Documentation>
+              <LongDescription>软删除主要用来记录用户添加过的商品，后期可以用来分析用户需求。同时，如果会员很多数据量很多，可以后期分表，将删除的分离。</LongDescription>
+            </Documentation>
+          </Property>
+        </EntityType>
+        <Association Name="UserUser_ShoppingCart">
+          <End Type="DataModel.User" Role="User" Multiplicity="1" />
+          <End Type="DataModel.User_ShoppingCart" Role="User_ShoppingCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_ShoppingCart">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="GoodsInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="GoodsProperty" Relationship="DataModel.GoodsInfoGoodsProperty" FromRole="GoodsInfo" ToRole="GoodsProperty" />
+          <NavigationProperty Name="GoodsType" Relationship="DataModel.GoodsInfoGoodsType" FromRole="GoodsInfo" ToRole="GoodsType" />
+          <Property Type="String" Name="SkuNumber" Nullable="false">
+            <Documentation>
+              <LongDescription>商品唯一编码</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="GoodsTypeID" Nullable="false" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" >
+            <Documentation>
+              <LongDescription>删除后前后台均不可见</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="Boolean" Name="IsView" Nullable="false" >
+            <Documentation>
+              <LongDescription>不显示时只是前台不可见不可访问</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="Boolean" Name="IsView4HomePage" Nullable="false" >
+            <Documentation>
+              <LongDescription>设置后可以在首页优先显示</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="GShortName" Nullable="false" MaxLength="64" >
+            <Documentation>
+              <LongDescription>商品简称</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="GFullName" Nullable="false" MaxLength="256">
+            <Documentation>
+              <LongDescription>商品全名称</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="Price" Nullable="false">
+            <Documentation>
+              <LongDescription>商品价格 单位 分.</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="ThumbPic" Nullable="false" MaxLength="1024" >
+            <Documentation>
+              <LongDescription>缩略图</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="DetailPics" Nullable="false" >
+            <Documentation>
+              <LongDescription> 详情图，多图。放大镜效果中 存储于该字段中，成对出现。默认1，2一对。3，4一对。等等。。。</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="Sequence" Nullable="false" >
+            <Documentation>
+              <LongDescription>用于后台列表排序</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="DeliveryDate" Nullable="false" >
+            <Documentation>
+              <LongDescription>出货期 单位:天</LongDescription>
+            </Documentation>
+          </Property>
+        </EntityType>
+        <EntityType Name="GoodsProperty">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="GoodsInfo" Relationship="DataModel.GoodsInfoGoodsProperty" FromRole="GoodsProperty" ToRole="GoodsInfo" />
+          <Property Type="Int32" Name="GoodsInfoID" Nullable="false" />
+          <NavigationProperty Name="GoodsPropertyDetail" Relationship="DataModel.GoodsPropertyGoodsPropertyDetail" FromRole="GoodsProperty" ToRole="GoodsPropertyDetail" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" />
+          <Property Type="String" Name="GPName" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="Sequence" Nullable="false" >
+            <Documentation>
+              <LongDescription>用于后台和前台显示排序</LongDescription>
+            </Documentation>
+          </Property>
+        </EntityType>
+        <EntityType Name="GoodsPropertyDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="GoodsProperty" Relationship="DataModel.GoodsPropertyGoodsPropertyDetail" FromRole="GoodsPropertyDetail" ToRole="GoodsProperty" />
+          <Property Type="Int32" Name="GoodsPropertyID" Nullable="false" />
+          <Property Type="String" Name="GPDName" Nullable="false" MaxLength="128" />
+          <Property Type="Boolean" Name="IsPic" Nullable="false">
+            <Documentation>
+              <LongDescription>默认显示文字属性，设置后显示图片属性</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="GPDPic" Nullable="true" MaxLength="1024" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" />
+          <Property Type="Int32" Name="Sequence" Nullable="false">
+            <Documentation>
+              <LongDescription>用于后台和前台属性排序</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="Boolean" Name="IsOutlink" Nullable="false" >
+            <Documentation>
+              <LongDescription>用于判断该属性详情是否能够链接到另外的地址</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="OutLinkUrl" Nullable="false" MaxLength="1024" >
+            <Documentation>
+              <LongDescription>设置IsOutlink后生效 默认值： javascript:;</LongDescription>
+            </Documentation>
+          </Property>
+        </EntityType>
+        <Association Name="GoodsInfoGoodsProperty">
+          <End Type="DataModel.GoodsInfo" Role="GoodsInfo" Multiplicity="1" />
+          <End Type="DataModel.GoodsProperty" Role="GoodsProperty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GoodsInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GoodsProperty">
+              <PropertyRef Name="GoodsInfoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GoodsPropertyGoodsPropertyDetail">
+          <End Type="DataModel.GoodsProperty" Role="GoodsProperty" Multiplicity="1" />
+          <End Type="DataModel.GoodsPropertyDetail" Role="GoodsPropertyDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GoodsProperty">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GoodsPropertyDetail">
+              <PropertyRef Name="GoodsPropertyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="GoodsType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="GoodsInfo" Relationship="DataModel.GoodsInfoGoodsType" FromRole="GoodsType" ToRole="GoodsInfo" />
+          <Property Type="String" Name="ParentID" Nullable="false" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" />
+          <Property Type="String" Name="GTName" Nullable="false" MaxLength="64" />
+          <Property Type="Int32" Name="Sequence" Nullable="false" >
+            <Documentation>
+              <LongDescription>用于后台排序</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="Boolean" Name="IsView" Nullable="false" >
+            <Documentation>
+              <LongDescription>默认都是显示的 取消后，前台不显示该类别</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="Remark" MaxLength="1024" />
+        </EntityType>
+        <Association Name="GoodsInfoGoodsType">
+          <End Type="DataModel.GoodsInfo" Role="GoodsInfo" Multiplicity="*" />
+          <End Type="DataModel.GoodsType" Role="GoodsType" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="GoodsType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GoodsInfo">
+              <PropertyRef Name="GoodsTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="OrderNum" Nullable="false" />
+          <Property Type="Int32" Name="DueMoney" Nullable="false" >
+            <Documentation>
+              <LongDescription>单位 分。。。应付款
+应付款 = 实际付款 + 余额支付部分 + 优惠券抵扣部分
+DueMoney  = ActualPay + BalanceChange + CouponValue
+</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="ActualPay" Nullable="false" >
+            <Documentation>
+              <LongDescription>实际支付 单位 分</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="BalanceChange" Nullable="false" >
+            <Documentation>
+              <LongDescription>账户余额变更数量 正数（余额支付的部分） 单位:  分。有可能用户选择了使用部分余额。</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="CouponValue" Nullable="false" >
+            <Documentation>
+              <LongDescription>优惠券面值。如果没有使用优惠券则为0</LongDescription>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="OrderStatus" Relationship="DataModel.OrderOrderStatus" FromRole="Order" ToRole="OrderStatus" />
+          <Property Type="Int32" Name="OrderStatusID" Nullable="false" />
+          <NavigationProperty Name="OrderGoods" Relationship="DataModel.OrderOrderGoods" FromRole="Order" ToRole="OrderGoods" />
+          <NavigationProperty Name="RecAddress" Relationship="DataModel.OrderRecAddress" FromRole="Order" ToRole="RecAddress" />
+          <Property Type="Int32" Name="RecAddressID" Nullable="false" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" >
+            <Documentation>
+              <LongDescription>后台和前台是否显示</LongDescription>
+            </Documentation>
+          </Property>
+        </EntityType>
+        <EntityType Name="OrderStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="OSName" Nullable="false" />
+          <Property Type="String" Name="OSDetail" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="DataModel.OrderOrderStatus" FromRole="OrderStatus" ToRole="Order" />
+        </EntityType>
+        <Association Name="OrderOrderStatus">
+          <End Type="DataModel.Order" Role="Order" Multiplicity="*" />
+          <End Type="DataModel.OrderStatus" Role="OrderStatus" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="OrderStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="OrderGoods">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Order" Relationship="DataModel.OrderOrderGoods" FromRole="OrderGoods" ToRole="Order" />
+          <Property Type="Int32" Name="OrderID" Nullable="false" />
+          <Property Type="String" Name="GoodsInfoID" Nullable="false" />
+          <Property Type="String" Name="GoodsPropertyInfos" Nullable="false" MaxLength="512" />
+          <Property Type="Int32" Name="Count" Nullable="false" >
+            <Documentation>
+              <LongDescription>购买数量</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="CurPrice" Nullable="false" >
+            <Documentation>
+              <LongDescription>生成订单时 的商品价格。 单位 分</LongDescription>
+            </Documentation>
+          </Property>
+        </EntityType>
+        <Association Name="OrderOrderGoods">
+          <End Type="DataModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="DataModel.OrderGoods" Role="OrderGoods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderGoods">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="RecAddress">
+          <Documentation>
+            <LongDescription>用户收货地址</LongDescription>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" />
+          <Property Type="Boolean" Name="IsDefault" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="128" >
+            <Documentation>
+              <LongDescription>用于说明该地址是哪里的地址 如 家里，公司等</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="RecvicerName" Nullable="false" MaxLength="32" >
+            <Documentation>
+              <LongDescription>收货人姓名</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="Mobile" Nullable="false" MaxLength="32" >
+            <Documentation>
+              <LongDescription>收货人手机</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="Province" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="City" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="Area" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="Detail" Nullable="false" MaxLength="512" />
+          <Property Type="String" Name="ZipCode" Nullable="true" MaxLength="32" />
+          <NavigationProperty Name="User" Relationship="DataModel.UserRecAddress" FromRole="RecAddress" ToRole="User" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="DataModel.OrderRecAddress" FromRole="RecAddress" ToRole="Order" />
+        </EntityType>
+        <Association Name="UserRecAddress">
+          <End Type="DataModel.User" Role="User" Multiplicity="1" />
+          <End Type="DataModel.RecAddress" Role="RecAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RecAddress">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OrderRecAddress">
+          <End Type="DataModel.Order" Role="Order" Multiplicity="*" />
+          <End Type="DataModel.RecAddress" Role="RecAddress" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="RecAddress">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="RecAddressID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CityInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="CName" Nullable="false" MaxLength="32" >
+            <Documentation>
+              <LongDescription>城市名</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" />
+          <Property Type="Boolean" Name="IsView" Nullable="false" />
+          <Property Type="Int32" Name="Sequence" Nullable="false" />
+          <NavigationProperty Name="AreaInfo" Relationship="DataModel.CityInfoAreaInfo" FromRole="CityInfo" ToRole="AreaInfo" />
+        </EntityType>
+        <EntityType Name="Community">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="AreaInfo" Relationship="DataModel.AreaInfoCommunity" FromRole="Community" ToRole="AreaInfo" />
+          <Property Type="Int32" Name="AreaInfoID" Nullable="false" />
+          <Property Type="String" Name="CName" Nullable="false" MaxLength="32" >
+            <Documentation>
+              <LongDescription>小区名称</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="Description" Nullable="false" >
+            <Documentation>
+              <LongDescription>描述</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="ThumbPic" Nullable="false" MaxLength="1024" >
+            <Documentation>
+              <LongDescription>方缩略图</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="ThumbCirclePic" Nullable="false" MaxLength="1024" >
+            <Documentation>
+              <LongDescription>楼盘 圆缩略图</LongDescription>
+            </Documentation>
+          </Property>
+        </EntityType>
+        <EntityType Name="AreaInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="AName" Nullable="false" MaxLength="32" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" />
+          <Property Type="Boolean" Name="IsView" Nullable="false" />
+          <Property Type="Int32" Name="Sequence" Nullable="false" />
+          <NavigationProperty Name="CityInfo" Relationship="DataModel.CityInfoAreaInfo" FromRole="AreaInfo" ToRole="CityInfo" />
+          <Property Type="Int32" Name="CityInfoID" Nullable="false" />
+          <NavigationProperty Name="Community" Relationship="DataModel.AreaInfoCommunity" FromRole="AreaInfo" ToRole="Community" />
+        </EntityType>
+        <Association Name="CityInfoAreaInfo">
+          <End Type="DataModel.CityInfo" Role="CityInfo" Multiplicity="1" />
+          <End Type="DataModel.AreaInfo" Role="AreaInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CityInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AreaInfo">
+              <PropertyRef Name="CityInfoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AreaInfoCommunity">
+          <End Type="DataModel.AreaInfo" Role="AreaInfo" Multiplicity="1" />
+          <End Type="DataModel.Community" Role="Community" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AreaInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Community">
+              <PropertyRef Name="AreaInfoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SampleHouse">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="SpHouse_HseArea" Relationship="DataModel.SampleHouseSpHouse_HseArea" FromRole="SampleHouse" ToRole="SpHouse_HseArea" />
+        </EntityType>
+        <EntityType Name="HouseArea">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="SpHouse_HseArea" Relationship="DataModel.HouseAreaSpHouse_HseArea" FromRole="HouseArea" ToRole="SpHouse_HseArea" />
+          <Property Type="String" Name="AName" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SpHouse_HseArea">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="SampleHouse" Relationship="DataModel.SampleHouseSpHouse_HseArea" FromRole="SpHouse_HseArea" ToRole="SampleHouse" />
+          <Property Type="Int32" Name="SampleHouseID" Nullable="false" />
+          <NavigationProperty Name="HouseArea" Relationship="DataModel.HouseAreaSpHouse_HseArea" FromRole="SpHouse_HseArea" ToRole="HouseArea" />
+          <Property Type="Int32" Name="HouseAreaID" Nullable="false" />
+        </EntityType>
+        <Association Name="SampleHouseSpHouse_HseArea">
+          <End Type="DataModel.SampleHouse" Role="SampleHouse" Multiplicity="1" />
+          <End Type="DataModel.SpHouse_HseArea" Role="SpHouse_HseArea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SampleHouse">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SpHouse_HseArea">
+              <PropertyRef Name="SampleHouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HouseAreaSpHouse_HseArea">
+          <End Type="DataModel.HouseArea" Role="HouseArea" Multiplicity="1" />
+          <End Type="DataModel.SpHouse_HseArea" Role="SpHouse_HseArea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HouseArea">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SpHouse_HseArea">
+              <PropertyRef Name="HouseAreaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -903,7 +1835,7 @@
           <ScalarProperty Name="Account" ColumnName="Account" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-          <ScalarProperty Name="WxOpenod" ColumnName="WxOpenod" />
+          <ScalarProperty Name="WxOpenid" ColumnName="WxOpenid" />
           <ScalarProperty Name="SinaWBOpenid" ColumnName="SinaWBOpenid" />
           <ScalarProperty Name="QQNum" ColumnName="QQNum" />
           <ScalarProperty Name="Pwd" ColumnName="Pwd" />
@@ -1140,6 +2072,189 @@
           <ScalarProperty Name="ExpireTime" ColumnName="ExpireTime" />
           <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
           <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_ShoppingCart">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.User_ShoppingCart)">
+        <MappingFragment StoreEntitySet="User_ShoppingCart">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="GoodsInfoID" ColumnName="GoodsInfoID" />
+          <ScalarProperty Name="GoodsPropertyInfos" ColumnName="GoodsPropertyInfos" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GoodsInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.GoodsInfo)">
+        <MappingFragment StoreEntitySet="GoodsInfo">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SkuNumber" ColumnName="SkuNumber" />
+          <ScalarProperty Name="GoodsTypeID" ColumnName="GoodsTypeID" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsView" ColumnName="IsView" />
+          <ScalarProperty Name="IsView4HomePage" ColumnName="IsView4HomePage" />
+          <ScalarProperty Name="GShortName" ColumnName="GShortName" />
+          <ScalarProperty Name="GFullName" ColumnName="GFullName" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="ThumbPic" ColumnName="ThumbPic" />
+          <ScalarProperty Name="DetailPics" ColumnName="DetailPics" />
+          <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+          <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GoodsProperty">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.GoodsProperty)">
+        <MappingFragment StoreEntitySet="GoodsProperty">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="GoodsInfoID" ColumnName="GoodsInfoID" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="GPName" ColumnName="GPName" />
+          <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GoodsPropertyDetail">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.GoodsPropertyDetail)">
+        <MappingFragment StoreEntitySet="GoodsPropertyDetail">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="GoodsPropertyID" ColumnName="GoodsPropertyID" />
+          <ScalarProperty Name="GPDName" ColumnName="GPDName" />
+          <ScalarProperty Name="IsPic" ColumnName="IsPic" />
+          <ScalarProperty Name="GPDPic" ColumnName="GPDPic" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+          <ScalarProperty Name="IsOutlink" ColumnName="IsOutlink" />
+          <ScalarProperty Name="OutLinkUrl" ColumnName="OutLinkUrl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GoodsType">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.GoodsType)">
+        <MappingFragment StoreEntitySet="GoodsType">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="GTName" ColumnName="GTName" />
+          <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+          <ScalarProperty Name="IsView" ColumnName="IsView" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Order">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Order)">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="OrderNum" ColumnName="OrderNum" />
+          <ScalarProperty Name="DueMoney" ColumnName="DueMoney" />
+          <ScalarProperty Name="ActualPay" ColumnName="ActualPay" />
+          <ScalarProperty Name="BalanceChange" ColumnName="BalanceChange" />
+          <ScalarProperty Name="CouponValue" ColumnName="CouponValue" />
+          <ScalarProperty Name="OrderStatusID" ColumnName="OrderStatusID" />
+          <ScalarProperty Name="RecAddressID" ColumnName="RecAddressID" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderStatus">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.OrderStatus)">
+        <MappingFragment StoreEntitySet="OrderStatus">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="OSName" ColumnName="OSName" />
+          <ScalarProperty Name="OSDetail" ColumnName="OSDetail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderGoods">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.OrderGoods)">
+        <MappingFragment StoreEntitySet="OrderGoods">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="GoodsInfoID" ColumnName="GoodsInfoID" />
+          <ScalarProperty Name="GoodsPropertyInfos" ColumnName="GoodsPropertyInfos" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="CurPrice" ColumnName="CurPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RecAddress">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.RecAddress)">
+        <MappingFragment StoreEntitySet="RecAddress">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="RecvicerName" ColumnName="RecvicerName" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Province" ColumnName="Province" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="Detail" ColumnName="Detail" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CityInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.CityInfo)">
+        <MappingFragment StoreEntitySet="CityInfo">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CName" ColumnName="CName" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsView" ColumnName="IsView" />
+          <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Community">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Community)">
+        <MappingFragment StoreEntitySet="Community">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AreaInfoID" ColumnName="AreaInfoID" />
+          <ScalarProperty Name="CName" ColumnName="CName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ThumbPic" ColumnName="ThumbPic" />
+          <ScalarProperty Name="ThumbCirclePic" ColumnName="ThumbCirclePic" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AreaInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.AreaInfo)">
+        <MappingFragment StoreEntitySet="AreaInfo">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AName" ColumnName="AName" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="IsView" ColumnName="IsView" />
+          <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+          <ScalarProperty Name="CityInfoID" ColumnName="CityInfoID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SampleHouse">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.SampleHouse)">
+        <MappingFragment StoreEntitySet="SampleHouse">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HouseArea">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.HouseArea)">
+        <MappingFragment StoreEntitySet="HouseArea">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AName" ColumnName="AName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SpHouse_HseArea">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.SpHouse_HseArea)">
+        <MappingFragment StoreEntitySet="SpHouse_HseArea">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SampleHouseID" ColumnName="SampleHouseID" />
+          <ScalarProperty Name="HouseAreaID" ColumnName="HouseAreaID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

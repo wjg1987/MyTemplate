@@ -39,6 +39,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
             //页面序号 用于后台首页左侧导航展开还是显示的判断
             ViewBag.pageNum = Request["pageNum"] == null ? 0 : Convert.ToInt32(Request["pageNum"].ToString());
 
+
             #region session保存用户状态 检验的方式
 
 
@@ -46,13 +47,17 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
 
 
             //如果有用户登录信息
-            if (Session["curLoginAdminID"] != null)
+            //if (Session["curLoginAdminID"] != null)
+            if (Common.Common.redisClient.GetValue("curLoginAdminID") != null)  
             {
                 //获得当前登录的用户
                 UserServices userser = new UserServices();
-                int uid = Convert.ToInt32(Session["curLoginAdminID"]);
+                //int uid = Convert.ToInt32(Session["curLoginAdminID"]);
+                int uid = Convert.ToInt32(Common.Common.redisClient.GetValue("curLoginAdminID"));
                 User loginUser = userser.LoadEntitys(u => u.ID == uid).FirstOrDefault();
 
+                ViewBag.curLoginAdminAccount = Common.Common.redisClient.GetValue("curLoginAdminAccount");
+                ViewBag.curLoginAdminHeadImg = Common.Common.redisClient.GetValue("curLoginAdminHeadImg");
                 if (loginUser == null)
                 {
                     filterContext.Result = new RedirectResult("/admin/login");

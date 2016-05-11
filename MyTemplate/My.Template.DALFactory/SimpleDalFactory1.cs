@@ -23,6 +23,11 @@ namespace My.Template.DALFactory
             return new ActionTypeDal();
         }
 	
+		public static IAreaInfoDal GetAreaInfoDal()
+        {
+            return new AreaInfoDal();
+        }
+	
 		public static IBannerDal GetBannerDal()
         {
             return new BannerDal();
@@ -31,6 +36,41 @@ namespace My.Template.DALFactory
 		public static IBannerTypeDal GetBannerTypeDal()
         {
             return new BannerTypeDal();
+        }
+	
+		public static ICityInfoDal GetCityInfoDal()
+        {
+            return new CityInfoDal();
+        }
+	
+		public static ICommunityDal GetCommunityDal()
+        {
+            return new CommunityDal();
+        }
+	
+		public static IGoodsInfoDal GetGoodsInfoDal()
+        {
+            return new GoodsInfoDal();
+        }
+	
+		public static IGoodsPropertyDal GetGoodsPropertyDal()
+        {
+            return new GoodsPropertyDal();
+        }
+	
+		public static IGoodsPropertyDetailDal GetGoodsPropertyDetailDal()
+        {
+            return new GoodsPropertyDetailDal();
+        }
+	
+		public static IGoodsTypeDal GetGoodsTypeDal()
+        {
+            return new GoodsTypeDal();
+        }
+	
+		public static IHouseAreaDal GetHouseAreaDal()
+        {
+            return new HouseAreaDal();
         }
 	
 		public static INewsDal GetNewsDal()
@@ -48,9 +88,29 @@ namespace My.Template.DALFactory
             return new NoticeDal();
         }
 	
+		public static IOrderDal GetOrderDal()
+        {
+            return new OrderDal();
+        }
+	
+		public static IOrderGoodsDal GetOrderGoodsDal()
+        {
+            return new OrderGoodsDal();
+        }
+	
+		public static IOrderStatusDal GetOrderStatusDal()
+        {
+            return new OrderStatusDal();
+        }
+	
 		public static IQAInfosDal GetQAInfosDal()
         {
             return new QAInfosDal();
+        }
+	
+		public static IRecAddressDal GetRecAddressDal()
+        {
+            return new RecAddressDal();
         }
 	
 		public static IRoleDal GetRoleDal()
@@ -63,6 +123,11 @@ namespace My.Template.DALFactory
             return new Role_ActionDal();
         }
 	
+		public static ISampleHouseDal GetSampleHouseDal()
+        {
+            return new SampleHouseDal();
+        }
+	
 		public static ISinglePageDal GetSinglePageDal()
         {
             return new SinglePageDal();
@@ -71,6 +136,11 @@ namespace My.Template.DALFactory
 		public static ISiteInfoDal GetSiteInfoDal()
         {
             return new SiteInfoDal();
+        }
+	
+		public static ISpHouse_HseAreaDal GetSpHouse_HseAreaDal()
+        {
+            return new SpHouse_HseAreaDal();
         }
 	
 		public static IUserDal GetUserDal()
@@ -86,6 +156,11 @@ namespace My.Template.DALFactory
 		public static IUser_RoleDal GetUser_RoleDal()
         {
             return new User_RoleDal();
+        }
+	
+		public static IUser_ShoppingCartDal GetUser_ShoppingCartDal()
+        {
+            return new User_ShoppingCartDal();
         }
 	
 		public static IUserInfoDal GetUserInfoDal()

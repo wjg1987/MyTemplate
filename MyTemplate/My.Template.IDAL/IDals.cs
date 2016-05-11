@@ -21,12 +21,52 @@ namespace My.Template.IDAL
        
     }   
 	
+	public partial interface IAreaInfoDal : IBaseDal<My.Template.Model.AreaInfo>
+    {
+       
+    }   
+	
 	public partial interface IBannerDal : IBaseDal<My.Template.Model.Banner>
     {
        
     }   
 	
 	public partial interface IBannerTypeDal : IBaseDal<My.Template.Model.BannerType>
+    {
+       
+    }   
+	
+	public partial interface ICityInfoDal : IBaseDal<My.Template.Model.CityInfo>
+    {
+       
+    }   
+	
+	public partial interface ICommunityDal : IBaseDal<My.Template.Model.Community>
+    {
+       
+    }   
+	
+	public partial interface IGoodsInfoDal : IBaseDal<My.Template.Model.GoodsInfo>
+    {
+       
+    }   
+	
+	public partial interface IGoodsPropertyDal : IBaseDal<My.Template.Model.GoodsProperty>
+    {
+       
+    }   
+	
+	public partial interface IGoodsPropertyDetailDal : IBaseDal<My.Template.Model.GoodsPropertyDetail>
+    {
+       
+    }   
+	
+	public partial interface IGoodsTypeDal : IBaseDal<My.Template.Model.GoodsType>
+    {
+       
+    }   
+	
+	public partial interface IHouseAreaDal : IBaseDal<My.Template.Model.HouseArea>
     {
        
     }   
@@ -46,7 +86,27 @@ namespace My.Template.IDAL
        
     }   
 	
+	public partial interface IOrderDal : IBaseDal<My.Template.Model.Order>
+    {
+       
+    }   
+	
+	public partial interface IOrderGoodsDal : IBaseDal<My.Template.Model.OrderGoods>
+    {
+       
+    }   
+	
+	public partial interface IOrderStatusDal : IBaseDal<My.Template.Model.OrderStatus>
+    {
+       
+    }   
+	
 	public partial interface IQAInfosDal : IBaseDal<My.Template.Model.QAInfos>
+    {
+       
+    }   
+	
+	public partial interface IRecAddressDal : IBaseDal<My.Template.Model.RecAddress>
     {
        
     }   
@@ -61,12 +121,22 @@ namespace My.Template.IDAL
        
     }   
 	
+	public partial interface ISampleHouseDal : IBaseDal<My.Template.Model.SampleHouse>
+    {
+       
+    }   
+	
 	public partial interface ISinglePageDal : IBaseDal<My.Template.Model.SinglePage>
     {
        
     }   
 	
 	public partial interface ISiteInfoDal : IBaseDal<My.Template.Model.SiteInfo>
+    {
+       
+    }   
+	
+	public partial interface ISpHouse_HseAreaDal : IBaseDal<My.Template.Model.SpHouse_HseArea>
     {
        
     }   
@@ -82,6 +152,11 @@ namespace My.Template.IDAL
     }   
 	
 	public partial interface IUser_RoleDal : IBaseDal<My.Template.Model.User_Role>
+    {
+       
+    }   
+	
+	public partial interface IUser_ShoppingCartDal : IBaseDal<My.Template.Model.User_ShoppingCart>
     {
        
     }   

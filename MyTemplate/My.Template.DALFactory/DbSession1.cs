@@ -42,6 +42,20 @@ namespace My.Template.DALFactory
         }
 
 	
+	   private IAreaInfoDal _AreaInfoDal;
+        public IAreaInfoDal AreaInfoDal
+        {
+            get
+            {
+                if(_AreaInfoDal == null)
+                {
+                    _AreaInfoDal = SimpleDalFactory.GetAreaInfoDal();
+                }
+                return _AreaInfoDal;
+            }
+        }
+
+	
 	   private IBannerDal _BannerDal;
         public IBannerDal BannerDal
         {
@@ -66,6 +80,104 @@ namespace My.Template.DALFactory
                     _BannerTypeDal = SimpleDalFactory.GetBannerTypeDal();
                 }
                 return _BannerTypeDal;
+            }
+        }
+
+	
+	   private ICityInfoDal _CityInfoDal;
+        public ICityInfoDal CityInfoDal
+        {
+            get
+            {
+                if(_CityInfoDal == null)
+                {
+                    _CityInfoDal = SimpleDalFactory.GetCityInfoDal();
+                }
+                return _CityInfoDal;
+            }
+        }
+
+	
+	   private ICommunityDal _CommunityDal;
+        public ICommunityDal CommunityDal
+        {
+            get
+            {
+                if(_CommunityDal == null)
+                {
+                    _CommunityDal = SimpleDalFactory.GetCommunityDal();
+                }
+                return _CommunityDal;
+            }
+        }
+
+	
+	   private IGoodsInfoDal _GoodsInfoDal;
+        public IGoodsInfoDal GoodsInfoDal
+        {
+            get
+            {
+                if(_GoodsInfoDal == null)
+                {
+                    _GoodsInfoDal = SimpleDalFactory.GetGoodsInfoDal();
+                }
+                return _GoodsInfoDal;
+            }
+        }
+
+	
+	   private IGoodsPropertyDal _GoodsPropertyDal;
+        public IGoodsPropertyDal GoodsPropertyDal
+        {
+            get
+            {
+                if(_GoodsPropertyDal == null)
+                {
+                    _GoodsPropertyDal = SimpleDalFactory.GetGoodsPropertyDal();
+                }
+                return _GoodsPropertyDal;
+            }
+        }
+
+	
+	   private IGoodsPropertyDetailDal _GoodsPropertyDetailDal;
+        public IGoodsPropertyDetailDal GoodsPropertyDetailDal
+        {
+            get
+            {
+                if(_GoodsPropertyDetailDal == null)
+                {
+                    _GoodsPropertyDetailDal = SimpleDalFactory.GetGoodsPropertyDetailDal();
+                }
+                return _GoodsPropertyDetailDal;
+            }
+        }
+
+	
+	   private IGoodsTypeDal _GoodsTypeDal;
+        public IGoodsTypeDal GoodsTypeDal
+        {
+            get
+            {
+                if(_GoodsTypeDal == null)
+                {
+                    _GoodsTypeDal = SimpleDalFactory.GetGoodsTypeDal();
+                }
+                return _GoodsTypeDal;
+            }
+        }
+
+	
+	   private IHouseAreaDal _HouseAreaDal;
+        public IHouseAreaDal HouseAreaDal
+        {
+            get
+            {
+                if(_HouseAreaDal == null)
+                {
+                    _HouseAreaDal = SimpleDalFactory.GetHouseAreaDal();
+                }
+                return _HouseAreaDal;
             }
         }
 
@@ -112,6 +224,48 @@ namespace My.Template.DALFactory
         }
 
 	
+	   private IOrderDal _OrderDal;
+        public IOrderDal OrderDal
+        {
+            get
+            {
+                if(_OrderDal == null)
+                {
+                    _OrderDal = SimpleDalFactory.GetOrderDal();
+                }
+                return _OrderDal;
+            }
+        }
+
+	
+	   private IOrderGoodsDal _OrderGoodsDal;
+        public IOrderGoodsDal OrderGoodsDal
+        {
+            get
+            {
+                if(_OrderGoodsDal == null)
+                {
+                    _OrderGoodsDal = SimpleDalFactory.GetOrderGoodsDal();
+                }
+                return _OrderGoodsDal;
+            }
+        }
+
+	
+	   private IOrderStatusDal _OrderStatusDal;
+        public IOrderStatusDal OrderStatusDal
+        {
+            get
+            {
+                if(_OrderStatusDal == null)
+                {
+                    _OrderStatusDal = SimpleDalFactory.GetOrderStatusDal();
+                }
+                return _OrderStatusDal;
+            }
+        }
+
+	
 	   private IQAInfosDal _QAInfosDal;
         public IQAInfosDal QAInfosDal
         {
@@ -122,6 +276,20 @@ namespace My.Template.DALFactory
                     _QAInfosDal = SimpleDalFactory.GetQAInfosDal();
                 }
                 return _QAInfosDal;
+            }
+        }
+
+	
+	   private IRecAddressDal _RecAddressDal;
+        public IRecAddressDal RecAddressDal
+        {
+            get
+            {
+                if(_RecAddressDal == null)
+                {
+                    _RecAddressDal = SimpleDalFactory.GetRecAddressDal();
+                }
+                return _RecAddressDal;
             }
         }
 
@@ -154,6 +322,20 @@ namespace My.Template.DALFactory
         }
 
 	
+	   private ISampleHouseDal _SampleHouseDal;
+        public ISampleHouseDal SampleHouseDal
+        {
+            get
+            {
+                if(_SampleHouseDal == null)
+                {
+                    _SampleHouseDal = SimpleDalFactory.GetSampleHouseDal();
+                }
+                return _SampleHouseDal;
+            }
+        }
+
+	
 	   private ISinglePageDal _SinglePageDal;
         public ISinglePageDal SinglePageDal
         {
@@ -178,6 +360,20 @@ namespace My.Template.DALFactory
                     _SiteInfoDal = SimpleDalFactory.GetSiteInfoDal();
                 }
                 return _SiteInfoDal;
+            }
+        }
+
+	
+	   private ISpHouse_HseAreaDal _SpHouse_HseAreaDal;
+        public ISpHouse_HseAreaDal SpHouse_HseAreaDal
+        {
+            get
+            {
+                if(_SpHouse_HseAreaDal == null)
+                {
+                    _SpHouse_HseAreaDal = SimpleDalFactory.GetSpHouse_HseAreaDal();
+                }
+                return _SpHouse_HseAreaDal;
             }
         }
 
@@ -220,6 +416,20 @@ namespace My.Template.DALFactory
                     _User_RoleDal = SimpleDalFactory.GetUser_RoleDal();
                 }
                 return _User_RoleDal;
+            }
+        }
+
+	
+	   private IUser_ShoppingCartDal _User_ShoppingCartDal;
+        public IUser_ShoppingCartDal User_ShoppingCartDal
+        {
+            get
+            {
+                if(_User_ShoppingCartDal == null)
+                {
+                    _User_ShoppingCartDal = SimpleDalFactory.GetUser_ShoppingCartDal();
+                }
+                return _User_ShoppingCartDal;
             }
         }
 

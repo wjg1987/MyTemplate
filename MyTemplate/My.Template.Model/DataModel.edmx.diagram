@@ -32,6 +32,34 @@
         <EntityTypeShape EntityType="DataModel.BannerType" Width="1.5" PointX="30.5" PointY="0.75" />
         <AssociationConnector Association="DataModel.BannerBannerType" />
         <EntityTypeShape EntityType="DataModel.Notice" Width="2.375" PointX="35.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModel.User_ShoppingCart" Width="2.25" PointX="0.5" PointY="12.375" />
+        <AssociationConnector Association="DataModel.UserUser_ShoppingCart" />
+        <EntityTypeShape EntityType="DataModel.GoodsInfo" Width="2.125" PointX="10" PointY="15.625" />
+        <EntityTypeShape EntityType="DataModel.GoodsProperty" Width="2.125" PointX="13.625" PointY="15.625" />
+        <EntityTypeShape EntityType="DataModel.GoodsPropertyDetail" Width="2.125" PointX="16.75" PointY="15.625" />
+        <AssociationConnector Association="DataModel.GoodsInfoGoodsProperty" />
+        <AssociationConnector Association="DataModel.GoodsPropertyGoodsPropertyDetail" />
+        <EntityTypeShape EntityType="DataModel.GoodsType" Width="2.125" PointX="10.125" PointY="20.5" />
+        <AssociationConnector Association="DataModel.GoodsInfoGoodsType" />
+        <EntityTypeShape EntityType="DataModel.Order" Width="2.25" PointX="5.875" PointY="15.75" />
+        <EntityTypeShape EntityType="DataModel.OrderStatus" Width="2.125" PointX="6" PointY="20" />
+        <AssociationConnector Association="DataModel.OrderOrderStatus" />
+        <EntityTypeShape EntityType="DataModel.OrderGoods" Width="2.375" PointX="2.125" PointY="15.75" />
+        <AssociationConnector Association="DataModel.OrderOrderGoods" />
+        <EntityTypeShape EntityType="DataModel.RecAddress" Width="2.25" PointX="6" PointY="11" />
+        <AssociationConnector Association="DataModel.UserRecAddress" />
+        <AssociationConnector Association="DataModel.OrderRecAddress" />
+        <EntityTypeShape EntityType="DataModel.CityInfo" Width="1.5" PointX="15.25" PointY="0.5" />
+        <EntityTypeShape EntityType="DataModel.Community" Width="1.5" PointX="15.25" PointY="3.5" />
+        <EntityTypeShape EntityType="DataModel.AreaInfo" Width="1.5" PointX="18" PointY="0.5" />
+        <AssociationConnector Association="DataModel.CityInfoAreaInfo" />
+        <AssociationConnector Association="DataModel.AreaInfoCommunity" />
+        <EntityTypeShape EntityType="DataModel.SampleHouse" Width="1.5" PointX="20.75" PointY="6.875" />
+        <EntityTypeShape EntityType="DataModel.HouseArea" Width="1.5" PointX="15.375" PointY="6.75" />
+        <EntityTypeShape EntityType="DataModel.SpHouse_HseArea" Width="1.75" PointX="17.5" PointY="6.875" />
+        <AssociationConnector Association="DataModel.SampleHouseSpHouse_HseArea" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="DataModel.HouseAreaSpHouse_HseArea" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

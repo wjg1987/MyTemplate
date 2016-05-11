@@ -19,11 +19,43 @@ namespace My.Template.IBLL
     {
     }
 	
+	 public partial interface IAreaInfoServices:IBaseServices<My.Template.Model.AreaInfo>
+    {
+    }
+	
 	 public partial interface IBannerServices:IBaseServices<My.Template.Model.Banner>
     {
     }
 	
 	 public partial interface IBannerTypeServices:IBaseServices<My.Template.Model.BannerType>
+    {
+    }
+	
+	 public partial interface ICityInfoServices:IBaseServices<My.Template.Model.CityInfo>
+    {
+    }
+	
+	 public partial interface ICommunityServices:IBaseServices<My.Template.Model.Community>
+    {
+    }
+	
+	 public partial interface IGoodsInfoServices:IBaseServices<My.Template.Model.GoodsInfo>
+    {
+    }
+	
+	 public partial interface IGoodsPropertyServices:IBaseServices<My.Template.Model.GoodsProperty>
+    {
+    }
+	
+	 public partial interface IGoodsPropertyDetailServices:IBaseServices<My.Template.Model.GoodsPropertyDetail>
+    {
+    }
+	
+	 public partial interface IGoodsTypeServices:IBaseServices<My.Template.Model.GoodsType>
+    {
+    }
+	
+	 public partial interface IHouseAreaServices:IBaseServices<My.Template.Model.HouseArea>
     {
     }
 	
@@ -39,7 +71,23 @@ namespace My.Template.IBLL
     {
     }
 	
+	 public partial interface IOrderServices:IBaseServices<My.Template.Model.Order>
+    {
+    }
+	
+	 public partial interface IOrderGoodsServices:IBaseServices<My.Template.Model.OrderGoods>
+    {
+    }
+	
+	 public partial interface IOrderStatusServices:IBaseServices<My.Template.Model.OrderStatus>
+    {
+    }
+	
 	 public partial interface IQAInfosServices:IBaseServices<My.Template.Model.QAInfos>
+    {
+    }
+	
+	 public partial interface IRecAddressServices:IBaseServices<My.Template.Model.RecAddress>
     {
     }
 	
@@ -51,11 +99,19 @@ namespace My.Template.IBLL
     {
     }
 	
+	 public partial interface ISampleHouseServices:IBaseServices<My.Template.Model.SampleHouse>
+    {
+    }
+	
 	 public partial interface ISinglePageServices:IBaseServices<My.Template.Model.SinglePage>
     {
     }
 	
 	 public partial interface ISiteInfoServices:IBaseServices<My.Template.Model.SiteInfo>
+    {
+    }
+	
+	 public partial interface ISpHouse_HseAreaServices:IBaseServices<My.Template.Model.SpHouse_HseArea>
     {
     }
 	
@@ -68,6 +124,10 @@ namespace My.Template.IBLL
     }
 	
 	 public partial interface IUser_RoleServices:IBaseServices<My.Template.Model.User_Role>
+    {
+    }
+	
+	 public partial interface IUser_ShoppingCartServices:IBaseServices<My.Template.Model.User_ShoppingCart>
     {
     }
 	

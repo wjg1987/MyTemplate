@@ -17,6 +17,7 @@ namespace My.Template.UI.Portal
 
             //启动Log4Net 配置
             log4net.Config.XmlConfigurator.Configure();
+            
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);

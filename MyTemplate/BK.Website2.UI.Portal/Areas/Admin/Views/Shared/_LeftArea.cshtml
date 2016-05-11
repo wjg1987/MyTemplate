@@ -3,11 +3,11 @@
     <!-- UserInfo -->
 <div class="media user-media well-small">
     <a class="user-link" href="#">
-        <img class="media-object img-thumbnail user-img"  alt="User Picture" style="width: 74px; height: 74px;" src="@Session["curLoginAdminHeadImg"]"/>
+        <img class="media-object img-thumbnail user-img"  alt="User Picture" style="width: 74px; height: 74px;" src="@ViewBag.curLoginAdminHeadImg"/>
     </a>
     <br/>
     <div class="media-body">
-        <h5 class="media-heading">@Session["curLoginAdminAccount"]</h5>
+        <h5 class="media-heading">@ViewBag.curLoginAdminAccount</h5>
         <ul class="list-unstyled user-info">
 
             <li>

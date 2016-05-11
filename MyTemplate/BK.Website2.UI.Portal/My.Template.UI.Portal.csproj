@@ -67,6 +67,22 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NPOI\NPOI.HSSF.dll</HintPath>
     </Reference>
+    <Reference Include="ServiceStack.Common, Version=4.0.56.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\ServiceStack.Common.4.0.56\lib\net40\ServiceStack.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43, processorArchitecture=MSIL">
+      <HintPath>packages\ServiceStack.Interfaces.4.0.56\lib\portable-wp80+sl5+net40+win8+wpa81+monotouch+monoandroid+xamarin.ios10\ServiceStack.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ServiceStack.Redis, Version=4.0.56.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\ServiceStack.Redis.4.0.56\lib\net40\ServiceStack.Redis.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ServiceStack.Text, Version=4.0.56.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\ServiceStack.Text.4.0.56\lib\net40\ServiceStack.Text.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -1792,6 +1808,7 @@
     <Content Include="Areas\Admin\css\gloable.css" />
     <Content Include="Areas\Admin\css\myuploadify.css" />
     <Content Include="Areas\Admin\css\myUploadifyMore.css" />
+    <Content Include="Areas\Admin\images\th.jpg" />
     <Content Include="Areas\Admin\js\AddSampleInfo.steps.js" />
     <Content Include="Areas\Admin\js\AddSampleInfo2.steps.js" />
     <Content Include="Areas\Admin\js\addSamplePics.js" />
@@ -1807,6 +1824,13 @@
     <Content Include="css\global.css" />
     <Content Include="css\layout.css" />
     <Content Include="Global.asax" />
+    <Content Include="images\morelist_del.png" />
+    <Content Include="images\uploadloading.gif" />
+    <Content Include="images\up_img.jpg" />
+    <Content Include="images\up_img2.jpg" />
+    <Content Include="images\up_img3.jpg" />
+    <Content Include="images\up_img4.jpg" />
+    <Content Include="images\up_img5.jpg" />
     <Content Include="js\CityJs.js" />
     <Content Include="js\CityJs2.js" />
     <Content Include="js\ditu.js" />
@@ -1866,6 +1890,7 @@
     <Content Include="js\web2js\pageGroup.js" />
     <Content Include="js\web2js\picscroll.js" />
     <Content Include="js\web2js\regist.js" />
+    <Content Include="readme.html" />
     <Content Include="scripts\ckfinder\bin\Debug\CKFinder.dll" />
     <Content Include="scripts\ckfinder\bin\Debug\CKFinder.pdb" />
     <Content Include="scripts\ckfinder\bin\Release\CKFinder.dll" />
@@ -3483,7 +3508,6 @@
     <Folder Include="Areas\API\Models\" />
     <Folder Include="Areas\API\Views\GetData\" />
     <Folder Include="Areas\API\Views\Shared\" />
-    <Folder Include="images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -3658,7 +3682,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>35767</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:3643/</IISUrl>
+          <IISUrl>http://localhost:3688/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
