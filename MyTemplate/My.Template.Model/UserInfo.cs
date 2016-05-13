@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Newtonsoft.Json;
+
+
 namespace My.Template.Model
 {
     using System;
@@ -34,6 +37,7 @@ namespace My.Template.Model
         public Nullable<bool> Sex { get; set; }
         public int UserID { get; set; }
     
+    	[JsonIgnore]
         public virtual User User { get; set; }
     }
 }

@@ -52,6 +52,7 @@
                 <p class="text-muted text-center btn-block btn btn-primary btn-rect">
                     请输入您的用户名和密码
                 </p>
+                <input type="hidden" id="hidenremberme" name="hidenremberme" value="0" />
                 <input type="text" placeholder="用户名" name="Account" class="form-control"/>
                 @Html.ValidationMessage("Account")
                 <input type="password" placeholder="密码" name="Pwd" class="form-control"/>
@@ -82,6 +83,11 @@
     </div>
     <div class="text-center">
         <ul class="list-inline">
+            <li style="margin-right: 5px;" id="lirememe">
+                <span style="height:20px;display: inline-block;"><input style="vertical-align: middle;margin: 0;" type="checkbox" id="ckremme" value="0" />
+                    <span style="display: inline-block;height: 20px;"></span>
+                </span><label for="ckremme" style="font-size: 13px !important;font-weight:normal;margin-bottom: 0;line-height: 20px;">记住我</label>
+            </li>
             <li><a class="text-muted" href="#login" data-toggle="tab">登录</a></li>
             <li><a class="text-muted" href="#forgot" data-toggle="tab">忘记密码</a></li>
             <li><a class="text-muted" href="#signup" data-toggle="tab">注册</a></li>
@@ -100,7 +106,17 @@
         <script src='@Url.Content("~/Scripts/jquery/jquery.validate.js")'></script>
     <script src="/Scripts/jquery/jquery.validate.unobtrusive.min.js"></script>
       <!--END PAGE LEVEL SCRIPTS -->
-
+    <script type="text/javascript">
+        $(function() {
+            $('#ckremme').change(function (event) {
+                if ($(this).is(':checked')) {
+                    $('#hidenremberme').val(1);
+                } else {
+                    $('#hidenremberme').val(0);
+                }
+            })
+        })
+    </script>
 </body>
     <!-- END BODY -->
 </html>

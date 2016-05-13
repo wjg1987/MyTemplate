@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Newtonsoft.Json;
+
+
 namespace My.Template.Model
 {
     using System;
@@ -25,7 +28,9 @@ namespace My.Template.Model
         public string GPName { get; set; }
         public int Sequence { get; set; }
     
+    	[JsonIgnore]
         public virtual GoodsInfo GoodsInfo { get; set; }
+    	[JsonIgnore]
         public virtual ICollection<GoodsPropertyDetail> GoodsPropertyDetail { get; set; }
     }
 }

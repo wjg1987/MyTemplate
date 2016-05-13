@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Newtonsoft.Json;
+
+
 namespace My.Template.Model
 {
     using System;
@@ -21,6 +24,7 @@ namespace My.Template.Model
         public string Count { get; set; }
         public bool IsDelete { get; set; }
     
+    	[JsonIgnore]
         public virtual User User { get; set; }
     }
 }

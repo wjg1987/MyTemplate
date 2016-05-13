@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Newtonsoft.Json;
+
+
 namespace My.Template.Model
 {
     using System;
@@ -30,7 +33,9 @@ namespace My.Template.Model
         public bool IsFrozen { get; set; }
         public System.DateTime CreateTime { get; set; }
     
+    	[JsonIgnore]
         public virtual ICollection<User_Role> User_Role { get; set; }
+    	[JsonIgnore]
         public virtual ICollection<Role_Action> Role_Action { get; set; }
     }
 }

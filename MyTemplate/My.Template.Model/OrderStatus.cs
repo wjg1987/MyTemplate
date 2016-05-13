@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Newtonsoft.Json;
+
+
 namespace My.Template.Model
 {
     using System;
@@ -23,6 +26,7 @@ namespace My.Template.Model
         public string OSName { get; set; }
         public string OSDetail { get; set; }
     
+    	[JsonIgnore]
         public virtual ICollection<Order> Order { get; set; }
     }
 }

@@ -10,11 +10,9 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
     {
         public ActionResult Index()
         {
-            Session["curLoginAdminID"] = null;
-            Session["curLoginAdminAccount"] = null;
-            Session["curLoginAdminHeadImg"] = null;
-            Session["AdminValidateCode"] = null;
-
+            Response.Cookies["sessionId"].Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies["cp1"].Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies["cp2"].Expires = DateTime.Now.AddDays(-1);
             return Redirect("/admin/login");
         }
     }

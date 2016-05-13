@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Newtonsoft.Json;
+
+
 namespace My.Template.Model
 {
     using System;
@@ -21,6 +24,7 @@ namespace My.Template.Model
         public string ThumbPic { get; set; }
         public string ThumbCirclePic { get; set; }
     
+    	[JsonIgnore]
         public virtual AreaInfo AreaInfo { get; set; }
     }
 }

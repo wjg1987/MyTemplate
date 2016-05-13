@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Newtonsoft.Json;
+
+
 namespace My.Template.Model
 {
     using System;
@@ -24,6 +27,7 @@ namespace My.Template.Model
         public bool IsOutlink { get; set; }
         public string OutLinkUrl { get; set; }
     
+    	[JsonIgnore]
         public virtual GoodsProperty GoodsProperty { get; set; }
     }
 }

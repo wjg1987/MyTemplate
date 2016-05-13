@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Newtonsoft.Json;
+
+
 namespace My.Template.Model
 {
     using System;
@@ -26,7 +29,9 @@ namespace My.Template.Model
         public int Sequence { get; set; }
         public int CityInfoID { get; set; }
     
+    	[JsonIgnore]
         public virtual CityInfo CityInfo { get; set; }
+    	[JsonIgnore]
         public virtual ICollection<Community> Community { get; set; }
     }
 }

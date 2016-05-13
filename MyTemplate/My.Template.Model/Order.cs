@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Newtonsoft.Json;
+
+
 namespace My.Template.Model
 {
     using System;
@@ -29,8 +32,11 @@ namespace My.Template.Model
         public int RecAddressID { get; set; }
         public bool IsDelete { get; set; }
     
+    	[JsonIgnore]
         public virtual OrderStatus OrderStatus { get; set; }
+    	[JsonIgnore]
         public virtual ICollection<OrderGoods> OrderGoods { get; set; }
+    	[JsonIgnore]
         public virtual RecAddress RecAddress { get; set; }
     }
 }

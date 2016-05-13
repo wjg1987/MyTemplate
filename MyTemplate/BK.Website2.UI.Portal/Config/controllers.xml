@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+
+  <!--这里配置的是 要注入的类的属性 type第一个值是命名空间，第2个值是 类所在的程序集-->
+  <object type="My.Template.UI.Portal.Controllers.DefaultController, My.Template.UI.Portal" singleton="false" >
+    <!--name是要注入的属性的名称， ref 是objects节点下复杂类型的object的name的值-->
+    <property name="UserInfoServices" ref="UserInfoServices" />
+    
+    <!--name是要注入的属性的名称， value是值-->
+    <!--<property name="UserName" value="admin" />-->
+  </object>
+
+  <!--这里配置的是 要翻转的类-->
+  <object name="UserInfoServices" type="My.Template.BLL.UserInfoServices, My.Template.BLL" singleton="false" >
+  </object>
+</objects>

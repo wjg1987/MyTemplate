@@ -8,10 +8,11 @@ namespace My.Template.UI.Portal
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new HandleErrorAttribute());
+            //默认过滤器
+            //filters.Add(new HandleErrorAttribute());
 
             //使用我们自定义的错误过滤器
-            //filters.Add(new MyErrorAttribute());
+            filters.Add(new MyErrorAttribute());
         }
     }
 }

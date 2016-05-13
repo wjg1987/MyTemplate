@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Newtonsoft.Json;
+
+
 namespace My.Template.Model
 {
     using System;
@@ -18,7 +21,9 @@ namespace My.Template.Model
         public int RoleID { get; set; }
         public int ActionID { get; set; }
     
+    	[JsonIgnore]
         public virtual Role Role { get; set; }
+    	[JsonIgnore]
         public virtual Action Action { get; set; }
     }
 }

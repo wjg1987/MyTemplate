@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Newtonsoft.Json;
+
+
 namespace My.Template.Model
 {
     using System;
@@ -31,6 +34,7 @@ namespace My.Template.Model
         public bool IsUse4Phone { get; set; }
         public int BannerTypeID { get; set; }
     
+    	[JsonIgnore]
         public virtual BannerType BannerType { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.Metadata.Edm;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace My.Template.Model
 {
@@ -42,6 +43,7 @@ namespace My.Template.Model
 
     public class Role_ActionValidate
     {
+      
     }
 
 
@@ -69,6 +71,13 @@ namespace My.Template.Model
         public string Pwd { get; set; }
         public bool IsDelete { get; set; }
         public bool IsFrozen { get; set; }
+
+        public System.DateTime CreateTime { get; set; }
+        public int Balance { get; set; }
+        public int FrozenBlance { get; set; }
+        public string AlipayAccount { get; set; }
+        public string BankNumber { get; set; }
+        public string BankName { get; set; }
     }
 
 

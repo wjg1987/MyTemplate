@@ -1,24 +1,32 @@
-﻿<!-- MENU SECTION -->
+﻿@using My.Template.Model.AdminDataModel
+<!-- MENU SECTION -->
 <div id="left">
     <!-- UserInfo -->
-<div class="media user-media well-small">
-    <a class="user-link" href="#">
-        <img class="media-object img-thumbnail user-img"  alt="User Picture" style="width: 74px; height: 74px;" src="@ViewBag.curLoginAdminHeadImg"/>
-    </a>
-    <br/>
-    <div class="media-body">
-        <h5 class="media-heading">@ViewBag.curLoginAdminAccount</h5>
-        <ul class="list-unstyled user-info">
+    <div class="media user-media well-small">
+        @{
+            var culoginadmin = ViewBag.loginadminuser as My.Template.Model.AdminDataModel.LoginAdminInfo;
+            if (culoginadmin == null)
+            {
+                culoginadmin = new LoginAdminInfo();
+            }
+        }
+        <a class="user-link" href="#">
+            <img class="media-object img-thumbnail user-img"  alt="User Picture" style="width: 74px; height: 74px;" src="@culoginadmin.HeadImg"/>
+        </a>
+        <br/>
+        <div class="media-body">
+            <h5 class="media-heading">@culoginadmin.Account</h5>
+            <ul class="list-unstyled user-info">
 
-            <li>
-                <a class="btn btn-success btn-xs btn-circle" style="width: 10px; height: 12px;"></a> Online
+                <li>
+                    <a class="btn btn-success btn-xs btn-circle" style="width: 10px; height: 12px;"></a> Online
 
-            </li>
+                </li>
 
-        </ul>
+            </ul>
+        </div>
+        <br/>
     </div>
-    <br/>
-</div>
     <!-- MENU List -->
 <ul id="menu" class="collapse">
 

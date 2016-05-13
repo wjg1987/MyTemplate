@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Newtonsoft.Json;
+
+
 namespace My.Template.Model
 {
     using System;
@@ -25,6 +28,7 @@ namespace My.Template.Model
         public bool IsView { get; set; }
         public int Sequence { get; set; }
     
+    	[JsonIgnore]
         public virtual ICollection<AreaInfo> AreaInfo { get; set; }
     }
 }

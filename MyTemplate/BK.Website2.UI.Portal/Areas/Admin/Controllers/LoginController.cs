@@ -8,31 +8,23 @@ using My.Template.BLL;
 using My.Template.Common;
 using My.Template.IBLL;
 using My.Template.Model;
+using My.Template.Model.AdminDataModel;
 using Newtonsoft.Json;
 
 namespace My.Template.UI.Portal.Areas.Admin.Controllers
 {
     public class LoginController : Controller
     {
-        
-        
+        IUserServices userServices = new UserServices();
+
         public ActionResult Index()
         {
-            #region 测试 后台 不登陆使用
-            Common.Common.redisClient.SetValue("curLoginAdminID", "1");
-            Common.Common.redisClient.SetValue("curLoginAdminAccount", "admin");
-            Common.Common.redisClient.SetValue("curLoginAdminHeadImg", "/areas/admin/images/th.jpg");
-            //Session["curLoginAdminID"] = 1;
-            //Session["curLoginAdminAccount"] = "admin";
-            //Session["curLoginAdminHeadImg"] = "/areas/admin/images/th.jpg";
-            return Redirect("/Admin/Home/index");
-            #endregion
-           
+            CheckCooiesInfo();
             return View();
         }
 
         [HttpPost]
-        public ActionResult Index(User user, string validatecode)
+        public ActionResult Index(User user, string validatecode, int hidenremberme = 0)
         {
             if (ModelState.IsValid)
             {
@@ -48,7 +40,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
                 #endregion
 
                 #region 验证用户名和密码 以及角色的有效性
-                IUserServices userServices = new UserServices();
+               
                 var dbUser = userServices.LoadEntitys(
                     u => string.Equals(u.Account, user.Account)
                          && string.Equals(u.Pwd, Common.Encryption.MD5(user.Pwd, true))
@@ -82,16 +74,33 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
                     return View();
                 }
 
+                #region 登陆成功后 需要用 全局缓存保存 当期登陆用户的信息（图像和账号  后台需要显示）
+                var loginAdminInfo =  new LoginAdminInfo()
+                {
+                    Userid = dbUser.ID,
+                    Account = dbUser.Account,
+                    HeadImg = dbUser.UserInfo.HeadPic
+                };
 
-         
-                #region 登陆成功后 需要用 session或全局缓存保存 当期登陆用户的信息（图像和账号  后台需要显示）
+                string sessionId = Guid.NewGuid().ToString();
+                //使用memcache代替session解决不同web服务器之间共享的问题
+                Common.MemcacheHelper.Set(sessionId, Common.SerializerHelper.SerializeToString(loginAdminInfo), DateTime.Now.AddMinutes(20));
+                //将memcache的key以cookie的形式返回浏览器端的内存中。当用户再次请求其他页面时，请求报文会将cookie中的sessionId再次发送到服务端
+                Response.Cookies["sessionId"].Value = sessionId;
 
-                //将登录用户所有权限ID 存入session中
+                #endregion
 
 
-                Session["curLoginAdminID"] = dbUser.ID;
-                Session["curLoginAdminAccount"] = dbUser.Account;
-                Session["curLoginAdminHeadImg"] = dbUser.UserInfo.HeadPic;
+                #region 如果登陆成功并且选择了记住我
+                if (hidenremberme == 1)
+                {
+                    HttpCookie cookie1 = new HttpCookie("cp1",dbUser.Account);
+                    HttpCookie cookie2 = new HttpCookie("cp2",Common.Encryption.EncryptAES(dbUser.Pwd));
+                    cookie1.Expires = DateTime.Now.AddDays(3);
+                    cookie2.Expires = DateTime.Now.AddDays(3);
+                    Response.Cookies.Add(cookie1);
+                    Response.Cookies.Add(cookie2);
+                }
                 #endregion
 
                 return Redirect("/Admin/Home/index");
@@ -117,10 +126,63 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
         {
             Common.ValidateCode validateCode = new ValidateCode();
             string vcode = validateCode.CreateValidateCode(4);
-            Session["AdminValidateCode"] = vcode;
 
+            #region MyRegion
+            //string vcodesessionId = Guid.NewGuid().ToString() + "vcode";
+            ////使用memcache代替session解决不同web服务器之间共享的问题
+            //Common.MemcacheHelper.Set(vcodesessionId, vcode, DateTime.Now.AddMinutes(20));
+            ////将memcache的key以cookie的形式返回浏览器端的内存中。当用户再次请求其他页面时，请求报文会将cookie中的sessionId再次发送到服务端
+            //Response.Cookies["vcodesessionId"].Value = vcode;
+            #endregion
+           
+            Session["AdminValidateCode"] = vcode;
             var byteData = validateCode.CreateValidateGraphic(vcode);
             return File(byteData, "image/jpeg");
         }
+
+
+        #region 判断cookie信息 用户是否选择了记住我功能
+        private void CheckCooiesInfo()
+        {
+            if (Request.Cookies["cp1"] != null && Request.Cookies["cp2"] != null)
+            {
+                string account = Request.Cookies["cp1"].Value;
+                string pwd = Request.Cookies["cp2"].Value;
+
+                //判断cookie中存储的用户名和密码是否正确
+                var dbuser = userServices.LoadEntitys(u => u.Account == account).FirstOrDefault();
+                if (dbuser != null)
+                {
+                    //比较密码 数据库中的密码和 cookie中的存储的密码都是加密过的
+                    if (dbuser.Pwd == Common.Encryption.DecryptAES(pwd))
+                    {
+                        #region 存储用户登陆状态
+
+                        var loginAdminInfo = new LoginAdminInfo()
+                            {
+                                Userid = dbuser.ID,
+                                Account = dbuser.Account,
+                                HeadImg = dbuser.UserInfo.HeadPic
+                            };
+                        string sessionId = Guid.NewGuid().ToString();
+                        //使用memcache代替session解决不同web服务器之间共享的问题
+                        Common.MemcacheHelper.Set(sessionId, Common.SerializerHelper.SerializeToString(loginAdminInfo),
+                                                  DateTime.Now.AddMinutes(20));
+                        //将memcache的key以cookie的形式返回浏览器端的内存中。当用户再次请求其他页面时，请求报文会将cookie中的sessionId再次发送到服务端
+                        Response.Cookies["sessionId"].Value = sessionId;
+
+                        #endregion
+
+                        Response.Redirect("/Admin/Home/index");
+                    }
+
+                }
+                
+                //没有找到用户 说明没有该账号 cookie过期 里面的密码比对失败也让cookie过期
+                Response.Cookies["cp1"].Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies["cp2"].Expires = DateTime.Now.AddDays(-1);
+            }
+        }
+        #endregion
     }
 }

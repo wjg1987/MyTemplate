@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Newtonsoft.Json;
+
+
 namespace My.Template.Model
 {
     using System;
@@ -21,6 +24,7 @@ namespace My.Template.Model
     
         public int ID { get; set; }
     
+    	[JsonIgnore]
         public virtual ICollection<SpHouse_HseArea> SpHouse_HseArea { get; set; }
     }
 }

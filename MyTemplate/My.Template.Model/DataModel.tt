@@ -96,6 +96,7 @@ foreach (var entity in typeMapper.GetItemsToGenerate<EntityType>(itemCollection)
         foreach (var navigationProperty in navigationProperties)
         {
 #>
+	[JsonIgnore]
     <#=codeStringGenerator.NavigationProperty(navigationProperty)#>
 <#
         }
@@ -226,6 +227,9 @@ public void WriteHeader(CodeStringGenerator codeStringGenerator, EntityFramework
 // <#=GetResourceString("Template_GeneratedCodeCommentLine3")#>
 // </auto-generated>
 //------------------------------------------------------------------------------
+
+using Newtonsoft.Json;
+
 <#=codeStringGenerator.UsingDirectives(inHeader: true)#>
 <#+
     fileManager.EndBlock();

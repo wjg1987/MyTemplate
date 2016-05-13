@@ -38,8 +38,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Commons">
+      <HintPath>..\..\..\..\demos_C#\memcach_demo\memcach_demo\Lib\Commons.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\..\..\demos_C#\memcach_demo\memcach_demo\Lib\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Memcached.ClientLibrary">
+      <HintPath>..\packages\memcache\Memcached.ClientLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\BK.Website2.UI.Portal\bin\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Common, Version=4.0.56.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\BK.Website2.UI.Portal\packages\ServiceStack.Common.4.0.56\lib\net40\ServiceStack.Common.dll</HintPath>
@@ -73,7 +85,10 @@
     <Compile Include="EmailXML.cs" />
     <Compile Include="Encryption.cs" />
     <Compile Include="LogHelper.cs" />
+    <Compile Include="MemcacheHelper.cs" />
+    <Compile Include="MySession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SerializerHelper.cs" />
     <Compile Include="ThreadSafe.cs" />
     <Compile Include="Tools.cs" />
     <Compile Include="ValidateCode.cs" />

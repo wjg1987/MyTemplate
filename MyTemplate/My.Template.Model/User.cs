@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Newtonsoft.Json;
+
+
 namespace My.Template.Model
 {
     using System;
@@ -41,10 +44,15 @@ namespace My.Template.Model
         public string BankNumber { get; set; }
         public string BankName { get; set; }
     
+    	[JsonIgnore]
         public virtual ICollection<User_Role> User_Role { get; set; }
+    	[JsonIgnore]
         public virtual ICollection<User_Action> User_Action { get; set; }
+    	[JsonIgnore]
         public virtual UserInfo UserInfo { get; set; }
+    	[JsonIgnore]
         public virtual ICollection<User_ShoppingCart> User_ShoppingCart { get; set; }
+    	[JsonIgnore]
         public virtual ICollection<RecAddress> RecAddress { get; set; }
     }
 }
