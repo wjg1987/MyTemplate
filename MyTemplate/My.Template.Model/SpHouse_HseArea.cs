@@ -15,7 +15,7 @@ namespace My.Template.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class SpHouse_HseArea
+    public partial class SpHouse_HseArea : IBaseEntity
     {
         public int ID { get; set; }
         public int SampleHouseID { get; set; }

@@ -44,6 +44,7 @@
                                     @Html.HiddenFor(u => u.ID)
                                     @Html.HiddenFor(u => u.CreateTime)
                                     @Html.HiddenFor(u => u.IsDelete)
+                                    @Html.HiddenFor(u => u.Pwd)
                                  @Html.ValidationSummary(true)
                                     <div class="form-group">
                                         @Html.LabelFor(u => u.Account, "账号", new {@class = "control-label col-lg-4"})
@@ -98,8 +99,8 @@
                                         <div class="col-lg-8 divsure">
 
                                             <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl"/>
-                                         <a href="@ViewBag.returnUrl" class="btn  btn-default btn-rect">取消</a>
-                                            <input type="submit" value="确认" class="btn btn-success btn-rect"/>
+                                         <a href="@ViewBag.returnUrl" class="btn btn-sm  btn-default btn-rect">取消</a>
+                                            <input type="submit" value="确认" class="btn  btn-sm btn-flat  btn-success btn-rect"/>
                                         </div>
                                          </div>
                                 }

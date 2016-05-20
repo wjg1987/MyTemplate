@@ -63,6 +63,7 @@
     <Compile Include="ActionType.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="AdminDataModel\ActionEnum.cs" />
     <Compile Include="AdminDataModel\LoginAdminInfo.cs" />
     <Compile Include="AreaInfo.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
@@ -92,6 +93,13 @@
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="HouseArea.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IBaseEntity.cs" />
+    <Compile Include="KeywordsRank.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KeywordsScore.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="News.cs">

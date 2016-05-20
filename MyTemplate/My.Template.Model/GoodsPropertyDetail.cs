@@ -15,7 +15,7 @@ namespace My.Template.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class GoodsPropertyDetail
+    public partial class GoodsPropertyDetail : IBaseEntity
     {
         public int ID { get; set; }
         public int GoodsPropertyID { get; set; }

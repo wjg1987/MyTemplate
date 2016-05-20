@@ -15,7 +15,7 @@ namespace My.Template.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class HouseArea
+    public partial class HouseArea : IBaseEntity
     {
         public HouseArea()
         {

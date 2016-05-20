@@ -15,7 +15,7 @@ namespace My.Template.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class GoodsProperty
+    public partial class GoodsProperty : IBaseEntity
     {
         public GoodsProperty()
         {

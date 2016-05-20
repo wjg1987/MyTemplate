@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml.Schema;
@@ -15,10 +16,11 @@ namespace My.Template.UI.Portal.Controllers
 {
     public class DefaultController : BaseController
     {
-
+        private UserServices UserServicesEntity { get; set; }
 
         public ActionResult Index()
         {
+
             return Redirect("/admin/login");
             return View();
         }

@@ -15,7 +15,7 @@ namespace My.Template.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class User : IBaseEntity
     {
         public User()
         {
@@ -49,10 +49,10 @@ namespace My.Template.Model
     	[JsonIgnore]
         public virtual ICollection<User_Action> User_Action { get; set; }
     	[JsonIgnore]
-        public virtual UserInfo UserInfo { get; set; }
-    	[JsonIgnore]
         public virtual ICollection<User_ShoppingCart> User_ShoppingCart { get; set; }
     	[JsonIgnore]
         public virtual ICollection<RecAddress> RecAddress { get; set; }
+    	[JsonIgnore]
+        public virtual UserInfo UserInfo { get; set; }
     }
 }

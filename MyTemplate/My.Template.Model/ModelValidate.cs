@@ -55,6 +55,8 @@ namespace My.Template.Model
     [MetadataType(typeof(UserValidate))]
     public partial class User
     {
+        //扩展属性 不在数据库中存在 方便后台登陆或者前台登陆验证码校验
+        public string ValidateCode { get; set; }
     }
 
     public class UserValidate
@@ -71,6 +73,7 @@ namespace My.Template.Model
         public string Pwd { get; set; }
         public bool IsDelete { get; set; }
         public bool IsFrozen { get; set; }
+        public string ValidateCode { get; set; }
 
         public System.DateTime CreateTime { get; set; }
         public int Balance { get; set; }

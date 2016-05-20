@@ -15,7 +15,7 @@ namespace My.Template.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class OrderGoods
+    public partial class OrderGoods : IBaseEntity
     {
         public int ID { get; set; }
         public int OrderID { get; set; }

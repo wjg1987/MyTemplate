@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+  <!--这里配置的是 要反转的类 type第一个值是要实例化的类的全名称（包含命名空间），第2个值是 类所在的程序集-->
+  <object name="UserServices" type="My.Template.BLL.UserServices, My.Template.BLL" singleton="false" >
+  </object>
+
+  <object name="ActionServices" type="My.Template.BLL.ActionServices, My.Template.BLL" singleton="false" >
+  </object>
+
+  <object name="User_ActionServices" type="My.Template.BLL.User_ActionServices, My.Template.BLL" singleton="false" >
+  </object>
+
+  <object name="RoleServices" type="My.Template.BLL.RoleServices, My.Template.BLL" singleton="false" >
+  </object>
+
+  <object name="Role_ActionServices" type="My.Template.BLL.Role_ActionServices, My.Template.BLL" singleton="false" >
+  </object>
+
+  <object name="User_RoleServices" type="My.Template.BLL.User_RoleServices, My.Template.BLL" singleton="false" >
+  </object>
+</objects>

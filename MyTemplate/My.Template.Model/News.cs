@@ -15,7 +15,7 @@ namespace My.Template.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class News
+    public partial class News : IBaseEntity
     {
         public News()
         {

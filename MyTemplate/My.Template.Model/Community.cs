@@ -15,7 +15,7 @@ namespace My.Template.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Community
+    public partial class Community : IBaseEntity
     {
         public int ID { get; set; }
         public int AreaInfoID { get; set; }

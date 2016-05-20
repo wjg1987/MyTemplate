@@ -47,23 +47,25 @@
     </div>
     <div class="tab-content">
         <div id="login" class="tab-pane active">
-            <form action="@Url.Action("Index", "Login")" class="form-signin" method="post">
-                  @Html.ValidationSummary(true)
-                <p class="text-muted text-center btn-block btn btn-primary btn-rect">
-                    请输入您的用户名和密码
-                </p>
-                <input type="hidden" id="hidenremberme" name="hidenremberme" value="0" />
-                <input type="text" placeholder="用户名" name="Account" class="form-control"/>
-                @Html.ValidationMessage("Account")
-                <input type="password" placeholder="密码" name="Pwd" class="form-control"/>
-                 @Html.ValidationMessage("Pwd")
-                <input type="text" placeholder="验证码" name="validatecode" class="form-control"/>
-                <img src="/admin/login/ShowValidateCode?id=1" class="validateImg" title="点击图片换一张" id="validateImg" alt="点击图片换一张"/><a href="javascript:void(0);" id="aVCode">换一张</a>
-                <button class="btn text-muted text-center btn-danger" type="submit">登录</button>
-            </form>
+              @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { @class = "form-signin" }))
+              {
+                      @Html.ValidationSummary(true)
+                      <p class="text-muted text-center btn-block btn btn-primary btn-rect">
+                          请输入您的用户名和密码
+                      </p>
+                  <input type="hidden" id="hidenremberme" name="hidenremberme" value="0" />
+                      @Html.TextBoxFor(u => u.Account, new { placeholder = "用户名", @class = "form-control" })
+                      @Html.ValidationMessage("Account")
+                      @Html.PasswordFor(u => u.Pwd, new { placeholder = "密码", @class = "form-control" })
+                      @Html.ValidationMessage("Pwd")
+                      <input type="text" placeholder="验证码" name="validatecode" class="form-control"/>
+                  <img src="/admin/login/ShowValidateCode?id=1" class="validateImg" title="点击图片换一张" id="validateImg" alt="点击图片换一张"/><a href="javascript:void(0);" id="aVCode">换一张</a>
+                     @Html.ValidationMessage("ValidateCode")
+                      <button class="btn text-muted text-center btn-danger" type="submit">登录</button>
+              }
         </div>
         <div id="forgot" class="tab-pane">
-            <form action="@Url.Action("Index","Login")" class="form-signin">
+            <form action="@Url.Action("Index", "Login")" class="form-signin">
                 <p class="text-muted text-center btn-block btn btn-primary btn-rect">验证邮箱</p>
                 <input type="email"  required="required" placeholder="注册邮箱"  class="form-control" />
                 <br />
@@ -71,7 +73,7 @@
             </form>
         </div>
         <div id="signup" class="tab-pane">
-            <form action="@Url.Action("RecoverPwd","Login")" class="form-signin">
+            <form action="@Url.Action("RecoverPwd", "Login")" class="form-signin">
                 <p class="text-muted text-center btn-block btn btn-primary btn-rect">注册资料</p>
                 <input type="text" placeholder="用户名" class="form-control" />
                 <input type="email" placeholder="邮箱" class="form-control" />
@@ -79,6 +81,7 @@
                 <input type="password" placeholder="重复密码" class="form-control" />
                 <button class="btn text-muted text-center btn-success" type="submit">注册</button>
             </form>
+            
         </div>
     </div>
     <div class="text-center">

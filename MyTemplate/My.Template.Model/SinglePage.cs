@@ -15,7 +15,7 @@ namespace My.Template.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class SinglePage
+    public partial class SinglePage : IBaseEntity
     {
         public SinglePage()
         {

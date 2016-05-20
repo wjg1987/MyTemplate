@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IActionServices.cs" />
+    <Compile Include="IKeyWordsRankService.cs" />
     <Compile Include="IServices.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -56,6 +58,7 @@
     <Compile Include="IUserInfoServices.cs" />
     <Compile Include="IUserServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="IRoleServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="IServices.tt">

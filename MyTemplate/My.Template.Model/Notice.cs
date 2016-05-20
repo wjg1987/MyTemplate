@@ -15,7 +15,7 @@ namespace My.Template.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Notice
+    public partial class Notice : IBaseEntity
     {
         public int ID { get; set; }
         public string Title { get; set; }

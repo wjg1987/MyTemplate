@@ -1,0 +1,43 @@
+﻿@model My.Template.Model.User
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+}
+
+@section Head{
+    
+<!-- PAGE LEVEL STYLES -->
+<link href="/areas/admin/assets/css/layout2.css" rel="stylesheet" />
+<link href="/areas/admin/assets/plugins/flot/examples/examples.css" rel="stylesheet" />
+<link rel="stylesheet" href="/areas/admin/assets/plugins/timeline/timeline.css" />
+<!-- END PAGE LEVEL  STYLES -->
+}
+
+
+<!--PAGE CONTENT -->
+<div id="content">
+             
+    <div class="inner" style="min-height: 700px;">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 style="text-align: center;"> 提示 </h1>
+            </div>
+        </div>
+    <hr/>
+        <h1 style="text-align: center;color: red;margin-top: 50px;">您没有权限访问该页面,请联系管理员!</h1>
+    </div>
+
+</div>
+<!--END PAGE CONTENT -->
+
+
+
+@section Foot{
+<!-- PAGE LEVEL SCRIPTS -->
+<script src="/areas/admin/assets/plugins/flot/jquery.flot.js"></script>
+<script src="/areas/admin/assets/plugins/flot/jquery.flot.resize.js"></script>
+<script src="/areas/admin/assets/plugins/flot/jquery.flot.time.js"></script>
+<script  src="/areas/admin/assets/plugins/flot/jquery.flot.stack.js"></script>
+<script src="/areas/admin/assets/js/for_index.js"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+}

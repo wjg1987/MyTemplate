@@ -1,6 +1,6 @@
 ﻿.row{margin: 5px;}
 .pagination{  margin: 10px 0 5px 0;}
-.pagination > a {position: relative;float: left;padding: 6px 12px;margin-left: -1px;line-height: 1.428571429;text-decoration: none; background-color: #ffffff;border: 1px solid #dddddd;color: #428bca;}
+.pagination > a {position: relative;float: left;padding: 3px 12px;margin-left: -1px;line-height: 1.428571429;text-decoration: none; background-color: #ffffff;border: 1px solid #dddddd;color: #428bca;}
 .pagination a.act {z-index: 2;color: #ffffff;cursor: default;background-color: #428bca;border-color: #428bca;}
 
 /*Chorme下滚动条样式设置*/

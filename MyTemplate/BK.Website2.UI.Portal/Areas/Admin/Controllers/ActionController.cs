@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using My.Template.BLL;
 using My.Template.IBLL;
 using My.Template.Model;
+using My.Template.Model.AdminDataModel;
 using Newtonsoft.Json.Linq;
 
 namespace My.Template.UI.Portal.Areas.Admin.Controllers
@@ -14,7 +15,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
     {
         //
         // GET: /Admin/Role/
-        IActionServices actionServices = new ActionServices();
+        IActionServices ActionServicesEntity { get; set; }
 
         public ActionResult Index(int pageSize = 10, int pageIndex = 1, string searchWords = "")
         {
@@ -32,7 +33,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
                 {
                     return
                             (
-                                b.IsDelete == false && b.IsFrozen == false
+                                b.IsDelete == false
                             )
                             &&
                             (
@@ -41,13 +42,13 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
                 }
                 else
                 {
-                    return b.IsDelete == false && b.IsFrozen == false;
+                    return b.IsDelete == false;
                 }
             };
 
             Func<Model.Action, int> orderFunc = (b) => { return b.ID; };
 
-            var tmp = actionServices.LoadPageEntitys(pageIndex, pageSize, out totalCount, whereFunc, orderFunc, true).ToList();
+            var tmp = ActionServicesEntity.LoadPageEntitys(pageIndex, pageSize, out totalCount, whereFunc, orderFunc, true).ToList();
 
 
 
@@ -66,6 +67,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
             Model.Action model = new Model.Action();
             model.ASequence = 1000;
             model.IsDelete = false;
+            model.IsFrozen = false;
 
             #region 权限类型
             List<SelectListItem> items = new List<SelectListItem>();
@@ -84,14 +86,13 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
 
             items2.Add(new SelectListItem() { Selected = false, Text = "请选择--", Value = "0" });
             ActionServices ser = new ActionServices();
-            var aList = ser.LoadEntitys(u => u.ActionTypeID == 1 && u.ParentID == 0).ToList();
+            var aList = ser.LoadEntitys(u => u.ActionTypeID == Convert.ToInt32(ActionEnum.MenuAction) && u.ParentID == 0).ToList();
 
             int index = 0;
             foreach (var item in aList)
             {
                 items2.Add(new SelectListItem() { Selected = false, Text = item.AName, Value = item.ID.ToString() });
-                ser.GetChildActions(item.ID, items2);
-
+                //ser.GetChildActions(item.ID, items2);
             }
             ViewBag.ParentID = items2;
 
@@ -108,23 +109,6 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
             //取消添加 返回页面
             ViewBag.returnUrl = returnUrl;
 
-            if (ModelState.IsValid)
-            {
-                Model.Action dbAction = actionServices.LoadEntitys(u => u.AName == model.AName).FirstOrDefault();
-                if (dbAction != null)
-                {
-                    ModelState.AddModelError("AName", "角色名已存在。");
-                    return View(model);
-                }
-
-                model.IsDelete = false;
-
-                model = actionServices.Add(model);
-                if (model.ID > 0)
-                {
-                    return Redirect(returnUrl);
-                }
-            }
 
             #region 权限类型
             List<SelectListItem> items = new List<SelectListItem>();
@@ -135,27 +119,45 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
             {
                 items.Add(new SelectListItem() { Selected = false, Text = item.TName, Value = item.ID.ToString() });
             }
-            ViewBag.ActionTypeID = items;
+            ViewBag.ActionTypeIDs = items;
             #endregion
-      
+
             #region 上级权限
             List<SelectListItem> items2 = new List<SelectListItem>();
 
             items2.Add(new SelectListItem() { Selected = false, Text = "请选择--", Value = "0" });
             ActionServices ser = new ActionServices();
-            var aList = ser.LoadEntitys(u => u.ActionTypeID == 1 && u.ParentID == 0).ToList();
+            var aList = ser.LoadEntitys(u => u.ActionTypeID == Convert.ToInt32(ActionEnum.MenuAction) && u.ParentID == 0).ToList();
 
             int index = 0;
             foreach (var item in aList)
             {
                 items2.Add(new SelectListItem() { Selected = false, Text = item.AName, Value = item.ID.ToString() });
-                ser.GetChildActions(item.ID, items2);
+                //ser.GetChildActions(item.ID, items2);
 
             }
-            ViewBag.ParentID = items2;
+            ViewBag.ParentIDs = items2;
             #endregion
-            
 
+            if (ModelState.IsValid)
+            {
+                Model.Action dbAction = ActionServicesEntity.LoadEntitys(u => u.AUrl == model.AUrl).FirstOrDefault();
+                if (dbAction != null)
+                {
+                    ModelState.AddModelError("AName", "权限路径已存在。");
+                    return View(model);
+                }
+
+                model.IsDelete = false;
+
+                model = ActionServicesEntity.Add(model);
+                if (model.ID > 0)
+                {
+                    return Redirect(returnUrl);
+                }
+            }
+
+  
             return View(model);
         }
 
@@ -165,7 +167,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
             //取消返回页面
             ViewBag.returnUrl = Request.UrlReferrer == null ? Url.Action("Index", "Action") : Request.UrlReferrer.ToString();
 
-            var model = actionServices.LoadEntitys(b => b.ID == id).FirstOrDefault();
+            var model = ActionServicesEntity.LoadEntitysAsNotracking(b => b.ID == id && !b.IsDelete).FirstOrDefault();
 
 
             List<SelectListItem> items = new List<SelectListItem>();
@@ -192,14 +194,22 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
 
             items2.Add(new SelectListItem() { Selected = false, Text = "请选择--", Value = "0" });
             ActionServices ser = new ActionServices();
-            var aList = ser.LoadEntitys(u => u.ActionTypeID == 1 && u.ParentID == 0).ToList();
+            var aList = ser.LoadEntitys(u => u.ActionTypeID == Convert.ToInt32(ActionEnum.MenuAction) && u.ParentID == 0).ToList();
 
             int index = 0;
             foreach (var item in aList)
             {
-                items2.Add(new SelectListItem() { Text = item.AName, Value = item.ID.ToString() });
-                ser.GetChildActions(item.ID, items2);
-
+                if (item.ID == model.ParentID)
+                {
+                    items2.Add(new SelectListItem() { Selected = true,Text = item.AName, Value = item.ID.ToString() });
+              
+                }
+                else
+                {
+                    items2.Add(new SelectListItem() { Text = item.AName, Value = item.ID.ToString() });
+              
+                }
+               
             }
             ViewBag.ParentID = items2;
 
@@ -217,13 +227,9 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
             ViewBag.returnUrl = returnUrl;
             if (ModelState.IsValid)
             {
-                if (actionServices.Update(model))
+                if (ActionServicesEntity.Update(model))
                 {
                     return Redirect(returnUrl);
-                }
-                else
-                {
-                    return View(model);
                 }
             }
 
@@ -251,14 +257,21 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
 
             items2.Add(new SelectListItem() { Text = "请选择--", Value = "0" });
             ActionServices ser = new ActionServices();
-            var aList = ser.LoadEntitys(u => u.ActionTypeID == 1 && u.ParentID == 0).ToList();
+            var aList = ser.LoadEntitys(u => u.ActionTypeID == Convert.ToInt32(ActionEnum.MenuAction) && u.ParentID == 0).ToList();
 
             int index = 0;
             foreach (var item in aList)
             {
-                items2.Add(new SelectListItem() { Text = item.AName, Value = item.ID.ToString() });
-                ser.GetChildActions(item.ID, items2);
+                if (item.ID == model.ParentID)
+                {
+                    items2.Add(new SelectListItem() { Selected = true, Text = item.AName, Value = item.ID.ToString() });
 
+                }
+                else
+                {
+                    items2.Add(new SelectListItem() { Text = item.AName, Value = item.ID.ToString() });
+
+                }
             }
             ViewBag.ParentID = items2;
 
@@ -271,13 +284,13 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
         public int Delete(int id)
         {
 
-            var model = actionServices.LoadEntitys(b => b.ID == id).FirstOrDefault();
+            var model = ActionServicesEntity.LoadEntitys(b => b.ID == id).FirstOrDefault();
             if (model == null)
             {
                 return 0;
             }
             model.IsDelete = true;
-            if (actionServices.Update(model))
+            if (ActionServicesEntity.Update(model))
             {
                 return 1;
             }
@@ -291,9 +304,6 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
         public JsonResult GetParentAction(int lev)
         {
             JObject json = new JObject();
-
-
-
 
             return this.Json(json.ToString());
         }

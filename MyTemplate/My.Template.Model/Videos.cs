@@ -15,7 +15,7 @@ namespace My.Template.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Videos
+    public partial class Videos : IBaseEntity
     {
         public int ID { get; set; }
         public string VName { get; set; }

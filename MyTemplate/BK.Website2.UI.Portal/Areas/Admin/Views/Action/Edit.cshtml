@@ -55,7 +55,7 @@
 
                                         <div class="col-lg-8">
                                             @Html.ValidationMessageFor(u => u.ActionTypeID)
-                                            @Html.DropDownList("ActionTypeID", ViewBag.ActionTypeID as IEnumerable<SelectListItem>, new { @class = "form-control" })
+                                            @Html.DropDownList("ActionTypeID", ViewBag.ActionTypeIDs as IEnumerable<SelectListItem>, new { @class = "form-control" })
 
                                         </div>
                                     </div>
@@ -96,7 +96,7 @@
                                         @Html.LabelFor(u => u.ParentID, "上级权限ID", new {@class = "control-label col-lg-4"})
                                         <div class="col-lg-8">
                                            @Html.ValidationMessageFor(u=>u.ParentID)
-                                          @Html.DropDownList("ParentID",ViewBag.ParentID as IEnumerable<SelectListItem>,new{@class="form-control"})
+                                          @Html.DropDownList("ParentID",ViewBag.ParentIDs as IEnumerable<SelectListItem>,new{@class="form-control"})
                                          </div>
                                     </div>
                                 
@@ -121,8 +121,8 @@
                                     <div class="form-group">
                                         <div class="col-lg-8 divsure">
                                          <input type="hidden" value="@ViewBag.returnUrl" name="returnUrl" />
-                                         <a href="@ViewBag.returnUrl" class="btn  btn-default btn-rect">取消</a>
-                                         <input type="submit" value="确认" class="btn btn-success btn-rect"/>
+                                         <a href="@ViewBag.returnUrl" class="btn btn-sm  btn-default btn-rect">取消</a>
+                                         <input type="submit" value="确认" class="btn btn-sm btn-flat btn-success btn-rect"/>
                                         </div>
                                          </div>
                                 }

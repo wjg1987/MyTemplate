@@ -20,12 +20,13 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
         public ActionResult Index()
         {
             CheckCooiesInfo();
-            return View();
+            return View(new User());
         }
 
         [HttpPost]
         public ActionResult Index(User user, string validatecode, int hidenremberme = 0)
         {
+            var model = new User() { Account = user.Account };
             if (ModelState.IsValid)
             {
                 #region 验证验证码
@@ -34,8 +35,8 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
                     || sessionCode == null
                     || !string.Equals(validatecode, sessionCode.ToString()))
                 {
-                    ModelState.AddModelError("validatecode", "验证码错误.");
-                    return View();
+                    ModelState.AddModelError("ValidateCode", "验证码错误.");
+                    return View(model);
                 }
                 #endregion
 
@@ -43,40 +44,49 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
                
                 var dbUser = userServices.LoadEntitys(
                     u => string.Equals(u.Account, user.Account)
-                         && string.Equals(u.Pwd, Common.Encryption.MD5(user.Pwd, true))
                          && u.IsDelete == false
                     ).FirstOrDefault();
 
                 if (dbUser == null)
                 {
-                    ModelState.AddModelError("validatecode", "用户名或者密码错误.");
-                    return View();
+                    ModelState.AddModelError("ValidateCode", "用户名不存在.");
+                    return View(model);
+                }
+
+                if (!string.Equals(dbUser.Pwd, Common.Encryption.MD5(user.Pwd, true)))
+                {
+                    ModelState.AddModelError("ValidateCode", "密码错误.");
+                    return View(model);
                 }
 
                 if (dbUser.IsFrozen)
                 {
-                    ModelState.AddModelError("validatecode", "该账号已冻结.");
-                    return View();
+                    ModelState.AddModelError("ValidateCode", "该账号已冻结.");
+                    return View(model);
                 }
 
-                bool flag = false;
-                foreach (var role in dbUser.User_Role)
-                {
-                    if (role.Role.ID == 1)//后台管理员
-                    {
-                        flag = true;
-                    }
-                }
+                #region 不用再此处校验是否是后台管理员，在base里已经做了权限校验此处可以不用校验。没有权限登陆不了后台...
+                //bool flag = false;
+                //foreach (var role in dbUser.User_Role)
+                //{
+                //    if (role.Role.ID == 1)//后台管理员
+                //    {
+                //        flag = true;
+                //    }
+                //}
 
-                if (!flag)//没有后台管理员权限
-                {
-                    ModelState.AddModelError("validatecode", "当前账号没有管理员权限.");
-                    return View();
-                }
+                //if (!flag)//没有后台管理员权限
+                //{
+                //    ModelState.AddModelError("ValidateCode", "当前账号没有管理员权限.");
+                //    return View(model);
+                //}
+                #endregion
+               
 
                 #region 登陆成功后 需要用 全局缓存保存 当期登陆用户的信息（图像和账号  后台需要显示）
                 var loginAdminInfo =  new LoginAdminInfo()
                 {
+                    LogingUser = dbUser,
                     Userid = dbUser.ID,
                     Account = dbUser.Account,
                     HeadImg = dbUser.UserInfo.HeadPic
@@ -108,7 +118,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
                 #endregion
             }
 
-            return View();
+            return View(model);
         }
 
 
@@ -160,6 +170,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
 
                         var loginAdminInfo = new LoginAdminInfo()
                             {
+                                LogingUser = dbuser,
                                 Userid = dbuser.ID,
                                 Account = dbuser.Account,
                                 HeadImg = dbuser.UserInfo.HeadPic

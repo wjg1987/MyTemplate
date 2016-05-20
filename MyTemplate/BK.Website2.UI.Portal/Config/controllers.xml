@@ -1,16 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <objects xmlns="http://www.springframework.net">
 
+  <!--===============================admin/controller开始===================================-->
   <!--这里配置的是 要注入的类的属性 type第一个值是命名空间，第2个值是 类所在的程序集-->
-  <object type="My.Template.UI.Portal.Controllers.DefaultController, My.Template.UI.Portal" singleton="false" >
+  <object type="My.Template.UI.Portal.Areas.Admin.Controllers.UserController, My.Template.UI.Portal" singleton="false" >
     <!--name是要注入的属性的名称， ref 是objects节点下复杂类型的object的name的值-->
-    <property name="UserInfoServices" ref="UserInfoServices" />
-    
-    <!--name是要注入的属性的名称， value是值-->
-    <!--<property name="UserName" value="admin" />-->
+    <property name="UserServicesEntity" ref="UserServices" />
+    <property name="ActionServicesEntity" ref="ActionServices" />
+    <property name="User_ActionServicesEntity" ref="User_ActionServices" />
+    <property name="RoleServicesEntity" ref="RoleServices" />
+    <property name="UserRoleServicesEntity" ref="User_RoleServices" />
   </object>
 
-  <!--这里配置的是 要翻转的类-->
-  <object name="UserInfoServices" type="My.Template.BLL.UserInfoServices, My.Template.BLL" singleton="false" >
+
+  <object type="My.Template.UI.Portal.Areas.Admin.Controllers.RoleController, My.Template.UI.Portal" singleton="false" >
+    <!--name是要注入的属性的名称， ref 是objects节点下复杂类型的object的name的值-->
+    <property name="RoleServicesEntity" ref="RoleServices" />
+    <property name="ActionServicesEntity" ref="ActionServices" />
+    <property name="UserServicesEntity" ref="UserServices" />
+    <property name="RoleActionServicesEntity" ref="Role_ActionServices" />
   </object>
+
+
+  <object type="My.Template.UI.Portal.Areas.Admin.Controllers.ActionController, My.Template.UI.Portal" singleton="false" >
+    <!--name是要注入的属性的名称， ref 是objects节点下复杂类型的object的name的值-->
+    <property name="ActionServicesEntity" ref="ActionServices" />
+  </object>
+
+
+  <object type="My.Template.UI.Portal.Areas.Admin.Controllers.LuceneSearchController, My.Template.UI.Portal" singleton="false" >
+    <!--name是要注入的属性的名称， ref 是objects节点下复杂类型的object的name的值-->
+    <property name="ActionServicesEntity" ref="ActionServices" />
+  </object>
+  <!--===============================admin/controller结束==========================================-->
+
+
+
+
+
+  <!--===============================/UI/Portal/controller开始===================================-->
+    <!--这里配置的是 要注入的类的属性 type第一个值是命名空间，第2个值是 类所在的程序集-->
+    <object type="My.Template.UI.Portal.Controllers.DefaultController, My.Template.UI.Portal" singleton="false" >
+      <!--name是要注入的属性的名称， ref 是objects节点下复杂类型的object的name的值-->
+      <property name="UserServicesEntity" ref="UserServices" />
+    </object>
+  <!--===============================/UI/Portal/controller结束==========================================-->
+
+
+
+
 </objects>

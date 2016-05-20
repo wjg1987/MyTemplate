@@ -15,7 +15,7 @@ namespace My.Template.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Banner
+    public partial class Banner : IBaseEntity
     {
         public Banner()
         {

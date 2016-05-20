@@ -15,7 +15,7 @@ namespace My.Template.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class User_ShoppingCart
+    public partial class User_ShoppingCart : IBaseEntity
     {
         public int ID { get; set; }
         public int UserID { get; set; }

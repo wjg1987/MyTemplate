@@ -6,17 +6,20 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
+using My.Template.Model.LuceneSearch;
 using My.Template.UI.Portal.Models;
+using Spring.Web.Mvc;
 
 namespace My.Template.UI.Portal
 {
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : SpringMvcApplication //System.Web.HttpApplication 继承spring 开启属性注入
     {
         protected void Application_Start()
         {
-
+            //开启线程扫描是否更新lucene磁盘文件
+            SearchIndexManager.GetInstance().StartThread();
             //启动Log4Net 配置
             log4net.Config.XmlConfigurator.Configure();
             

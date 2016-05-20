@@ -38,6 +38,8 @@
     <EntitySet Name="SampleHouse" EntityType="DataModel.Store.SampleHouse" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="HouseArea" EntityType="DataModel.Store.HouseArea" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="SpHouse_HseArea" EntityType="DataModel.Store.SpHouse_HseArea" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="KeywordsRank" EntityType="DataModel.Store.KeywordsRank" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="KeywordsRecords" EntityType="DataModel.Store.KeywordsRecords" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="UserUser_Role" Association="DataModel.Store.UserUser_Role">
       <End Role="User" EntitySet="User" />
       <End Role="User_Role" EntitySet="User_Role" />
@@ -69,10 +71,6 @@
     <AssociationSet Name="NewsNewsType" Association="DataModel.Store.NewsNewsType">
       <End Role="News" EntitySet="News" />
       <End Role="NewsType" EntitySet="NewsType" />
-    </AssociationSet>
-    <AssociationSet Name="UserUserInfo" Association="DataModel.Store.UserUserInfo">
-      <End Role="User" EntitySet="User" />
-      <End Role="UserInfo" EntitySet="UserInfo" />
     </AssociationSet>
     <AssociationSet Name="BannerBannerType" Association="DataModel.Store.BannerBannerType">
       <End Role="Banner" EntitySet="Banner" />
@@ -126,6 +124,10 @@
       <End Role="HouseArea" EntitySet="HouseArea" />
       <End Role="SpHouse_HseArea" EntitySet="SpHouse_HseArea" />
     </AssociationSet>
+    <AssociationSet Name="UserUserInfo" Association="DataModel.Store.UserUserInfo">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserInfo" EntitySet="UserInfo" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="User">
     <Key>
@@ -166,7 +168,6 @@
     <Property Name="QQNum" Type="nvarchar" Nullable="true" MaxLength="16" />
     <Property Name="Email" Type="nvarchar" Nullable="true" MaxLength="64" />
     <Property Name="Sex" Type="bit" Nullable="true" />
-    <Property Name="UserID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
@@ -526,6 +527,21 @@
     <Property Name="SampleHouseID" Type="int" Nullable="false" />
     <Property Name="HouseAreaID" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="KeywordsRank">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Kkeywords" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Count" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="KeywordsRecords">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Keywords" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
   <Association Name="UserUser_Role">
     <End Role="User" Type="DataModel.Store.User" Multiplicity="1" />
     <End Role="User_Role" Type="DataModel.Store.User_Role" Multiplicity="*" />
@@ -619,18 +635,6 @@
       </Principal>
       <Dependent Role="News">
         <PropertyRef Name="NewsTypeID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="UserUserInfo">
-    <End Role="User" Type="DataModel.Store.User" Multiplicity="*" />
-    <End Role="UserInfo" Type="DataModel.Store.UserInfo" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="UserInfo">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="User">
-        <PropertyRef Name="UserInfo_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -790,6 +794,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="UserUserInfo">
+    <End Role="User" Type="DataModel.Store.User" Multiplicity="*" />
+    <End Role="UserInfo" Type="DataModel.Store.UserInfo" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="UserInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="UserInfo_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -839,10 +855,6 @@
           <AssociationSet Name="NewsNewsType" Association="DataModel.NewsNewsType">
             <End Role="News" EntitySet="News" />
             <End Role="NewsType" EntitySet="NewsType" />
-          </AssociationSet>
-          <AssociationSet Name="UserUserInfo" Association="DataModel.UserUserInfo">
-            <End Role="User" EntitySet="User" />
-            <End Role="UserInfo" EntitySet="UserInfo" />
           </AssociationSet>
           <EntitySet Name="Videos" EntityType="DataModel.Videos" />
           <EntitySet Name="QAInfos" EntityType="DataModel.QAInfos" />
@@ -915,6 +927,12 @@
             <End Role="HouseArea" EntitySet="HouseArea" />
             <End Role="SpHouse_HseArea" EntitySet="SpHouse_HseArea" />
           </AssociationSet>
+          <AssociationSet Name="UserUserInfo" Association="DataModel.UserUserInfo">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserInfo" EntitySet="UserInfo" />
+          </AssociationSet>
+          <EntitySet Name="KeywordsRank" EntityType="DataModel.KeywordsRank" />
+          <EntitySet Name="KeywordsRecords" EntityType="DataModel.KeywordsScore" />
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -933,7 +951,6 @@
           <Property Type="DateTime" Name="CreateTime" Nullable="false" />
           <NavigationProperty Name="User_Role" Relationship="DataModel.UserUser_Role" FromRole="User" ToRole="User_Role" />
           <NavigationProperty Name="User_Action" Relationship="DataModel.UserUser_Action" FromRole="User" ToRole="User_Action" />
-          <NavigationProperty Name="UserInfo" Relationship="DataModel.UserUserInfo" FromRole="User" ToRole="UserInfo" />
           <Property Type="Int32" Name="Balance" Nullable="false" >
             <Documentation>
               <LongDescription>单位 分</LongDescription>
@@ -949,6 +966,7 @@
           <Property Type="String" Name="BankName" Nullable="true" MaxLength="256" />
           <NavigationProperty Name="User_ShoppingCart" Relationship="DataModel.UserUser_ShoppingCart" FromRole="User" ToRole="User_ShoppingCart" />
           <NavigationProperty Name="RecAddress" Relationship="DataModel.UserRecAddress" FromRole="User" ToRole="RecAddress" />
+          <NavigationProperty Name="UserInfo" Relationship="DataModel.UserUserInfo" FromRole="User" ToRole="UserInfo" />
         </EntityType>
         <EntityType Name="UserInfo">
           <Key>
@@ -967,7 +985,6 @@
           <Property Type="String" Name="QQNum" Nullable="true" MaxLength="16" />
           <Property Type="String" Name="Email" MaxLength="64" Nullable="true" />
           <Property Type="Boolean" Name="Sex" Nullable="true" />
-          <Property Type="Int32" Name="UserID" Nullable="false" />
           <NavigationProperty Name="User" Relationship="DataModel.UserUserInfo" FromRole="UserInfo" ToRole="User" />
         </EntityType>
         <EntityType Name="Role">
@@ -1265,10 +1282,6 @@
               <PropertyRef Name="NewsTypeID" />
             </Dependent>
           </ReferentialConstraint>
-        </Association>
-        <Association Name="UserUserInfo">
-          <End Type="DataModel.User" Role="User" Multiplicity="1" />
-          <End Type="DataModel.UserInfo" Role="UserInfo" Multiplicity="1" />
         </Association>
         <EntityType Name="Videos">
           <Key>
@@ -1822,6 +1835,36 @@ DueMoney  = ActualPay + BalanceChange + CouponValue
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="UserUserInfo">
+          <End Type="DataModel.User" Role="User" Multiplicity="1" />
+          <End Type="DataModel.UserInfo" Role="UserInfo" Multiplicity="1" />
+        </Association>
+        <EntityType Name="KeywordsRank">
+          <Documentation>
+            <LongDescription>搜索热词统计</LongDescription>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" >
+            <Documentation>
+              <LongDescription>搜索热点</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="String" Name="Kkeywords" Nullable="false" />
+          <Property Type="Int32" Name="Count" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KeywordsScore">
+          <Documentation>
+            <LongDescription>搜索记录 记录每一次搜索词
+定时任务更新到 KeywordsRank中</LongDescription>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Keywords" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1866,7 +1909,6 @@ DueMoney  = ActualPay + BalanceChange + CouponValue
           <ScalarProperty Name="QQNum" ColumnName="QQNum" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Sex" ColumnName="Sex" />
-          <ScalarProperty Name="UserID" ColumnName="UserID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2255,6 +2297,23 @@ DueMoney  = ActualPay + BalanceChange + CouponValue
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="SampleHouseID" ColumnName="SampleHouseID" />
           <ScalarProperty Name="HouseAreaID" ColumnName="HouseAreaID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KeywordsRank">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.KeywordsRank)">
+        <MappingFragment StoreEntitySet="KeywordsRank">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Kkeywords" ColumnName="Kkeywords" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KeywordsRecords">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.KeywordsScore)">
+        <MappingFragment StoreEntitySet="KeywordsRecords">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Keywords" ColumnName="Keywords" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

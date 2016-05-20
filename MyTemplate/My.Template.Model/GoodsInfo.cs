@@ -15,7 +15,7 @@ namespace My.Template.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class GoodsInfo
+    public partial class GoodsInfo : IBaseEntity
     {
         public GoodsInfo()
         {

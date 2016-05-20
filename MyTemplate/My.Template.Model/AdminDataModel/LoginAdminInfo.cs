@@ -7,6 +7,7 @@ namespace My.Template.Model.AdminDataModel
 {
     public class LoginAdminInfo
     {
+        public User LogingUser { get; set; }
         public int Userid { get; set; }
         public string Account { get; set; }
         public string HeadImg { get; set; }

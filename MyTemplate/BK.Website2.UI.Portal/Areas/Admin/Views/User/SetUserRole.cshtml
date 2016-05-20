@@ -1,131 +1,290 @@
 ﻿@using My.Template.Model
-@model My.Template.Model.User
-
+@model List<My.Template.Model.Role>
 @{
     Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
 }
 
-
 @section Head{
-        <!-- PAGE LEVEL STYLES -->
-     <link href="/areas/admin/assets/css/jquery-ui.css" rel="stylesheet" />
+     <!-- PAGE LEVEL STYLES -->
+    <link href="/areas/admin/assets/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet"/>
+    <link href="/Areas/Admin/css/gloable.css" rel="stylesheet" />
+    <!-- END PAGE LEVEL  STYLES -->
 }
-
-
        <!--PAGE CONTENT -->
         <div id="content">
 
             <div class="inner">
-                 <div class="row">
+                <div class="row">
                     <div class="col-lg-12">
-                        <h3> 设置用户角色 </h3>
+                        <h3> 用户角色 </h3>
                     </div>
                 </div>
                 <hr />
                 <div class="row">
-                    <div class="col-lg-12">
-                        <div class="box dark">
-                            <header>
-                                <div class="icons"><i class="icon-edit"></i>
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            用户角色列表
+                        </div>
+                        <div class="panel-heading">
+                            @{
+                                var user = ViewBag.user as User;
+                                List<My.Template.Model.Role> roleactions = ViewBag.userRoles as List<My.Template.Model.Role>;
+                            }
+                            给用户[ <span style="color: red;">@user.Account</span>]<img height="50px;" src="@user.UserInfo.HeadPic" />
+                            设置角色 <span style="color:red;">此处显示了用户已经有的角色。</span> <a href="@ViewBag.returnUrl" class="btn  btn-default   btn-sm  btn-rect">返回</a>
+                        </div>
+               
+
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                                <!--记录条数-->
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="dataTables_length" id="dataTables-example_length"><label>
+                                                <select id="pageselect" name="dataTables-example_length" aria-controls="dataTables-example" class="form-control input-sm">
+                                                    @{
+                                                        string str = "selected=true";
+                                                        }
+                                                    <option @if(ViewBag.pageSize==10){@str} value="10">10</option>
+                                                    <option @if(ViewBag.pageSize==20){@str}  value="20">20</option>
+                                                    <option @if(ViewBag.pageSize==30){@str} value="30">30</option>
+                                                </select> / 页
+                                            </label>
+                                        </div>
+                                     
+                                    </div>
+                                <div class="col-sm-6">
+                                    <div id="dataTables-example_filter" class="dataTables_filter"><label>搜索:<input type="search" id="searchBtn" value="@ViewBag.searchWords" class="form-control input-sm" aria-controls="dataTables-example"></label>
+                                    </div>
                                 </div>
-                                <h5>设置信息</h5>
-                            </header>
-                            <div id="div-1" class="accordion-body collapse in body">
-                                @using (Html.BeginForm("SetUserRole", "User", FormMethod.Post, new { @class = "form-horizontal", id = "AddForm" }))
-                                {
-                                    <input type="hidden" name="pageNum" value="@ViewBag.pageNum" />
-                                    @Html.ValidationSummary(true)
-                                    @Html.HiddenFor(u=>u.ID)
-                                    <div class="form-group">
-                                        @Html.LabelFor(u => u.Account, "账号", new {@class = "control-label col-lg-4",@readonly="readonly"})
 
-                                        <div class="col-lg-8">
-                                            @Html.ValidationMessageFor(u => u.Account)
-                                            @Html.TextBoxFor(u => u.Account, new {placeholder = "账号", @class = "form-control"})
+
+                                      <!--分页开始-->
+                              
+                                        <div class="col-sm-6">
+                                            <div class="pagination">
+                                                @Html.Raw(ViewBag.pageStr)
+                                            </div>
                                         </div>
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <label for="RoleIDs" class="control-label col-lg-4">角色列表</label>
-                                        <div class="col-lg-8">
-                                            @{
-                                                var roleInts = ViewBag.rolInts as List<int>;
-                                            }
-                                            @foreach (var item in  (ViewBag.RoleIDs as List<Role>))
-                                            {
-
-
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input @if(roleInts.Contains(item.ID)){@("checked=checked")} class="uniform" data-rid="@item.ID" data-uid="@Model.ID" name="roleids" type="checkbox" value="@item.ID">@item.RCNName
-                                                    </label>
-                                                </div>
-                                            }
-                                        </div>
-                                    </div>
-
                                   
-                             
-                                    <div class="form-group">
-                                        <div class="col-lg-8 divsure">
+                                     <!--分页结束-->
+                                       </div>
 
-                                         <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl"/>
-                                         <a href="@ViewBag.returnUrl" class="btn  btn-default btn-rect">取消</a>
-                                        </div>
-                                         </div>
+                                  <!--列表数据开始-->
+                                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <thead>
+                                <tr>
+                                     <th>ID</th>
+                                    <th>角色中文</th>
+                                    <th>角色英文</th>
+                                    <th>备注</th> 
+                                    <th>是否显示</th>
+                                    <th>[@(user.Account)]是否有该角色</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @{
+                                    for (int i = 0; i < Model.Count(); i++)
+                                    {
+                                        <tr >
+                                             <td>@Model[i].ID</td>
+                                            <td>@Model[i].RCNName</td>
+                                            <td>@Model[i].REnName</td>
+                                            <td>@Model[i].RRemark</td>
+                                            <td >@if (Model[i].IsFrozen)
+                                                {
+                                                    <span style="color: green; font-weight: bold;">√</span>
+                                                }
+                                                else
+                                                {
+                                                    <span style="color: red; font-weight: bold;">×</span>
+                                                }</td>
+                                             <td class="issetactions">@if (roleactions.Contains(Model[i]))
+                                                {
+                                                    <span style="color: green; font-weight: bold;">√</span>
+                                                }
+                                                else
+                                                {
+                                                    <span style="color: red; font-weight: bold;">×</span>
+                                                }</td>
+                                            <td>
+                                                <input type="button" value="设置角色" data-setroleid="@Model[i].ID" class="btn   btn-sm btn-flat btn-success btn-rect btn_setuseraction" data-toggle="modal" data-target="#buttonedModal"/>
+                                                <input type="button" value="移除角色" data-mglid="@Model[i].ID" class="btn   btn-sm btn-flat btn-danger btn-rect btn-del btn-remove" data-toggle="modal" />
+                                                 <a href="@Url.Action("SetRoleAction", "Role", new {roleID = Model[i].ID,pageNum=ViewBag.pageNum})" class="btn   btn-sm btn-flat btn-success btn-rect" target="_blank">查看该角色权限</a>
+                                            </td>
+                                        </tr>
+
+                                    }
                                 }
-                             
+                                </tbody>
+                            </table>
+                                      <!--列表数据结束-->
+
+                                   <!--分页开始-->
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="pagination">
+                                                @Html.Raw(ViewBag.pageStr)
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <!--分页结束-->
+
+                                    </div>
                             </div>
+                           
                         </div>
                     </div>
-
                 </div>
             </div>
+                <!--信息提示区-->
+                <div class="row">
+                      <div class="col-lg-12">
+                        <div class="modal fade" id="buttonedModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="H1">提示消息</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                           确认设置吗?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" id="btn-cancelsetuseraction" class="btn btn-default" data-dismiss="modal">取消</button>
+                                            <button type="button" id="btn-confirmdel" class="btn btn-primary" data-dismiss="modal">确认</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                      <div class="col-lg-12" id="hintdiv">
+                        <div class="modal fade" id="ayncerror" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" >错误消息</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                         发送异步请求失败.请重试!
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button"  class="btn btn-default" data-dismiss="modal">关闭</button>         
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
             </div>
+
+        </div>
+       <!--END PAGE CONTENT -->
+
+
+
+   
+
 @section Foot{
     <!-- PAGE LEVEL SCRIPTS -->
-    <script src='@Url.Content("~/Scripts/jquery/jquery.validate.js")'></script>
-    <script src="/Scripts/jquery/jquery.validate.unobtrusive.min.js"></script>
-    <!-- END PAGE LEVEL SCRIPTS -->
-    <script type="text/javascript">
-        $(function() {
-            $('.uniform').click(function() {
-                var ischecked = $(this).attr('checked');
-                var rid = $(this).data('rid');
-                var uid = $(this).data('uid');
-                var setOrDelete;
-                if (ischecked) {
-                    setOrDelete = false;
-                } else {
-                    setOrDelete = true;
-                }
-                var issuccess = false;
+    
+    
+   
+    <script>
+        $(document).ready(function () {
+
+
+            /*设置相关 前台代码和框架弹出提示框结合*/
+            var setroleid = 0;
+            var clickel;
+            $('.btn_setuseraction').click(function () {
+                setroleid = $(this).data('setroleid');
+                clickel = $(this);
+            })
+
+            $('#btn-cancelsetuseraction').click(function () {
+                setroleid = 0;
+                clickel = null;
+            })
+
+            $('#btn-confirmdel').click(function () {
                 $.ajax({
-                    url: '/admin/user/setuserrole',
-                    data: { roleID: rid, userID: uid, setOrDelete: setOrDelete },
-                    dataType: 'text',
+                    url: '@Url.Action("SetUserRoleAjax", "User")',
+                    data: { roleid: setroleid, userid: '@user.ID' },
                     type: 'post',
+                    dataType: 'json',
                     success: function (data) {
-                        if (data == 1) {
-                            issuccess = true;
-                            if (setOrDelete) {
-                                $(this).attr('checked', 'checked');
-                            } else {
-                                $(this).attr('checked', '');
-                            }
-                            
-                        } 
+                        var jsondata = JSON.parse(data);
+                        if (jsondata.res == 1) {
+                            var $tr = clickel.parent().parent();
+                            $tr.find('td.issetactions').html('<span style="color: green; font-weight: bold;">√</span>');
+                        } else {
+                            alert(jsondata.msg);
+                        }
                     },
                     error: function () {
-
+                        alert('异步错误.');
                     }
                 })
-
-                if (!issuccess) {
-                    return;
-                }
             })
-        })
+
+
+            $('.btn-remove').click(function () {
+                var $el = $(this);
+                canceluseraction($el);
+            })
+
+
+            function canceluseraction($el) {
+                var roleid = $el.data('mglid');
+                $.ajax({
+                    url: '@Url.Action("CancelUserRoleAjax", "User")',
+                    data: { roleid: roleid, userid: '@user.ID' },
+                    type: 'post',
+                    dataType: 'json',
+                    success: function (data) {
+                        var jsondata = JSON.parse(data);
+                        if (jsondata.res == 1) {
+                            var $tr = $el.parent().parent();
+                            $tr.find('td.issetactions').html('<span style="color: red; font-weight: bold;">×</span>');
+                        } else {
+                            alert(jsondata.msg);
+                        }
+                    },
+                    error: function () {
+                        alert('异步错误.');
+                    }
+                })
+            }
+
+
+            //------------搜索事件
+            $('body').keydown(function () {
+                var searchwords = $('#searchBtn').val();
+                if (event.keyCode == 13)//按Enter键的键值为13  
+                    reFresh(1, '@ViewBag.pageSize', searchwords);
+            })
+
+            $('#pageselect').change(function () {
+                //
+                var pageSize = $(this).val();
+                var searchwords = $('#searchBtn').val();
+                reFresh(1, pageSize, searchwords);
+            });
+        });
+
+
+        //刷新
+        function reFresh(pageIndex, pageSize, searchwords) {
+            window.location.href = "/admin/User/SetUserRole?pageIndex=" + pageIndex + "&pageSize=" + pageSize + "&searchWords=" + encodeURIComponent(searchwords) + "&pageNum=@ViewBag.pageNum&userid=@user.ID";
+        }
+
     </script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+
+    
 }

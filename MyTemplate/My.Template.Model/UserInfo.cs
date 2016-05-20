@@ -15,7 +15,7 @@ namespace My.Template.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class UserInfo
+    public partial class UserInfo : IBaseEntity
     {
         public UserInfo()
         {
@@ -35,7 +35,6 @@ namespace My.Template.Model
         public string QQNum { get; set; }
         public string Email { get; set; }
         public Nullable<bool> Sex { get; set; }
-        public int UserID { get; set; }
     
     	[JsonIgnore]
         public virtual User User { get; set; }

@@ -15,7 +15,7 @@ namespace My.Template.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Action
+    public partial class Action : IBaseEntity
     {
         public Action()
         {

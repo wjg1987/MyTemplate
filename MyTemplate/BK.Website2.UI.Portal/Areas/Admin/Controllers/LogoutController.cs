@@ -6,7 +6,7 @@ using System.Web.Mvc;
  
 namespace My.Template.UI.Portal.Areas.Admin.Controllers
 {
-    public class LogoutController : BaseController
+    public class LogoutController : Controller
     {
         public ActionResult Index()
         {

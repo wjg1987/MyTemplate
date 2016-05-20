@@ -57,5 +57,13 @@ namespace My.Template.DALFactory
         //{
         //    return DbContextFactory.GetCurDbContext().SaveChanges();
         //}
+        public int ExecuteSql(string sql, params System.Data.SqlClient.SqlParameter[] pars)
+        {
+            return Db.Database.ExecuteSqlCommand(sql, pars);
+        }
+        public List<T> ExecuteSelectQuery<T>(string sql, params System.Data.SqlClient.SqlParameter[] pars)
+        {
+            return Db.Database.SqlQuery<T>(sql, pars).ToList();
+        }
     }
 }

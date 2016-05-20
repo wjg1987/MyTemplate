@@ -8,7 +8,7 @@ using My.Template.Model;
 
 namespace My.Template.EFDAL
 {
-    public class BaseDal<T> where T:class, new()
+    public class BaseDal<T> where T:IBaseEntity, new()
     {
         //DbContextFactory.GetCurDbContext() 方法 实现线程内 dbcontext 唯一。
         protected DbContext db = DbContextFactory.GetCurDbContext();
@@ -22,7 +22,7 @@ namespace My.Template.EFDAL
         /// <returns></returns>
         public IQueryable<T> LoadEntitys(Func<T, bool> whereLambdaFun)
         {
-            return db.Set<T>().Where(whereLambdaFun).AsQueryable().AsNoTracking();
+            return db.Set<T>().AsNoTracking().Where(whereLambdaFun).AsQueryable();
         }
 
 
@@ -33,7 +33,7 @@ namespace My.Template.EFDAL
         /// <returns></returns>
         public IQueryable<T> LoadEntitysAsNotracking(Func<T, bool> whereLambdaFun)
         {
-            return db.Set<T>().Where(whereLambdaFun).AsQueryable().AsNoTracking();
+            return db.Set<T>().AsNoTracking().Where(whereLambdaFun).AsQueryable();
         }
 
         /// <summary>
@@ -54,19 +54,19 @@ namespace My.Template.EFDAL
 
             if (isAsc)
             {
-                return db.Set<T>().Where(whereLambdaFunc)
+                return db.Set<T>().AsNoTracking().Where(whereLambdaFunc)
                   .OrderBy<T, TOrerByKey>(orderByFunc)
                   .Skip((pageIndex - 1) * pageSize)
                   .Take(pageSize)
-                  .AsQueryable().AsNoTracking();
+                  .AsQueryable();
             }
             else
             {
-                return db.Set<T>().Where(whereLambdaFunc)
+                return db.Set<T>().AsNoTracking().Where(whereLambdaFunc)
                   .OrderByDescending<T, TOrerByKey>(orderByFunc)
                   .Skip((pageIndex - 1) * pageSize)
                   .Take(pageSize)
-                  .AsQueryable().AsNoTracking();
+                  .AsQueryable();
             }
 
         }
@@ -92,38 +92,38 @@ namespace My.Template.EFDAL
 
             if (isAsc && isAsc2)//都是升序
             {
-                return db.Set<T>().Where(whereLambdaFunc)
+                return db.Set<T>().AsNoTracking().Where(whereLambdaFunc)
                   .OrderBy<T, TOrerByKey>(orderByFunc)
                   .ThenBy<T, TOrerByKey2>(orderByFunc2)
                   .Skip((pageIndex - 1) * pageSize)
                   .Take(pageSize)
-                  .AsQueryable().AsNoTracking();
+                  .AsQueryable();
             }
             else if (!isAsc && !isAsc2)//都是降序
             {
-                return db.Set<T>().Where(whereLambdaFunc)
+                return db.Set<T>().AsNoTracking().Where(whereLambdaFunc)
                   .OrderByDescending<T, TOrerByKey>(orderByFunc)
                   .ThenByDescending<T, TOrerByKey2>(orderByFunc2)
                   .Skip((pageIndex - 1) * pageSize)
                   .Take(pageSize)
-                  .AsQueryable().AsNoTracking();
+                  .AsQueryable();
             }else if (isAsc && !isAsc2)//第一个升序 第2个降序
             {
-                return db.Set<T>().Where(whereLambdaFunc)
+                return db.Set<T>().AsNoTracking().Where(whereLambdaFunc)
                 .OrderBy<T, TOrerByKey>(orderByFunc)
                 .ThenByDescending<T, TOrerByKey2>(orderByFunc2)
                 .Skip((pageIndex - 1) * pageSize)
                 .Take(pageSize)
-                .AsQueryable().AsNoTracking();
+                .AsQueryable();
             }
             else//第1个降序 第2个升序
             {
-                return db.Set<T>().Where(whereLambdaFunc)
+                return db.Set<T>().AsNoTracking().Where(whereLambdaFunc)
                 .OrderByDescending<T, TOrerByKey>(orderByFunc)
                 .ThenBy<T, TOrerByKey2>(orderByFunc2)
                 .Skip((pageIndex - 1) * pageSize)
                 .Take(pageSize)
-                .AsQueryable().AsNoTracking();
+                .AsQueryable();
             }
         }
 
@@ -163,8 +163,9 @@ namespace My.Template.EFDAL
 
         public bool Update(T entity)
         {
-         
-           db.Entry<T>(entity).State = EntityState.Modified;
+
+
+            db.Entry<T>(entity).State = EntityState.Modified;
           
             //return db.SaveChanges() > 0;//dbsession中 调用了 savechanges 方法。 将数据库的保存提高到了 BLL层
             return true;

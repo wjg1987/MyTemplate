@@ -47,11 +47,23 @@
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Lucene.Net">
+      <HintPath>..\packages\Lucene.Net\Lucene.Net.dll</HintPath>
+    </Reference>
     <Reference Include="Memcached.ClientLibrary">
       <HintPath>..\packages\memcache\Memcached.ClientLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\BK.Website2.UI.Portal\bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PanGu">
+      <HintPath>..\packages\Lucene.Net\PanGu.dll</HintPath>
+    </Reference>
+    <Reference Include="PanGu.HighLight">
+      <HintPath>..\packages\Lucene.Net\PanGu.HighLight.dll</HintPath>
+    </Reference>
+    <Reference Include="PanGu.Lucene.Analyzer">
+      <HintPath>..\packages\Lucene.Net\PanGu.Lucene.Analyzer.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Common, Version=4.0.56.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\BK.Website2.UI.Portal\packages\ServiceStack.Common.4.0.56\lib\net40\ServiceStack.Common.dll</HintPath>

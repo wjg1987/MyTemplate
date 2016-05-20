@@ -15,7 +15,7 @@ namespace My.Template.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Role
+    public partial class Role : IBaseEntity
     {
         public Role()
         {

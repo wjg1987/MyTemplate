@@ -15,7 +15,7 @@ namespace My.Template.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class QAInfos
+    public partial class QAInfos : IBaseEntity
     {
         public int ID { get; set; }
         public string Question { get; set; }

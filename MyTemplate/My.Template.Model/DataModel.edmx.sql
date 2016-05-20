@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 05/11/2016 16:31:18
+-- Date Created: 05/20/2016 17:30:44
 -- Generated from EDMX file: F:\task\template\MyTemplate\MyTemplate\My.Template.Model\DataModel.edmx
 -- --------------------------------------------------
 
@@ -41,11 +41,47 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_NewsNewsType]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[News] DROP CONSTRAINT [FK_NewsNewsType];
 GO
-IF OBJECT_ID(N'[dbo].[FK_UserUserInfo]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_UserUserInfo];
-GO
 IF OBJECT_ID(N'[dbo].[FK_BannerBannerType]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Banner] DROP CONSTRAINT [FK_BannerBannerType];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserUser_ShoppingCart]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[User_ShoppingCart] DROP CONSTRAINT [FK_UserUser_ShoppingCart];
+GO
+IF OBJECT_ID(N'[dbo].[FK_GoodsInfoGoodsProperty]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GoodsProperty] DROP CONSTRAINT [FK_GoodsInfoGoodsProperty];
+GO
+IF OBJECT_ID(N'[dbo].[FK_GoodsPropertyGoodsPropertyDetail]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GoodsPropertyDetail] DROP CONSTRAINT [FK_GoodsPropertyGoodsPropertyDetail];
+GO
+IF OBJECT_ID(N'[dbo].[FK_GoodsInfoGoodsType]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GoodsInfo] DROP CONSTRAINT [FK_GoodsInfoGoodsType];
+GO
+IF OBJECT_ID(N'[dbo].[FK_OrderOrderStatus]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Order] DROP CONSTRAINT [FK_OrderOrderStatus];
+GO
+IF OBJECT_ID(N'[dbo].[FK_OrderOrderGoods]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[OrderGoods] DROP CONSTRAINT [FK_OrderOrderGoods];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserRecAddress]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RecAddress] DROP CONSTRAINT [FK_UserRecAddress];
+GO
+IF OBJECT_ID(N'[dbo].[FK_OrderRecAddress]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Order] DROP CONSTRAINT [FK_OrderRecAddress];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CityInfoAreaInfo]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AreaInfo] DROP CONSTRAINT [FK_CityInfoAreaInfo];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AreaInfoCommunity]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Community] DROP CONSTRAINT [FK_AreaInfoCommunity];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SampleHouseSpHouse_HseArea]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SpHouse_HseArea] DROP CONSTRAINT [FK_SampleHouseSpHouse_HseArea];
+GO
+IF OBJECT_ID(N'[dbo].[FK_HouseAreaSpHouse_HseArea]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SpHouse_HseArea] DROP CONSTRAINT [FK_HouseAreaSpHouse_HseArea];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserUserInfo]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_UserUserInfo];
 GO
 
 -- --------------------------------------------------
@@ -103,6 +139,51 @@ GO
 IF OBJECT_ID(N'[dbo].[Notice]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Notice];
 GO
+IF OBJECT_ID(N'[dbo].[User_ShoppingCart]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[User_ShoppingCart];
+GO
+IF OBJECT_ID(N'[dbo].[GoodsInfo]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GoodsInfo];
+GO
+IF OBJECT_ID(N'[dbo].[GoodsProperty]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GoodsProperty];
+GO
+IF OBJECT_ID(N'[dbo].[GoodsPropertyDetail]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GoodsPropertyDetail];
+GO
+IF OBJECT_ID(N'[dbo].[GoodsType]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GoodsType];
+GO
+IF OBJECT_ID(N'[dbo].[Order]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Order];
+GO
+IF OBJECT_ID(N'[dbo].[OrderStatus]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[OrderStatus];
+GO
+IF OBJECT_ID(N'[dbo].[OrderGoods]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[OrderGoods];
+GO
+IF OBJECT_ID(N'[dbo].[RecAddress]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[RecAddress];
+GO
+IF OBJECT_ID(N'[dbo].[CityInfo]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CityInfo];
+GO
+IF OBJECT_ID(N'[dbo].[Community]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Community];
+GO
+IF OBJECT_ID(N'[dbo].[AreaInfo]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[AreaInfo];
+GO
+IF OBJECT_ID(N'[dbo].[SampleHouse]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SampleHouse];
+GO
+IF OBJECT_ID(N'[dbo].[HouseArea]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[HouseArea];
+GO
+IF OBJECT_ID(N'[dbo].[SpHouse_HseArea]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SpHouse_HseArea];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -144,8 +225,7 @@ CREATE TABLE [dbo].[UserInfo] (
     [Address] nvarchar(256)  NULL,
     [QQNum] nvarchar(16)  NULL,
     [Email] nvarchar(64)  NULL,
-    [Sex] bit  NULL,
-    [UserID] int  NOT NULL
+    [Sex] bit  NULL
 );
 GO
 
@@ -507,6 +587,21 @@ CREATE TABLE [dbo].[SpHouse_HseArea] (
 );
 GO
 
+-- Creating table 'KeywordsRank'
+CREATE TABLE [dbo].[KeywordsRank] (
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [Kkeywords] nvarchar(max)  NOT NULL,
+    [Count] int  NOT NULL
+);
+GO
+
+-- Creating table 'KeywordsRecords'
+CREATE TABLE [dbo].[KeywordsRecords] (
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [Keywords] nvarchar(max)  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -703,6 +798,18 @@ ADD CONSTRAINT [PK_SpHouse_HseArea]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
+-- Creating primary key on [ID] in table 'KeywordsRank'
+ALTER TABLE [dbo].[KeywordsRank]
+ADD CONSTRAINT [PK_KeywordsRank]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'KeywordsRecords'
+ALTER TABLE [dbo].[KeywordsRecords]
+ADD CONSTRAINT [PK_KeywordsRecords]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
@@ -817,20 +924,6 @@ ADD CONSTRAINT [FK_NewsNewsType]
 CREATE INDEX [IX_FK_NewsNewsType]
 ON [dbo].[News]
     ([NewsTypeID]);
-GO
-
--- Creating foreign key on [UserInfo_ID] in table 'User'
-ALTER TABLE [dbo].[User]
-ADD CONSTRAINT [FK_UserUserInfo]
-    FOREIGN KEY ([UserInfo_ID])
-    REFERENCES [dbo].[UserInfo]
-        ([ID])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_UserUserInfo'
-CREATE INDEX [IX_FK_UserUserInfo]
-ON [dbo].[User]
-    ([UserInfo_ID]);
 GO
 
 -- Creating foreign key on [BannerTypeID] in table 'Banner'
@@ -1013,6 +1106,20 @@ ADD CONSTRAINT [FK_HouseAreaSpHouse_HseArea]
 CREATE INDEX [IX_FK_HouseAreaSpHouse_HseArea]
 ON [dbo].[SpHouse_HseArea]
     ([HouseAreaID]);
+GO
+
+-- Creating foreign key on [UserInfo_ID] in table 'User'
+ALTER TABLE [dbo].[User]
+ADD CONSTRAINT [FK_UserUserInfo]
+    FOREIGN KEY ([UserInfo_ID])
+    REFERENCES [dbo].[UserInfo]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_UserUserInfo'
+CREATE INDEX [IX_FK_UserUserInfo]
+ON [dbo].[User]
+    ([UserInfo_ID]);
 GO
 
 -- --------------------------------------------------

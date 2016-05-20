@@ -15,7 +15,7 @@ namespace My.Template.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Role_Action
+    public partial class Role_Action : IBaseEntity
     {
         public int ID { get; set; }
         public int RoleID { get; set; }
