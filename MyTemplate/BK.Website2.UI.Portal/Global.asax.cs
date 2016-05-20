@@ -7,7 +7,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 using My.Template.Model.LuceneSearch;
-using My.Template.UI.Portal.Models;
+using My.Template.UI.Portal.CommClass;
 using Spring.Web.Mvc;
 
 namespace My.Template.UI.Portal
@@ -39,11 +39,11 @@ namespace My.Template.UI.Portal
                 {
                     while (true)
                     {
-                        if (MyErrorAttribute.ErrorQueue.Count > 0)
+                        if (Common.Common.redisClient.GetListCount("errormsg") > 0)
                         {
                             //出队1个错误
-                            Exception ex = MyErrorAttribute.ErrorQueue.Dequeue();
-                            Common.LogHelper.logWriter.Error(ex.ToString());
+                            //Exception ex = MyErrorAttribute.ErrorQueue.Dequeue();
+                            Common.LogHelper.logWriter.Error(Common.Common.redisClient.DequeueItemFromList("errormsg"));
                         }
                         else
                         {

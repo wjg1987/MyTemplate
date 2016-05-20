@@ -1,6 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
-using My.Template.UI.Portal.Models;
+using My.Template.UI.Portal.CommClass;
+
 
 namespace My.Template.UI.Portal
 {

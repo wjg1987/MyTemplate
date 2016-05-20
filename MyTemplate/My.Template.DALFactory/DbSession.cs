@@ -59,11 +59,11 @@ namespace My.Template.DALFactory
         //}
         public int ExecuteSql(string sql, params System.Data.SqlClient.SqlParameter[] pars)
         {
-            return Db.Database.ExecuteSqlCommand(sql, pars);
+            return DbContextFactory.GetCurDbContext().Database.ExecuteSqlCommand(sql, pars);
         }
         public List<T> ExecuteSelectQuery<T>(string sql, params System.Data.SqlClient.SqlParameter[] pars)
         {
-            return Db.Database.SqlQuery<T>(sql, pars).ToList();
+            return DbContextFactory.GetCurDbContext().Database.SqlQuery<T>(sql, pars).ToList();
         }
     }
 }
