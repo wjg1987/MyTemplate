@@ -120,6 +120,24 @@ namespace My.Template.BLL
 
     }
 	
+	 public partial class KeywordsRankServices:BaseServices<My.Template.Model.KeywordsRank>,IKeywordsRankServices
+    {
+        public override void SetCurrentDal()
+        {
+            this.CurrentDal = dbSession.KeywordsRankDal;
+        }
+
+    }
+	
+	 public partial class KeywordsRecordsServices:BaseServices<My.Template.Model.KeywordsRecords>,IKeywordsRecordsServices
+    {
+        public override void SetCurrentDal()
+        {
+            this.CurrentDal = dbSession.KeywordsRecordsDal;
+        }
+
+    }
+	
 	 public partial class NewsServices:BaseServices<My.Template.Model.News>,INewsServices
     {
         public override void SetCurrentDal()

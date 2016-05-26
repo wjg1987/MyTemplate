@@ -37,7 +37,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
                             )
                             &&
                             (
-                                   b.RCNName.Contains(searchWords) || b.REnName.Contains(searchWords)
+                                   b.RCNName.Contains(searchWords) || b.RCNName.Contains(searchWords.ToLower()) || b.REnName.Contains(searchWords)
                             );
                 }
                 else
@@ -174,7 +174,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
                 {
                     return
                             (
-                                b.IsDelete == false && b.IsFrozen == false
+                                b.IsDelete == false
                             )
                             &&
                             (
@@ -183,7 +183,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
                 }
                 else
                 {
-                    return b.IsDelete == false && b.IsFrozen == false;
+                    return b.IsDelete == false;
                 }
             };
 

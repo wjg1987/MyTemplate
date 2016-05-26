@@ -32,9 +32,7 @@ namespace My.Template.Common
 
         public static string ConnStr = ConfigurationManager.AppSettings["Connstr"];
 
-        public static string Redisservicesipaddress = ConfigurationManager.AppSettings["redisservicesipaddress"];
-
-        public static RedisClient redisClient = new RedisClient(Redisservicesipaddress);
+       
 
     }
 

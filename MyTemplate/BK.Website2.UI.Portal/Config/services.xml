@@ -18,4 +18,8 @@
 
   <object name="User_RoleServices" type="My.Template.BLL.User_RoleServices, My.Template.BLL" singleton="false" >
   </object>
+
+
+  <object name="SiteInfoServices" type="My.Template.BLL.SiteInfoServices, My.Template.BLL" singleton="false" >
+  </object>
 </objects>

@@ -71,6 +71,16 @@ namespace My.Template.IDAL
        
     }   
 	
+	public partial interface IKeywordsRankDal : IBaseDal<My.Template.Model.KeywordsRank>
+    {
+       
+    }   
+	
+	public partial interface IKeywordsRecordsDal : IBaseDal<My.Template.Model.KeywordsRecords>
+    {
+       
+    }   
+	
 	public partial interface INewsDal : IBaseDal<My.Template.Model.News>
     {
        

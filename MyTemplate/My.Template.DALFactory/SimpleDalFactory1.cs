@@ -73,6 +73,16 @@ namespace My.Template.DALFactory
             return new HouseAreaDal();
         }
 	
+		public static IKeywordsRankDal GetKeywordsRankDal()
+        {
+            return new KeywordsRankDal();
+        }
+	
+		public static IKeywordsRecordsDal GetKeywordsRecordsDal()
+        {
+            return new KeywordsRecordsDal();
+        }
+	
 		public static INewsDal GetNewsDal()
         {
             return new NewsDal();

@@ -39,7 +39,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
                             )
                             &&
                             (
-                                   b.Account.Contains(searchWords)
+                                   b.Account.Contains(searchWords) || b.Account.Contains(searchWords.ToLower())
                             );
                 }
                 else

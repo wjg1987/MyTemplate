@@ -18,10 +18,18 @@ namespace My.Template.UI.Portal
     {
         protected void Application_Start()
         {
-            //开启线程扫描是否更新lucene磁盘文件
-            SearchIndexManager.GetInstance().StartThread();
+            #region 开启lucene
+            //开启线程扫描是否更新lucene磁盘文件 也可以用redis队列 写一个服务程序 部署到另外的服务器 这样减轻web服务器的压力
+            SearchManager.GetInstance().StartThread();
+
+            #endregion
+
+
+            #region Log4Net
             //启动Log4Net 配置
             log4net.Config.XmlConfigurator.Configure();
+            #endregion
+         
             
             AreaRegistration.RegisterAllAreas();
 
@@ -33,17 +41,17 @@ namespace My.Template.UI.Portal
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
 
-            #region 开启线程处理错误日志
+            #region 开启线程处理错误日志 此处还可以优化，可以写一个小服务程序 开启一个线程 读取redis错误写日志 这样的话开启线程这个就和web服务器分开了，可以减轻web服务器压力
 
             ThreadPool.QueueUserWorkItem((a) =>
                 {
                     while (true)
                     {
-                        if (Common.Common.redisClient.GetListCount("errormsg") > 0)
+                        if (MyErrorAttribute.redisClient.GetListCount("errormsg") > 0)
                         {
                             //出队1个错误
                             //Exception ex = MyErrorAttribute.ErrorQueue.Dequeue();
-                            Common.LogHelper.logWriter.Error(Common.Common.redisClient.DequeueItemFromList("errormsg"));
+                            Common.LogHelper.logWriter.Error(MyErrorAttribute.redisClient.DequeueItemFromList("errormsg"));
                         }
                         else
                         {

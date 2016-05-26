@@ -30,6 +30,11 @@
                             @{
                                 var role = ViewBag.role as Role;
                                List<My.Template.Model.Action> roleactions = ViewBag.roleActions as List<My.Template.Model.Action>;
+                               List<int> ids = new List<int>();
+                               foreach (var item in roleactions)
+                                {
+                            ids.Add(item.ID);
+                                }
                             }
                             给角色 [ <span style="color: red;">@role.RCNName</span>] 设置权限
                             <a onclick="javascript:window.close()" class="btn   btn-sm btn-flat btn-success btn-rect">关闭</a>
@@ -107,7 +112,7 @@
                                                 {
                                                     <span style="color: red; font-weight: bold;">×</span>
                                                 }</td>
-                                             <td class="issetactions">@if (roleactions.Contains(Model[i]))
+                                             <td class="issetactions">@if(ids.Contains(Model[i].ID))
                                                 {
                                                     <span style="color: green; font-weight: bold;">√</span>
                                                 }

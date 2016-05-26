@@ -73,6 +73,16 @@ namespace My.Template.EFDAL
 
     }
 	
+	public partial class KeywordsRankDal:BaseDal<My.Template.Model.KeywordsRank>,IKeywordsRankDal
+    {
+
+    }
+	
+	public partial class KeywordsRecordsDal:BaseDal<My.Template.Model.KeywordsRecords>,IKeywordsRecordsDal
+    {
+
+    }
+	
 	public partial class NewsDal:BaseDal<My.Template.Model.News>,INewsDal
     {
 

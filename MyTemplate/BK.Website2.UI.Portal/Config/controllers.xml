@@ -32,6 +32,13 @@
     <!--name是要注入的属性的名称， ref 是objects节点下复杂类型的object的name的值-->
     <property name="ActionServicesEntity" ref="ActionServices" />
   </object>
+
+
+  <object type="My.Template.UI.Portal.Areas.Admin.Controllers.SiteInfoController, My.Template.UI.Portal" singleton="false" >
+    <!--name是要注入的属性的名称， ref 是objects节点下复杂类型的object的name的值-->
+    <property name="SiteInfoServicesEntity" ref="SiteInfoServices" />
+  </object>
+  
   <!--===============================admin/controller结束==========================================-->
 
 
@@ -44,6 +51,7 @@
       <!--name是要注入的属性的名称， ref 是objects节点下复杂类型的object的name的值-->
       <property name="UserServicesEntity" ref="UserServices" />
     </object>
+
   <!--===============================/UI/Portal/controller结束==========================================-->
 
 

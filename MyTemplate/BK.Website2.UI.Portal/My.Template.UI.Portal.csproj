@@ -239,10 +239,10 @@
     <Compile Include="CommClass\Comms.cs" />
     <Compile Include="CommClass\GenarateStaticPage.cs" />
     <Compile Include="CommClass\LoginFiterAttribute.cs" />
-    <Compile Include="CommClass\LuceneSearch\IndexContent.cs" />
+    <Compile Include="CommClass\LuceneSearch\SearchIndexContent.cs" />
     <Compile Include="CommClass\LuceneSearch\LuceneEnum.cs" />
-    <Compile Include="CommClass\LuceneSearch\SearchIndex.cs" />
-    <Compile Include="CommClass\LuceneSearch\SearchIndexManager.cs" />
+    <Compile Include="CommClass\LuceneSearch\Search.cs" />
+    <Compile Include="CommClass\LuceneSearch\SearchManager.cs" />
     <Compile Include="CommClass\LuceneSearch\ViewSarchContentModel.cs" />
     <Compile Include="CommClass\SampleHouse_Areacmp.cs" />
     <Compile Include="Controllers\AlipayController.cs" />
@@ -255,6 +255,7 @@
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\PayStatusController.cs" />
     <Compile Include="Controllers\RegistController.cs" />
+    <Compile Include="Controllers\SearchDemoController.cs" />
     <Compile Include="Controllers\VideoController.cs" />
     <Compile Include="Controllers\VipValidateController.cs" />
     <Compile Include="Controllers\WXPayController.cs" />
@@ -3571,6 +3572,8 @@
     <Content Include="Views\wxpaytest\pay.cshtml" />
     <Content Include="Views\wxpaytest\payResult.cshtml" />
     <Content Include="Views\wxpaytest\gorder.cshtml" />
+    <Content Include="Views\SearchDemo\Index.cshtml" />
+    <Content Include="Views\SearchDemo\CreatSearchIndexFirst.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

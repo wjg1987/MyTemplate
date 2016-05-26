@@ -59,6 +59,14 @@ namespace My.Template.IBLL
     {
     }
 	
+	 public partial interface IKeywordsRankServices:IBaseServices<My.Template.Model.KeywordsRank>
+    {
+    }
+	
+	 public partial interface IKeywordsRecordsServices:IBaseServices<My.Template.Model.KeywordsRecords>
+    {
+    }
+	
 	 public partial interface INewsServices:IBaseServices<My.Template.Model.News>
     {
     }

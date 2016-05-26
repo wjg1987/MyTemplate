@@ -3,6 +3,7 @@ using My.Template.BLL;
 using My.Template.Common;
 using My.Template.EFDAL;
 using My.Template.Model;
+using My.Template.Model.LuceneSearch;
 using My.Template.UI.Portal.Areas.mobile.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
@@ -29,7 +30,20 @@ namespace UnitTestProject1
         }
         #endregion
        
+        
 
 
+            
+        #region 添加单个商品到购物车
+        [TestMethod]
+        public void TestCreatSearchIndexFirst()
+        {
+            SearchManager sms = SearchManager.GetInstance();
+
+            sms.CreatSearchIndexFirst();
+
+            //Assert.Equals(res, "1");
+        }
+        #endregion
     }
 }

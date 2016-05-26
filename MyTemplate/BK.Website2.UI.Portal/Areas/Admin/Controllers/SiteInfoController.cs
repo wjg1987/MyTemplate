@@ -11,15 +11,16 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
 {
     public class SiteInfoController : BaseController
     {
-        ISiteInfoServices siteInfoServices = new SiteInfoServices();
+        ISiteInfoServices SiteInfoServicesEntity { get; set; }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit()
         {
 
             //取消返回页面
             ViewBag.returnUrl = Request.UrlReferrer == null ? Url.Action("Index", "Home") : Request.UrlReferrer.ToString();
 
-            var model = siteInfoServices.LoadEntitys(b => b.ID == id).FirstOrDefault();
+            var model = SiteInfoServicesEntity.LoadEntitys(b => true).FirstOrDefault();
+
             return View(model);
         }
 
@@ -32,7 +33,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
             ViewBag.returnUrl = returnUrl;
             if (ModelState.IsValid)
             {
-                if (siteInfoServices.Update(model))
+                if (SiteInfoServicesEntity.Update(model))
                 {
                     Common.Common.SiteInfo = model;
                     return Redirect(returnUrl);

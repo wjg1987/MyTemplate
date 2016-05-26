@@ -99,7 +99,7 @@
     <Compile Include="KeywordsRank.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="KeywordsScore.cs">
+    <Compile Include="KeywordsRecords.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="News.cs">

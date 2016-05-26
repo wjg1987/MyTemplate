@@ -1,0 +1,50 @@
+﻿@{
+    Layout = null;
+}
+@using My.Template.Model.LuceneSearch
+@model List<My.Template.Model.LuceneSearch.ViewSarchContentModel>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style type="text/css">
+        .search-text2{ display:block; width:528px; height:26px; line-height:26px; float:left; margin:3px 5px; border:1px solid; font-family:'Microsoft Yahei'; font-size:14px;}
+        .search-btn2{width:102px; height:32px; line-height:32px; cursor:pointer; border:0px; background-color:#d6000f;font-family:'Microsoft Yahei'; font-size:16px;color:#f3f3f3;}
+        .search-list{width:600px; overflow:hidden; margin:10px 20px 0px 20px;}
+        .search-list dt{font-family:'Microsoft Yahei'; font-size:16px; line-height:20px; margin-bottom:7px; font-weight:normal;}
+        .search-list .search-detail{font-size:12px; color:#666666;margin-bottom:5px; font-family:Arial;line-height:16px;}
+        .search-list dt a{color:#2981a9;}
+    </style>
+     <script type="text/javascript">
+         //$(function () {
+         //    $("#searchTxtContent").autocomplete({
+         //        source: "/Search/AutoComplete"
+
+         //    });
+         //});
+
+ </script>
+</head>
+<body>
+     <div>
+        <form method="get" action="/SearchDemo/Index">
+            <input type="text" value="@ViewBag.keywords" name="keywords" autocomplete="off" class="search-text2" id="searchTxtContent"/>
+            <input type="submit" value="搜一搜" name="btnSearch" class="search-btn2" />
+            <a target="_Blank" href="/SearchDemo/CreatSearchIndexFirst">重新创建lucene索引 注意要先清除原数据</a>
+        </form>
+
+        <dl class="search-list">
+     
+            @foreach (ViewSarchContentModel viewModel in Model)
+            {
+                <dt><a href="/News/Detail/?id=@viewModel.Id"> @Html.Raw(viewModel.Title)</a></dt>
+             <dd class="search-detail">@MvcHtmlString.Create(viewModel.Content)</dd>
+            }
+        
+            </dl>
+
+    </div>
+</body>
+</html>

@@ -58,6 +58,6 @@ namespace My.Template.Model
         public DbSet<HouseArea> HouseArea { get; set; }
         public DbSet<SpHouse_HseArea> SpHouse_HseArea { get; set; }
         public DbSet<KeywordsRank> KeywordsRank { get; set; }
-        public DbSet<KeywordsScore> KeywordsRecords { get; set; }
+        public DbSet<KeywordsRecords> KeywordsRecords { get; set; }
     }
 }

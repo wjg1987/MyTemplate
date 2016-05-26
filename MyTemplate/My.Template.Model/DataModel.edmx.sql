@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 05/20/2016 17:30:44
+-- Date Created: 05/26/2016 18:33:27
 -- Generated from EDMX file: F:\task\template\MyTemplate\MyTemplate\My.Template.Model\DataModel.edmx
 -- --------------------------------------------------
 
@@ -184,6 +184,12 @@ GO
 IF OBJECT_ID(N'[dbo].[SpHouse_HseArea]', 'U') IS NOT NULL
     DROP TABLE [dbo].[SpHouse_HseArea];
 GO
+IF OBJECT_ID(N'[dbo].[KeywordsRank]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[KeywordsRank];
+GO
+IF OBJECT_ID(N'[dbo].[KeywordsRecords]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[KeywordsRecords];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -348,16 +354,7 @@ CREATE TABLE [dbo].[SiteInfo] (
     [SeoKeyWords] nvarchar(256)  NULL,
     [SeoDescription] nvarchar(256)  NULL,
     [IcpNumber] nvarchar(64)  NULL,
-    [IsViewInfo] bit  NOT NULL,
-    [Img0] nvarchar(512)  NOT NULL,
-    [Img1] nvarchar(512)  NOT NULL,
-    [Img2] nvarchar(512)  NOT NULL,
-    [Img3] nvarchar(512)  NOT NULL,
-    [Img4] nvarchar(512)  NOT NULL,
-    [Img5] nvarchar(512)  NOT NULL,
-    [Img6] nvarchar(512)  NOT NULL,
-    [Img7] nvarchar(512)  NOT NULL,
-    [Img8] nvarchar(512)  NOT NULL
+    [IsViewInfo] bit  NOT NULL
 );
 GO
 
@@ -590,7 +587,7 @@ GO
 -- Creating table 'KeywordsRank'
 CREATE TABLE [dbo].[KeywordsRank] (
     [ID] int IDENTITY(1,1) NOT NULL,
-    [Kkeywords] nvarchar(max)  NOT NULL,
+    [Keywords] nvarchar(max)  NOT NULL,
     [Count] int  NOT NULL
 );
 GO
@@ -598,7 +595,8 @@ GO
 -- Creating table 'KeywordsRecords'
 CREATE TABLE [dbo].[KeywordsRecords] (
     [ID] int IDENTITY(1,1) NOT NULL,
-    [Keywords] nvarchar(max)  NOT NULL
+    [Keywords] nvarchar(512)  NOT NULL,
+    [AddTime] datetime  NOT NULL
 );
 GO
 

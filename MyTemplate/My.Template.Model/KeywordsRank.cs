@@ -18,7 +18,7 @@ namespace My.Template.Model
     public partial class KeywordsRank : IBaseEntity
     {
         public int ID { get; set; }
-        public string Kkeywords { get; set; }
+        public string Keywords { get; set; }
         public int Count { get; set; }
     }
 }

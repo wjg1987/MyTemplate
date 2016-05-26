@@ -291,15 +291,6 @@
     <Property Name="SeoDescription" Type="nvarchar" Nullable="true" MaxLength="256" />
     <Property Name="IcpNumber" Type="nvarchar" Nullable="true" MaxLength="64" />
     <Property Name="IsViewInfo" Type="bit" Nullable="false" DefaultValue="false" />
-    <Property Name="Img0" Type="nvarchar" Nullable="false" MaxLength="512" />
-    <Property Name="Img1" Type="nvarchar" Nullable="false" MaxLength="512" />
-    <Property Name="Img2" Type="nvarchar" Nullable="false" MaxLength="512" />
-    <Property Name="Img3" Type="nvarchar" Nullable="false" MaxLength="512" />
-    <Property Name="Img4" Type="nvarchar" Nullable="false" MaxLength="512" />
-    <Property Name="Img5" Type="nvarchar" Nullable="false" MaxLength="512" />
-    <Property Name="Img6" Type="nvarchar" Nullable="false" MaxLength="512" />
-    <Property Name="Img7" Type="nvarchar" Nullable="false" MaxLength="512" />
-    <Property Name="Img8" Type="nvarchar" Nullable="false" MaxLength="512" />
   </EntityType>
   <EntityType Name="NewsType">
     <Key>
@@ -532,7 +523,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Kkeywords" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Keywords" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Count" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="KeywordsRecords">
@@ -540,7 +531,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Keywords" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Keywords" Type="nvarchar" Nullable="false" MaxLength="512" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
   </EntityType>
   <Association Name="UserUser_Role">
     <End Role="User" Type="DataModel.Store.User" Multiplicity="1" />
@@ -932,7 +924,7 @@
             <End Role="UserInfo" EntitySet="UserInfo" />
           </AssociationSet>
           <EntitySet Name="KeywordsRank" EntityType="DataModel.KeywordsRank" />
-          <EntitySet Name="KeywordsRecords" EntityType="DataModel.KeywordsScore" />
+          <EntitySet Name="KeywordsRecords" EntityType="DataModel.KeywordsRecords" />
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -1213,51 +1205,6 @@
           <Property Type="String" Name="SeoDescription" Nullable="true" MaxLength="256" />
           <Property Type="String" Name="IcpNumber" Nullable="true" MaxLength="64" />
           <Property Type="Boolean" Name="IsViewInfo" Nullable="false" DefaultValue="false" />
-          <Property Type="String" Name="Img0" Nullable="false" MaxLength="512" >
-            <Documentation>
-              <LongDescription>首页如何返利图</LongDescription>
-            </Documentation>
-          </Property>
-          <Property Type="String" Name="Img1" Nullable="false" MaxLength="512" >
-            <Documentation>
-              <LongDescription>首页蜂巢日志图</LongDescription>
-            </Documentation>
-          </Property>
-          <Property Type="String" Name="Img2" Nullable="false" MaxLength="512" >
-            <Documentation>
-              <LongDescription>首页线上样板房图1</LongDescription>
-            </Documentation>
-          </Property>
-          <Property Type="String" Name="Img3" Nullable="false" MaxLength="512" >
-            <Documentation>
-              <LongDescription>首页线上样板房图2</LongDescription>
-            </Documentation>
-          </Property>
-          <Property Type="String" Name="Img4" Nullable="false" MaxLength="512" >
-            <Documentation>
-              <LongDescription>首页线上样板房图3</LongDescription>
-            </Documentation>
-          </Property>
-          <Property Type="String" Name="Img5" Nullable="false" MaxLength="512" >
-            <Documentation>
-              <LongDescription>首页线上样板房图4</LongDescription>
-            </Documentation>
-          </Property>
-          <Property Type="String" Name="Img6" Nullable="false" MaxLength="512" >
-            <Documentation>
-              <LongDescription>首页线上样板房图5</LongDescription>
-            </Documentation>
-          </Property>
-          <Property Type="String" Name="Img7" Nullable="false" MaxLength="512" >
-            <Documentation>
-              <LongDescription>首页线上样板房图6</LongDescription>
-            </Documentation>
-          </Property>
-          <Property Type="String" Name="Img8" Nullable="false" MaxLength="512" >
-            <Documentation>
-              <LongDescription>首页线上样板房图7</LongDescription>
-            </Documentation>
-          </Property>
         </EntityType>
         <EntityType Name="NewsType">
           <Key>
@@ -1841,7 +1788,7 @@ DueMoney  = ActualPay + BalanceChange + CouponValue
         </Association>
         <EntityType Name="KeywordsRank">
           <Documentation>
-            <LongDescription>搜索热词统计</LongDescription>
+            <LongDescription>搜索热词统计 排名前10的热词可以放入缓存中 有则直接从缓存中取 没有则查询一次放入缓存中</LongDescription>
           </Documentation>
           <Key>
             <PropertyRef Name="ID" />
@@ -1851,19 +1798,29 @@ DueMoney  = ActualPay + BalanceChange + CouponValue
               <LongDescription>搜索热点</LongDescription>
             </Documentation>
           </Property>
-          <Property Type="String" Name="Kkeywords" Nullable="false" />
+          <Property Type="String" Name="Keywords" Nullable="false" />
           <Property Type="Int32" Name="Count" Nullable="false" />
         </EntityType>
-        <EntityType Name="KeywordsScore">
+        <EntityType Name="KeywordsRecords">
           <Documentation>
             <LongDescription>搜索记录 记录每一次搜索词
-定时任务更新到 KeywordsRank中</LongDescription>
+定时任务更新到 KeywordsRank中
+当该表中的数据过多时 可以再分一张表出来 存储已经统计过的数据
+定时任务groupby统计后 直接删除 统计表中KeywordsRank的统计结果
+ 再一一添加
+这样相对于先查询再更新效率更高
+</LongDescription>
           </Documentation>
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Keywords" Nullable="false" />
+          <Property Type="String" Name="Keywords" Nullable="false" MaxLength="512" />
+          <Property Type="DateTime" Name="AddTime" Nullable="false" >
+            <Documentation>
+              <LongDescription>搜索时间便于数据挖掘</LongDescription>
+            </Documentation>
+          </Property>
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2042,15 +1999,6 @@ DueMoney  = ActualPay + BalanceChange + CouponValue
           <ScalarProperty Name="SeoDescription" ColumnName="SeoDescription" />
           <ScalarProperty Name="IcpNumber" ColumnName="IcpNumber" />
           <ScalarProperty Name="IsViewInfo" ColumnName="IsViewInfo" />
-          <ScalarProperty Name="Img0" ColumnName="Img0" />
-          <ScalarProperty Name="Img1" ColumnName="Img1" />
-          <ScalarProperty Name="Img2" ColumnName="Img2" />
-          <ScalarProperty Name="Img3" ColumnName="Img3" />
-          <ScalarProperty Name="Img4" ColumnName="Img4" />
-          <ScalarProperty Name="Img5" ColumnName="Img5" />
-          <ScalarProperty Name="Img6" ColumnName="Img6" />
-          <ScalarProperty Name="Img7" ColumnName="Img7" />
-          <ScalarProperty Name="Img8" ColumnName="Img8" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2304,16 +2252,17 @@ DueMoney  = ActualPay + BalanceChange + CouponValue
       <EntityTypeMapping TypeName="IsTypeOf(DataModel.KeywordsRank)">
         <MappingFragment StoreEntitySet="KeywordsRank">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Kkeywords" ColumnName="Kkeywords" />
+          <ScalarProperty Name="Keywords" ColumnName="Keywords" />
           <ScalarProperty Name="Count" ColumnName="Count" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="KeywordsRecords">
-      <EntityTypeMapping TypeName="IsTypeOf(DataModel.KeywordsScore)">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.KeywordsRecords)">
         <MappingFragment StoreEntitySet="KeywordsRecords">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Keywords" ColumnName="Keywords" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -72,6 +72,16 @@ namespace My.Template.IDAL
    
 			
 	
+        IKeywordsRankDal KeywordsRankDal { get; }
+
+   
+			
+	
+        IKeywordsRecordsDal KeywordsRecordsDal { get; }
+
+   
+			
+	
         INewsDal NewsDal { get; }
 
    

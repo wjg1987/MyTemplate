@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using My.Template.BLL;
 using My.Template.IBLL;
 using My.Template.Model;
+using My.Template.Model.LuceneSearch;
 
 namespace My.Template.UI.Portal.Areas.Admin.Controllers
 {
@@ -29,7 +30,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
             {
                 if (!string.IsNullOrEmpty(searchWords))
                 {
-                    return !b.IsDelete  && (b.Title.Contains(searchWords)||b.Content.Contains(searchWords));
+                    return !b.IsDelete  && (b.Title.Contains(searchWords)|| b.Title.Contains(searchWords.ToLower()) ||b.Content.Contains(searchWords));
                 }
                 else
                 {
@@ -86,6 +87,9 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
                 model = newsServices.Add(model);
                 if (model.ID > 0)
                 {
+                    //lucene索引更新
+                   SearchManager.GetInstance().AddToQueue(model.ID.ToString(),model.Title,model.Content, CreateIndexEmum.NewsIndex);
+
                     return Redirect(returnUrl);
                 }
                 else
@@ -124,6 +128,8 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
 
                 if (newsServices.Update(model))
                 {
+                    //lucene索引更新
+                    SearchManager.GetInstance().AddToQueue(model.ID.ToString(), model.Title, model.Content, CreateIndexEmum.NewsIndex);
                     return Redirect(returnUrl);
                 }
             }
@@ -142,6 +148,8 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
             model.IsDelete = true;
             if (newsServices.Update(model))
             {
+                //lucene索引更新
+                SearchManager.GetInstance().DeleteQueue(model.ID.ToString(), CreateIndexEmum.NewsIndex);
                 return 1;
             }
             else

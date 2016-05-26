@@ -154,9 +154,12 @@ namespace My.Template.BLL
         #endregion
 
         #region 执行executeNoneQuery的方法
+
         public int ExecuteNoneQuery(string sql) {
             return CurrentDal.ExecuteNoneQuery(sql);
         }
+
+
         public object ExecuteScalar(string sql)
         {
             return CurrentDal.ExecuteScalar(sql);

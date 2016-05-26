@@ -27,7 +27,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
             {
                 if (!string.IsNullOrEmpty(searchWords))
                 {
-                    return b.IsDelete == false && b.Question.Contains(searchWords);
+                    return b.IsDelete == false && (b.Question.Contains(searchWords) || b.Question.Contains(searchWords.ToLower()));
                 }
                 else
                 {

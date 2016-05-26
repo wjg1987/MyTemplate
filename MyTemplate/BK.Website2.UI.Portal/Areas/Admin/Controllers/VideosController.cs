@@ -29,7 +29,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
             {
                 if (!string.IsNullOrEmpty(searchWords))
                 {
-                    return !b.IsDelete && (b.VName.Contains(searchWords));
+                    return !b.IsDelete && (b.VName.Contains(searchWords) || b.VName.Contains(searchWords.ToLower()));
                 }
                 else
                 {

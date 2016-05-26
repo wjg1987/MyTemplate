@@ -182,6 +182,34 @@ namespace My.Template.DALFactory
         }
 
 	
+	   private IKeywordsRankDal _KeywordsRankDal;
+        public IKeywordsRankDal KeywordsRankDal
+        {
+            get
+            {
+                if(_KeywordsRankDal == null)
+                {
+                    _KeywordsRankDal = SimpleDalFactory.GetKeywordsRankDal();
+                }
+                return _KeywordsRankDal;
+            }
+        }
+
+	
+	   private IKeywordsRecordsDal _KeywordsRecordsDal;
+        public IKeywordsRecordsDal KeywordsRecordsDal
+        {
+            get
+            {
+                if(_KeywordsRecordsDal == null)
+                {
+                    _KeywordsRecordsDal = SimpleDalFactory.GetKeywordsRecordsDal();
+                }
+                return _KeywordsRecordsDal;
+            }
+        }
+
+	
 	   private INewsDal _NewsDal;
         public INewsDal NewsDal
         {
