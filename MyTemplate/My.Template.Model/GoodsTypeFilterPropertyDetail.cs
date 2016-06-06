@@ -15,25 +15,15 @@ namespace My.Template.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class GoodsType : IBaseEntity
+    public partial class GoodsTypeFilterPropertyDetail : IBaseEntity
     {
-        public GoodsType()
-        {
-            this.GoodsInfo = new HashSet<GoodsInfo>();
-            this.GoodsTypeFilterProperty = new HashSet<GoodsTypeFilterProperty>();
-        }
-    
         public int ID { get; set; }
-        public string ParentID { get; set; }
+        public int GoodsTypeFilterPropertyID { get; set; }
+        public string FilterDetailWords { get; set; }
         public bool IsDelete { get; set; }
-        public string GTName { get; set; }
         public int Sequence { get; set; }
-        public bool IsView { get; set; }
-        public string Remark { get; set; }
     
     	[JsonIgnore]
-        public virtual ICollection<GoodsInfo> GoodsInfo { get; set; }
-    	[JsonIgnore]
-        public virtual ICollection<GoodsTypeFilterProperty> GoodsTypeFilterProperty { get; set; }
+        public virtual GoodsTypeFilterProperty GoodsTypeFilterProperty { get; set; }
     }
 }

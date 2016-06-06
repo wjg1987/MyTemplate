@@ -15,25 +15,24 @@ namespace My.Template.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class GoodsType : IBaseEntity
+    public partial class GoodsSkuPrice : IBaseEntity
     {
-        public GoodsType()
+        public GoodsSkuPrice()
         {
-            this.GoodsInfo = new HashSet<GoodsInfo>();
-            this.GoodsTypeFilterProperty = new HashSet<GoodsTypeFilterProperty>();
+            this.GoodsSkuPrice_R_GoodsProDetails = new HashSet<GoodsSkuPrice_R_GoodsProDetails>();
         }
     
         public int ID { get; set; }
-        public string ParentID { get; set; }
+        public string SKUNumber { get; set; }
+        public int OriginalPrice { get; set; }
+        public int SalPrice { get; set; }
+        public int RepertoryCount { get; set; }
+        public int GoodsInfoID { get; set; }
         public bool IsDelete { get; set; }
-        public string GTName { get; set; }
-        public int Sequence { get; set; }
-        public bool IsView { get; set; }
-        public string Remark { get; set; }
     
     	[JsonIgnore]
-        public virtual ICollection<GoodsInfo> GoodsInfo { get; set; }
+        public virtual GoodsInfo GoodsInfo { get; set; }
     	[JsonIgnore]
-        public virtual ICollection<GoodsTypeFilterProperty> GoodsTypeFilterProperty { get; set; }
+        public virtual ICollection<GoodsSkuPrice_R_GoodsProDetails> GoodsSkuPrice_R_GoodsProDetails { get; set; }
     }
 }

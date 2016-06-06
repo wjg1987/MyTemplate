@@ -12,7 +12,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
 {
     public class NewsController : BaseController
     {
-        INewsServices newsServices = new NewsServices();
+        INewsServices NewsServicesEntity { get; set; }
 
 
 
@@ -40,7 +40,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
 
             Func<News, int> orderFunc = (b) => { return b.ID; };
 
-            var tmp = newsServices.LoadPageEntitys(pageIndex, pageSize, out totalCount, whereFunc, orderFunc, true).ToList();
+            var tmp = NewsServicesEntity.LoadPageEntitys(pageIndex, pageSize, out totalCount, whereFunc, orderFunc, true).ToList();
 
           
 
@@ -84,7 +84,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
                 model.AddTime = DateTime.Now;
                 model.IsDelete = false;
 
-                model = newsServices.Add(model);
+                model = NewsServicesEntity.Add(model);
                 if (model.ID > 0)
                 {
                     //lucene索引更新
@@ -107,7 +107,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
             //取消返回页面
             ViewBag.returnUrl = Request.UrlReferrer == null ? Url.Action("Index", "News") : Request.UrlReferrer.ToString();
 
-            var model = newsServices.LoadEntitys(b => b.ID == id).FirstOrDefault();
+            var model = NewsServicesEntity.LoadEntitys(b => b.ID == id).FirstOrDefault();
             return View(model);
         }
 
@@ -126,7 +126,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
                     model.Content = model.Content.Replace("src=\"/UserUpload/", "src=\"" + Common.Common.WebSiteUrl + "/UserUpload/");
                 }
 
-                if (newsServices.Update(model))
+                if (NewsServicesEntity.Update(model))
                 {
                     //lucene索引更新
                     SearchManager.GetInstance().AddToQueue(model.ID.ToString(), model.Title, model.Content, CreateIndexEmum.NewsIndex);
@@ -140,13 +140,13 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
         public int Delete(int id)
         {
 
-            var model = newsServices.LoadEntitys(b => b.ID == id).FirstOrDefault();
+            var model = NewsServicesEntity.LoadEntitys(b => b.ID == id).FirstOrDefault();
             if (model == null)
             {
                 return 0;
             }
             model.IsDelete = true;
-            if (newsServices.Update(model))
+            if (NewsServicesEntity.Update(model))
             {
                 //lucene索引更新
                 SearchManager.GetInstance().DeleteQueue(model.ID.ToString(), CreateIndexEmum.NewsIndex);

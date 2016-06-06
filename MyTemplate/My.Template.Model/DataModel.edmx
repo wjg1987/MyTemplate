@@ -40,6 +40,12 @@
     <EntitySet Name="SpHouse_HseArea" EntityType="DataModel.Store.SpHouse_HseArea" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="KeywordsRank" EntityType="DataModel.Store.KeywordsRank" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="KeywordsRecords" EntityType="DataModel.Store.KeywordsRecords" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GoodsSkuPrice" EntityType="DataModel.Store.GoodsSkuPrice" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GoodsTypeFilterProperty" EntityType="DataModel.Store.GoodsTypeFilterProperty" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GoodsTypeFilterPropertyDetail" EntityType="DataModel.Store.GoodsTypeFilterPropertyDetail" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GoodsInfo_R_GTypeFilters" EntityType="DataModel.Store.GoodsInfo_R_GTypeFilters" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GoodsSkuPrice_R_GoodsProDetails" EntityType="DataModel.Store.GoodsSkuPrice_R_GoodsProDetails" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GoodsComment" EntityType="DataModel.Store.GoodsComment" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="UserUser_Role" Association="DataModel.Store.UserUser_Role">
       <End Role="User" EntitySet="User" />
       <End Role="User_Role" EntitySet="User_Role" />
@@ -127,6 +133,30 @@
     <AssociationSet Name="UserUserInfo" Association="DataModel.Store.UserUserInfo">
       <End Role="User" EntitySet="User" />
       <End Role="UserInfo" EntitySet="UserInfo" />
+    </AssociationSet>
+    <AssociationSet Name="GoodsTypeFilterPropertyGoodsTypeFilterPropertyDetail" Association="DataModel.Store.GoodsTypeFilterPropertyGoodsTypeFilterPropertyDetail">
+      <End Role="GoodsTypeFilterProperty" EntitySet="GoodsTypeFilterProperty" />
+      <End Role="GoodsTypeFilterPropertyDetail" EntitySet="GoodsTypeFilterPropertyDetail" />
+    </AssociationSet>
+    <AssociationSet Name="GoodsInfoGoodsInfo_R_GTypeFilters" Association="DataModel.Store.GoodsInfoGoodsInfo_R_GTypeFilters">
+      <End Role="GoodsInfo" EntitySet="GoodsInfo" />
+      <End Role="GoodsInfo_R_GTypeFilters" EntitySet="GoodsInfo_R_GTypeFilters" />
+    </AssociationSet>
+    <AssociationSet Name="GoodsTypeGoodsTypeFilterProperty" Association="DataModel.Store.GoodsTypeGoodsTypeFilterProperty">
+      <End Role="GoodsType" EntitySet="GoodsType" />
+      <End Role="GoodsTypeFilterProperty" EntitySet="GoodsTypeFilterProperty" />
+    </AssociationSet>
+    <AssociationSet Name="GoodsInfoGoodsComment" Association="DataModel.Store.GoodsInfoGoodsComment">
+      <End Role="GoodsInfo" EntitySet="GoodsInfo" />
+      <End Role="GoodsComment" EntitySet="GoodsComment" />
+    </AssociationSet>
+    <AssociationSet Name="GoodsInfoGoodsSkuPrice" Association="DataModel.Store.GoodsInfoGoodsSkuPrice">
+      <End Role="GoodsInfo" EntitySet="GoodsInfo" />
+      <End Role="GoodsSkuPrice" EntitySet="GoodsSkuPrice" />
+    </AssociationSet>
+    <AssociationSet Name="GoodsSkuPriceGoodsSkuPrice_R_GoodsProDetails" Association="DataModel.Store.GoodsSkuPriceGoodsSkuPrice_R_GoodsProDetails">
+      <End Role="GoodsSkuPrice" EntitySet="GoodsSkuPrice" />
+      <End Role="GoodsSkuPrice_R_GoodsProDetails" EntitySet="GoodsSkuPrice_R_GoodsProDetails" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="User">
@@ -378,6 +408,7 @@
     <Property Name="DetailPics" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Sequence" Type="int" Nullable="false" />
     <Property Name="DeliveryDate" Type="int" Nullable="false" />
+    <Property Name="SearchKeywords" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="GoodsProperty">
     <Key>
@@ -533,6 +564,71 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Keywords" Type="nvarchar" Nullable="false" MaxLength="512" />
     <Property Name="AddTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GoodsSkuPrice">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SKUNumber" Type="nvarchar" Nullable="false" MaxLength="64" />
+    <Property Name="OriginalPrice" Type="int" Nullable="false" />
+    <Property Name="SalPrice" Type="int" Nullable="false" />
+    <Property Name="RepertoryCount" Type="int" Nullable="false" />
+    <Property Name="GoodsInfoID" Type="int" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GoodsTypeFilterProperty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GoodsTypeID" Type="int" Nullable="false" />
+    <Property Name="FilterWords" Type="nvarchar" Nullable="false" MaxLength="64" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+    <Property Name="Sequence" Type="int" Nullable="false" />
+    <Property Name="GoodsTypeID1" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GoodsTypeFilterPropertyDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GoodsTypeFilterPropertyID" Type="int" Nullable="false" />
+    <Property Name="FilterDetailWords" Type="nvarchar" Nullable="false" MaxLength="64" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+    <Property Name="Sequence" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GoodsInfo_R_GTypeFilters">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GoodsInfoID" Type="int" Nullable="false" />
+    <Property Name="GoodsTypeID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="GoodsTypeFilterPropertyID" Type="int" Nullable="false" />
+    <Property Name="GoodsTypeFilterPropertyDetailID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GoodsSkuPrice_R_GoodsProDetails">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GoodsPropertyID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="GoodsPropertyDetailID" Type="int" Nullable="false" />
+    <Property Name="GoodsSkuPriceID" Type="int" Nullable="false" />
+    <Property Name="GoodsInfoID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GoodsComment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="GoodsInfoID" Type="int" Nullable="false" />
+    <Property Name="CommTime" Type="datetime" Nullable="false" />
+    <Property Name="CommContent" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsDelete" Type="bit" Nullable="false" />
   </EntityType>
   <Association Name="UserUser_Role">
     <End Role="User" Type="DataModel.Store.User" Multiplicity="1" />
@@ -798,6 +894,78 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="GoodsTypeFilterPropertyGoodsTypeFilterPropertyDetail">
+    <End Role="GoodsTypeFilterProperty" Type="DataModel.Store.GoodsTypeFilterProperty" Multiplicity="1" />
+    <End Role="GoodsTypeFilterPropertyDetail" Type="DataModel.Store.GoodsTypeFilterPropertyDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GoodsTypeFilterProperty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="GoodsTypeFilterPropertyDetail">
+        <PropertyRef Name="GoodsTypeFilterPropertyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GoodsInfoGoodsInfo_R_GTypeFilters">
+    <End Role="GoodsInfo" Type="DataModel.Store.GoodsInfo" Multiplicity="1" />
+    <End Role="GoodsInfo_R_GTypeFilters" Type="DataModel.Store.GoodsInfo_R_GTypeFilters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GoodsInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="GoodsInfo_R_GTypeFilters">
+        <PropertyRef Name="GoodsInfoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GoodsTypeGoodsTypeFilterProperty">
+    <End Role="GoodsType" Type="DataModel.Store.GoodsType" Multiplicity="1" />
+    <End Role="GoodsTypeFilterProperty" Type="DataModel.Store.GoodsTypeFilterProperty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GoodsType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="GoodsTypeFilterProperty">
+        <PropertyRef Name="GoodsTypeID1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GoodsInfoGoodsComment">
+    <End Role="GoodsInfo" Type="DataModel.Store.GoodsInfo" Multiplicity="1" />
+    <End Role="GoodsComment" Type="DataModel.Store.GoodsComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GoodsInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="GoodsComment">
+        <PropertyRef Name="GoodsInfoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GoodsInfoGoodsSkuPrice">
+    <End Role="GoodsInfo" Type="DataModel.Store.GoodsInfo" Multiplicity="1" />
+    <End Role="GoodsSkuPrice" Type="DataModel.Store.GoodsSkuPrice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GoodsInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="GoodsSkuPrice">
+        <PropertyRef Name="GoodsInfoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GoodsSkuPriceGoodsSkuPrice_R_GoodsProDetails">
+    <End Role="GoodsSkuPrice" Type="DataModel.Store.GoodsSkuPrice" Multiplicity="1" />
+    <End Role="GoodsSkuPrice_R_GoodsProDetails" Type="DataModel.Store.GoodsSkuPrice_R_GoodsProDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GoodsSkuPrice">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="GoodsSkuPrice_R_GoodsProDetails">
+        <PropertyRef Name="GoodsSkuPriceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -865,8 +1033,8 @@
           <EntitySet Name="GoodsProperty" EntityType="DataModel.GoodsProperty" />
           <EntitySet Name="GoodsPropertyDetail" EntityType="DataModel.GoodsPropertyDetail" />
           <AssociationSet Name="GoodsInfoGoodsProperty" Association="DataModel.GoodsInfoGoodsProperty">
-            <End Role="GoodsInfo" EntitySet="GoodsInfo" />
-            <End Role="GoodsProperty" EntitySet="GoodsProperty" />
+            <End EntitySet="GoodsInfo" Role="GoodsInfo" />
+            <End EntitySet="GoodsProperty" Role="GoodsProperty" />
           </AssociationSet>
           <AssociationSet Name="GoodsPropertyGoodsPropertyDetail" Association="DataModel.GoodsPropertyGoodsPropertyDetail">
             <End Role="GoodsProperty" EntitySet="GoodsProperty" />
@@ -925,6 +1093,36 @@
           </AssociationSet>
           <EntitySet Name="KeywordsRank" EntityType="DataModel.KeywordsRank" />
           <EntitySet Name="KeywordsRecords" EntityType="DataModel.KeywordsRecords" />
+          <EntitySet Name="GoodsSkuPrice" EntityType="DataModel.GoodsSkuPrice" />
+          <EntitySet Name="GoodsTypeFilterProperty" EntityType="DataModel.GoodsTypeFilterProperty" />
+          <EntitySet Name="GoodsTypeFilterPropertyDetail" EntityType="DataModel.GoodsTypeFilterPropertyDetail" />
+          <AssociationSet Name="GoodsTypeFilterPropertyGoodsTypeFilterPropertyDetail" Association="DataModel.GoodsTypeFilterPropertyGoodsTypeFilterPropertyDetail">
+            <End Role="GoodsTypeFilterProperty" EntitySet="GoodsTypeFilterProperty" />
+            <End Role="GoodsTypeFilterPropertyDetail" EntitySet="GoodsTypeFilterPropertyDetail" />
+          </AssociationSet>
+          <EntitySet Name="GoodsInfo_R_GTypeFilters" EntityType="DataModel.GoodsInfo_R_GTypeFilters" />
+          <AssociationSet Name="GoodsInfoGoodsInfo_R_GTypeFilters" Association="DataModel.GoodsInfoGoodsInfo_R_GTypeFilters">
+            <End Role="GoodsInfo" EntitySet="GoodsInfo" />
+            <End Role="GoodsInfo_R_GTypeFilters" EntitySet="GoodsInfo_R_GTypeFilters" />
+          </AssociationSet>
+          <EntitySet Name="GoodsSkuPrice_R_GoodsProDetails" EntityType="DataModel.GoodsSkuPrice_R_GoodsProDetails" />
+          <EntitySet Name="GoodsComment" EntityType="DataModel.GoodsComment" />
+          <AssociationSet Name="GoodsTypeGoodsTypeFilterProperty" Association="DataModel.GoodsTypeGoodsTypeFilterProperty">
+            <End Role="GoodsType" EntitySet="GoodsType" />
+            <End Role="GoodsTypeFilterProperty" EntitySet="GoodsTypeFilterProperty" />
+          </AssociationSet>
+          <AssociationSet Name="GoodsInfoGoodsComment" Association="DataModel.GoodsInfoGoodsComment">
+            <End Role="GoodsInfo" EntitySet="GoodsInfo" />
+            <End Role="GoodsComment" EntitySet="GoodsComment" />
+          </AssociationSet>
+          <AssociationSet Name="GoodsInfoGoodsSkuPrice" Association="DataModel.GoodsInfoGoodsSkuPrice">
+            <End Role="GoodsInfo" EntitySet="GoodsInfo" />
+            <End Role="GoodsSkuPrice" EntitySet="GoodsSkuPrice" />
+          </AssociationSet>
+          <AssociationSet Name="GoodsSkuPriceGoodsSkuPrice_R_GoodsProDetails" Association="DataModel.GoodsSkuPriceGoodsSkuPrice_R_GoodsProDetails">
+            <End Role="GoodsSkuPrice" EntitySet="GoodsSkuPrice" />
+            <End Role="GoodsSkuPrice_R_GoodsProDetails" EntitySet="GoodsSkuPrice_R_GoodsProDetails" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -1397,14 +1595,25 @@ GoodsProperty 和 GoodsPropertyDetail 表主键ID
               <LongDescription>出货期 单位:天</LongDescription>
             </Documentation>
           </Property>
+          <Property Type="String" Name="SearchKeywords" Nullable="false" >
+            <Documentation>
+              <Summary>搜索关键字，和 商品名称以及详情配合使用</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="GoodsInfo_R_GTypeFilters" Relationship="DataModel.GoodsInfoGoodsInfo_R_GTypeFilters" FromRole="GoodsInfo" ToRole="GoodsInfo_R_GTypeFilters" />
+          <NavigationProperty Name="GoodsComment" Relationship="DataModel.GoodsInfoGoodsComment" FromRole="GoodsInfo" ToRole="GoodsComment" />
+          <NavigationProperty Name="GoodsSkuPrice" Relationship="DataModel.GoodsInfoGoodsSkuPrice" FromRole="GoodsInfo" ToRole="GoodsSkuPrice" />
         </EntityType>
         <EntityType Name="GoodsProperty">
+          <Documentation>
+            <Summary>删除属性以及属性详情 需要的对 sku价格表进行更新处理,,</Summary>
+          </Documentation>
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="GoodsInfo" Relationship="DataModel.GoodsInfoGoodsProperty" FromRole="GoodsProperty" ToRole="GoodsInfo" />
-          <Property Type="Int32" Name="GoodsInfoID" Nullable="false" />
+          <Property Name="GoodsInfoID" Nullable="false" Type="Int32" />
           <NavigationProperty Name="GoodsPropertyDetail" Relationship="DataModel.GoodsPropertyGoodsPropertyDetail" FromRole="GoodsProperty" ToRole="GoodsPropertyDetail" />
           <Property Type="Boolean" Name="IsDelete" Nullable="false" />
           <Property Type="String" Name="GPName" Nullable="false" MaxLength="128" />
@@ -1446,8 +1655,8 @@ GoodsProperty 和 GoodsPropertyDetail 表主键ID
           </Property>
         </EntityType>
         <Association Name="GoodsInfoGoodsProperty">
-          <End Type="DataModel.GoodsInfo" Role="GoodsInfo" Multiplicity="1" />
-          <End Type="DataModel.GoodsProperty" Role="GoodsProperty" Multiplicity="*" />
+          <End Type="DataModel.GoodsInfo" Multiplicity="1" Role="GoodsInfo" />
+          <End Type="DataModel.GoodsProperty" Multiplicity="*" Role="GoodsProperty" />
           <ReferentialConstraint>
             <Principal Role="GoodsInfo">
               <PropertyRef Name="ID" />
@@ -1489,6 +1698,7 @@ GoodsProperty 和 GoodsPropertyDetail 表主键ID
             </Documentation>
           </Property>
           <Property Type="String" Name="Remark" MaxLength="1024" />
+          <NavigationProperty Name="GoodsTypeFilterProperty" Relationship="DataModel.GoodsTypeGoodsTypeFilterProperty" FromRole="GoodsType" ToRole="GoodsTypeFilterProperty" />
         </EntityType>
         <Association Name="GoodsInfoGoodsType">
           <End Type="DataModel.GoodsInfo" Role="GoodsInfo" Multiplicity="*" />
@@ -1822,6 +2032,197 @@ DueMoney  = ActualPay + BalanceChange + CouponValue
             </Documentation>
           </Property>
         </EntityType>
+        <EntityType Name="GoodsSkuPrice">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="SKUNumber" Nullable="false" MaxLength="64" >
+            <Documentation>
+              <Summary>64</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="OriginalPrice" Nullable="false" >
+            <Documentation>
+              <Summary>原价</Summary>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="SalPrice" Nullable="false" >
+            <Documentation>
+              <Summary>单位 分</Summary>
+              <LongDescription>售价</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="RepertoryCount" Nullable="false" >
+            <Documentation>
+              <LongDescription>库存</LongDescription>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="GoodsInfo" Relationship="DataModel.GoodsInfoGoodsSkuPrice" FromRole="GoodsSkuPrice" ToRole="GoodsInfo" />
+          <Property Type="Int32" Name="GoodsInfoID" Nullable="false" />
+          <NavigationProperty Name="GoodsSkuPrice_R_GoodsProDetails" Relationship="DataModel.GoodsSkuPriceGoodsSkuPrice_R_GoodsProDetails" FromRole="GoodsSkuPrice" ToRole="GoodsSkuPrice_R_GoodsProDetails" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GoodsTypeFilterProperty">
+          <Documentation>
+            <Summary>类别下的过滤属性</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="GoodsTypeID" Nullable="false" />
+          <NavigationProperty Name="GoodsTypeFilterPropertyDetail" Relationship="DataModel.GoodsTypeFilterPropertyGoodsTypeFilterPropertyDetail" FromRole="GoodsTypeFilterProperty" ToRole="GoodsTypeFilterPropertyDetail" />
+          <Property Type="String" Name="FilterWords" Nullable="false" MaxLength="64" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" >
+            <Documentation>
+              <LongDescription>是否删除 删除后 在前台不显示该过滤项。原来关联过的商品过滤属性不用理会。前台不显示后台就不会去查询</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="Sequence" Nullable="false" >
+            <Documentation>
+              <LongDescription>排序</LongDescription>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="GoodsType" Relationship="DataModel.GoodsTypeGoodsTypeFilterProperty" FromRole="GoodsTypeFilterProperty" ToRole="GoodsType" />
+          <Property Type="Int32" Name="GoodsTypeID1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GoodsTypeFilterPropertyDetail">
+          <Documentation>
+            <LongDescription>过滤属性详情</LongDescription>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="GoodsTypeFilterProperty" Relationship="DataModel.GoodsTypeFilterPropertyGoodsTypeFilterPropertyDetail" FromRole="GoodsTypeFilterPropertyDetail" ToRole="GoodsTypeFilterProperty" />
+          <Property Type="Int32" Name="GoodsTypeFilterPropertyID" Nullable="false" />
+          <Property Type="String" Name="FilterDetailWords" Nullable="false" MaxLength="64" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" >
+            <Documentation>
+              <LongDescription>是否删除 删除后前台不显示。</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Type="Int32" Name="Sequence" Nullable="false" >
+            <Documentation>
+              <Summary>排序</Summary>
+            </Documentation>
+          </Property>
+        </EntityType>
+        <Association Name="GoodsTypeFilterPropertyGoodsTypeFilterPropertyDetail">
+          <End Type="DataModel.GoodsTypeFilterProperty" Role="GoodsTypeFilterProperty" Multiplicity="1" />
+          <End Type="DataModel.GoodsTypeFilterPropertyDetail" Role="GoodsTypeFilterPropertyDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GoodsTypeFilterProperty">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GoodsTypeFilterPropertyDetail">
+              <PropertyRef Name="GoodsTypeFilterPropertyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="GoodsInfo_R_GTypeFilters">
+          <Documentation>
+            <LongDescription> 商品类型过滤属性对应关系表
+影响搜索结果..</LongDescription>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="GoodsInfo" Relationship="DataModel.GoodsInfoGoodsInfo_R_GTypeFilters" FromRole="GoodsInfo_R_GTypeFilters" ToRole="GoodsInfo" />
+          <Property Type="Int32" Name="GoodsInfoID" Nullable="false" />
+          <Property Type="String" Name="GoodsTypeID" Nullable="false" />
+          <Property Type="Int32" Name="GoodsTypeFilterPropertyID" Nullable="false" />
+          <Property Type="Int32" Name="GoodsTypeFilterPropertyDetailID" Nullable="false" />
+        </EntityType>
+        <Association Name="GoodsInfoGoodsInfo_R_GTypeFilters">
+          <End Type="DataModel.GoodsInfo" Role="GoodsInfo" Multiplicity="1" />
+          <End Type="DataModel.GoodsInfo_R_GTypeFilters" Role="GoodsInfo_R_GTypeFilters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GoodsInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GoodsInfo_R_GTypeFilters">
+              <PropertyRef Name="GoodsInfoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="GoodsSkuPrice_R_GoodsProDetails">
+          <Documentation>
+            <Summary>每个SKU对应着多组的属性和属性详情组合</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="GoodsPropertyID" Nullable="false" />
+          <Property Type="Int32" Name="GoodsPropertyDetailID" Nullable="false" />
+          <NavigationProperty Name="GoodsSkuPrice" Relationship="DataModel.GoodsSkuPriceGoodsSkuPrice_R_GoodsProDetails" FromRole="GoodsSkuPrice_R_GoodsProDetails" ToRole="GoodsSkuPrice" />
+          <Property Type="Int32" Name="GoodsSkuPriceID" Nullable="false" />
+          <Property Type="String" Name="GoodsInfoID" Nullable="false" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GoodsComment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <NavigationProperty Name="GoodsInfo" Relationship="DataModel.GoodsInfoGoodsComment" FromRole="GoodsComment" ToRole="GoodsInfo" />
+          <Property Type="Int32" Name="GoodsInfoID" Nullable="false" />
+          <Property Type="DateTime" Name="CommTime" Nullable="false" />
+          <Property Type="String" Name="CommContent" Nullable="false" />
+          <Property Type="Boolean" Name="IsDelete" Nullable="false" />
+        </EntityType>
+        <Association Name="GoodsTypeGoodsTypeFilterProperty">
+          <End Type="DataModel.GoodsType" Role="GoodsType" Multiplicity="1" />
+          <End Type="DataModel.GoodsTypeFilterProperty" Role="GoodsTypeFilterProperty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GoodsType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GoodsTypeFilterProperty">
+              <PropertyRef Name="GoodsTypeID1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GoodsInfoGoodsComment">
+          <End Type="DataModel.GoodsInfo" Role="GoodsInfo" Multiplicity="1" />
+          <End Type="DataModel.GoodsComment" Role="GoodsComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GoodsInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GoodsComment">
+              <PropertyRef Name="GoodsInfoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GoodsInfoGoodsSkuPrice">
+          <End Type="DataModel.GoodsInfo" Role="GoodsInfo" Multiplicity="1" />
+          <End Type="DataModel.GoodsSkuPrice" Role="GoodsSkuPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GoodsInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GoodsSkuPrice">
+              <PropertyRef Name="GoodsInfoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GoodsSkuPriceGoodsSkuPrice_R_GoodsProDetails">
+          <End Type="DataModel.GoodsSkuPrice" Role="GoodsSkuPrice" Multiplicity="1" />
+          <End Type="DataModel.GoodsSkuPrice_R_GoodsProDetails" Role="GoodsSkuPrice_R_GoodsProDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GoodsSkuPrice">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GoodsSkuPrice_R_GoodsProDetails">
+              <PropertyRef Name="GoodsSkuPriceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2093,6 +2494,7 @@ DueMoney  = ActualPay + BalanceChange + CouponValue
           <ScalarProperty Name="DetailPics" ColumnName="DetailPics" />
           <ScalarProperty Name="Sequence" ColumnName="Sequence" />
           <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+          <ScalarProperty Name="SearchKeywords" ColumnName="SearchKeywords" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2263,6 +2665,77 @@ DueMoney  = ActualPay + BalanceChange + CouponValue
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Keywords" ColumnName="Keywords" />
           <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GoodsSkuPrice">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.GoodsSkuPrice)">
+        <MappingFragment StoreEntitySet="GoodsSkuPrice">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SKUNumber" ColumnName="SKUNumber" />
+          <ScalarProperty Name="OriginalPrice" ColumnName="OriginalPrice" />
+          <ScalarProperty Name="SalPrice" ColumnName="SalPrice" />
+          <ScalarProperty Name="RepertoryCount" ColumnName="RepertoryCount" />
+          <ScalarProperty Name="GoodsInfoID" ColumnName="GoodsInfoID" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GoodsTypeFilterProperty">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.GoodsTypeFilterProperty)">
+        <MappingFragment StoreEntitySet="GoodsTypeFilterProperty">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="GoodsTypeID" ColumnName="GoodsTypeID" />
+          <ScalarProperty Name="FilterWords" ColumnName="FilterWords" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+          <ScalarProperty Name="GoodsTypeID1" ColumnName="GoodsTypeID1" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GoodsTypeFilterPropertyDetail">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.GoodsTypeFilterPropertyDetail)">
+        <MappingFragment StoreEntitySet="GoodsTypeFilterPropertyDetail">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="GoodsTypeFilterPropertyID" ColumnName="GoodsTypeFilterPropertyID" />
+          <ScalarProperty Name="FilterDetailWords" ColumnName="FilterDetailWords" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+          <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GoodsInfo_R_GTypeFilters">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.GoodsInfo_R_GTypeFilters)">
+        <MappingFragment StoreEntitySet="GoodsInfo_R_GTypeFilters">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="GoodsInfoID" ColumnName="GoodsInfoID" />
+          <ScalarProperty Name="GoodsTypeID" ColumnName="GoodsTypeID" />
+          <ScalarProperty Name="GoodsTypeFilterPropertyID" ColumnName="GoodsTypeFilterPropertyID" />
+          <ScalarProperty Name="GoodsTypeFilterPropertyDetailID" ColumnName="GoodsTypeFilterPropertyDetailID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GoodsSkuPrice_R_GoodsProDetails">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.GoodsSkuPrice_R_GoodsProDetails)">
+        <MappingFragment StoreEntitySet="GoodsSkuPrice_R_GoodsProDetails">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="GoodsPropertyID" ColumnName="GoodsPropertyID" />
+          <ScalarProperty Name="GoodsPropertyDetailID" ColumnName="GoodsPropertyDetailID" />
+          <ScalarProperty Name="GoodsSkuPriceID" ColumnName="GoodsSkuPriceID" />
+          <ScalarProperty Name="GoodsInfoID" ColumnName="GoodsInfoID" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GoodsComment">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.GoodsComment)">
+        <MappingFragment StoreEntitySet="GoodsComment">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="GoodsInfoID" ColumnName="GoodsInfoID" />
+          <ScalarProperty Name="CommTime" ColumnName="CommTime" />
+          <ScalarProperty Name="CommContent" ColumnName="CommContent" />
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

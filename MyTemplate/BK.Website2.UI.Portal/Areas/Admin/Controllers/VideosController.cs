@@ -11,7 +11,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
 {
     public class VideosController : BaseController
     {
-        IVideosServices videosServices = new VideosServices();
+        IVideosServices VideosServicesEntity { get; set; }
 
 
 
@@ -39,7 +39,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
 
             Func<Videos, int> orderFunc = (b) => { return b.ID; };
 
-            var tmp = videosServices.LoadPageEntitys(pageIndex, pageSize, out totalCount, whereFunc, orderFunc, true).ToList();
+            var tmp = VideosServicesEntity.LoadPageEntitys(pageIndex, pageSize, out totalCount, whereFunc, orderFunc, true).ToList();
 
 
 
@@ -91,7 +91,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
                     model.WebMUrl = Common.Common.WebSiteUrl + model.WebMUrl;
                 }
                 model.AddTime = DateTime.Now;
-                model = videosServices.Add(model);
+                model = VideosServicesEntity.Add(model);
                 if (model.ID > 0)
                 {
                     return Redirect(returnUrl);
@@ -107,7 +107,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
             //取消返回页面
             ViewBag.returnUrl = Request.UrlReferrer == null ? Url.Action("Index", "Videos") : Request.UrlReferrer.ToString();
 
-            var model = videosServices.LoadEntitys(b => b.ID == id).FirstOrDefault();
+            var model = VideosServicesEntity.LoadEntitys(b => b.ID == id).FirstOrDefault();
             return View(model);
         }
 
@@ -136,7 +136,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
                 {
                     model.WebMUrl = Common.Common.WebSiteUrl + model.WebMUrl;
                 }
-                if (videosServices.Update(model))
+                if (VideosServicesEntity.Update(model))
                 {
                     return RedirectToAction("Index");
                 }
@@ -152,13 +152,13 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
         public int Delete(int id)
         {
 
-            var model = videosServices.LoadEntitys(b => b.ID == id).FirstOrDefault();
+            var model = VideosServicesEntity.LoadEntitys(b => b.ID == id).FirstOrDefault();
             if (model == null)
             {
                 return 0;
             }
             model.IsDelete = true;
-            if (videosServices.Update(model))
+            if (VideosServicesEntity.Update(model))
             {
                 return 1;
             }

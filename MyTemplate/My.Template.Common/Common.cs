@@ -28,11 +28,10 @@ namespace My.Template.Common
         
         public static  log4net.ILog logWriter = LogManager.GetLogger("");
 
-        public  static string IsTestAlipay =  ConfigurationManager.AppSettings["IsTestAlipay"];
+        public static string IsTestAlipay =  ConfigurationManager.AppSettings["IsTestAlipay"];
 
         public static string ConnStr = ConfigurationManager.AppSettings["Connstr"];
 
-       
 
     }
 

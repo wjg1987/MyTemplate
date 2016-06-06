@@ -59,5 +59,11 @@ namespace My.Template.Model
         public DbSet<SpHouse_HseArea> SpHouse_HseArea { get; set; }
         public DbSet<KeywordsRank> KeywordsRank { get; set; }
         public DbSet<KeywordsRecords> KeywordsRecords { get; set; }
+        public DbSet<GoodsSkuPrice> GoodsSkuPrice { get; set; }
+        public DbSet<GoodsTypeFilterProperty> GoodsTypeFilterProperty { get; set; }
+        public DbSet<GoodsTypeFilterPropertyDetail> GoodsTypeFilterPropertyDetail { get; set; }
+        public DbSet<GoodsInfo_R_GTypeFilters> GoodsInfo_R_GTypeFilters { get; set; }
+        public DbSet<GoodsSkuPrice_R_GoodsProDetails> GoodsSkuPrice_R_GoodsProDetails { get; set; }
+        public DbSet<GoodsComment> GoodsComment { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
 {
     public class SinglePageController : BaseController
     {
-            ISinglePageServices singlePageServices = new SinglePageServices();
+        ISinglePageServices SinglePageServicesEntity { get; set; }
 
 
 
@@ -39,7 +39,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
 
                 Func<SinglePage, int> orderFunc = (b) => { return b.ID; };
 
-                var tmp = singlePageServices.LoadPageEntitys(pageIndex, pageSize, out totalCount, whereFunc, orderFunc, true).ToList();
+                var tmp = SinglePageServicesEntity.LoadPageEntitys(pageIndex, pageSize, out totalCount, whereFunc, orderFunc, true).ToList();
 
                
 
@@ -79,7 +79,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
                     model.AddTime = DateTime.Now;
                     model.IsDelete = false;
 
-                    model = singlePageServices.Add(model);
+                    model = SinglePageServicesEntity.Add(model);
                     if (model.ID > 0)
                     {
                         return Redirect(returnUrl);
@@ -95,7 +95,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
                 //取消返回页面
                 ViewBag.returnUrl = Request.UrlReferrer == null ? Url.Action("Index", "SinglePage") : Request.UrlReferrer.ToString();
 
-                var model = singlePageServices.LoadEntitys(b => b.ID == id).FirstOrDefault();
+                var model = SinglePageServicesEntity.LoadEntitys(b => b.ID == id).FirstOrDefault();
                 return View(model);
             }
 
@@ -114,7 +114,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
                         model.PageContent = model.PageContent.Replace("src=\"/UserUpload/", "src=\"" + Common.Common.WebSiteUrl + "/UserUpload/");
                     }
 
-                    if (singlePageServices.Update(model))
+                    if (SinglePageServicesEntity.Update(model))
                     {
                         return Redirect(returnUrl);
                     }
@@ -126,13 +126,13 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
             public int Delete(int id)
             {
 
-                var model = singlePageServices.LoadEntitys(b => b.ID == id).FirstOrDefault();
+                var model = SinglePageServicesEntity.LoadEntitys(b => b.ID == id).FirstOrDefault();
                 if (model == null)
                 {
                     return 0;
                 }
                 model.IsDelete = true;
-                if (singlePageServices.Update(model))
+                if (SinglePageServicesEntity.Update(model))
                 {
                     return 1;
                 }

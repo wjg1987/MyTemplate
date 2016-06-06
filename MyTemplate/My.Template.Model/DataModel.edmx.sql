@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 05/26/2016 18:33:27
+-- Date Created: 05/31/2016 15:07:58
 -- Generated from EDMX file: F:\task\template\MyTemplate\MyTemplate\My.Template.Model\DataModel.edmx
 -- --------------------------------------------------
 
@@ -441,7 +441,8 @@ CREATE TABLE [dbo].[GoodsInfo] (
     [ThumbPic] nvarchar(1024)  NOT NULL,
     [DetailPics] nvarchar(max)  NOT NULL,
     [Sequence] int  NOT NULL,
-    [DeliveryDate] int  NOT NULL
+    [DeliveryDate] int  NOT NULL,
+    [SearchKeywords] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -597,6 +598,71 @@ CREATE TABLE [dbo].[KeywordsRecords] (
     [ID] int IDENTITY(1,1) NOT NULL,
     [Keywords] nvarchar(512)  NOT NULL,
     [AddTime] datetime  NOT NULL
+);
+GO
+
+-- Creating table 'GoodsSkuPrice'
+CREATE TABLE [dbo].[GoodsSkuPrice] (
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [SKUNumber] nvarchar(64)  NOT NULL,
+    [OriginalPrice] int  NOT NULL,
+    [SalPrice] int  NOT NULL,
+    [RepertoryCount] int  NOT NULL,
+    [GoodsInfoID] int  NOT NULL,
+    [IsDelete] bit  NOT NULL
+);
+GO
+
+-- Creating table 'GoodsTypeFilterProperty'
+CREATE TABLE [dbo].[GoodsTypeFilterProperty] (
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [GoodsTypeID] int  NOT NULL,
+    [FilterWords] nvarchar(64)  NOT NULL,
+    [IsDelete] bit  NOT NULL,
+    [Sequence] int  NOT NULL,
+    [GoodsTypeID1] int  NOT NULL
+);
+GO
+
+-- Creating table 'GoodsTypeFilterPropertyDetail'
+CREATE TABLE [dbo].[GoodsTypeFilterPropertyDetail] (
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [GoodsTypeFilterPropertyID] int  NOT NULL,
+    [FilterDetailWords] nvarchar(64)  NOT NULL,
+    [IsDelete] bit  NOT NULL,
+    [Sequence] int  NOT NULL
+);
+GO
+
+-- Creating table 'GoodsInfo_R_GTypeFilters'
+CREATE TABLE [dbo].[GoodsInfo_R_GTypeFilters] (
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [GoodsInfoID] int  NOT NULL,
+    [GoodsTypeID] nvarchar(max)  NOT NULL,
+    [GoodsTypeFilterPropertyID] int  NOT NULL,
+    [GoodsTypeFilterPropertyDetailID] int  NOT NULL
+);
+GO
+
+-- Creating table 'GoodsSkuPrice_R_GoodsProDetails'
+CREATE TABLE [dbo].[GoodsSkuPrice_R_GoodsProDetails] (
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [GoodsPropertyID] nvarchar(max)  NOT NULL,
+    [GoodsPropertyDetailID] int  NOT NULL,
+    [GoodsSkuPriceID] int  NOT NULL,
+    [GoodsInfoID] nvarchar(max)  NOT NULL,
+    [IsDelete] bit  NOT NULL
+);
+GO
+
+-- Creating table 'GoodsComment'
+CREATE TABLE [dbo].[GoodsComment] (
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [UserID] int  NOT NULL,
+    [GoodsInfoID] int  NOT NULL,
+    [CommTime] datetime  NOT NULL,
+    [CommContent] nvarchar(max)  NOT NULL,
+    [IsDelete] bit  NOT NULL
 );
 GO
 
@@ -805,6 +871,42 @@ GO
 -- Creating primary key on [ID] in table 'KeywordsRecords'
 ALTER TABLE [dbo].[KeywordsRecords]
 ADD CONSTRAINT [PK_KeywordsRecords]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'GoodsSkuPrice'
+ALTER TABLE [dbo].[GoodsSkuPrice]
+ADD CONSTRAINT [PK_GoodsSkuPrice]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'GoodsTypeFilterProperty'
+ALTER TABLE [dbo].[GoodsTypeFilterProperty]
+ADD CONSTRAINT [PK_GoodsTypeFilterProperty]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'GoodsTypeFilterPropertyDetail'
+ALTER TABLE [dbo].[GoodsTypeFilterPropertyDetail]
+ADD CONSTRAINT [PK_GoodsTypeFilterPropertyDetail]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'GoodsInfo_R_GTypeFilters'
+ALTER TABLE [dbo].[GoodsInfo_R_GTypeFilters]
+ADD CONSTRAINT [PK_GoodsInfo_R_GTypeFilters]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'GoodsSkuPrice_R_GoodsProDetails'
+ALTER TABLE [dbo].[GoodsSkuPrice_R_GoodsProDetails]
+ADD CONSTRAINT [PK_GoodsSkuPrice_R_GoodsProDetails]
+    PRIMARY KEY CLUSTERED ([ID] ASC);
+GO
+
+-- Creating primary key on [ID] in table 'GoodsComment'
+ALTER TABLE [dbo].[GoodsComment]
+ADD CONSTRAINT [PK_GoodsComment]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
@@ -1118,6 +1220,90 @@ ADD CONSTRAINT [FK_UserUserInfo]
 CREATE INDEX [IX_FK_UserUserInfo]
 ON [dbo].[User]
     ([UserInfo_ID]);
+GO
+
+-- Creating foreign key on [GoodsTypeFilterPropertyID] in table 'GoodsTypeFilterPropertyDetail'
+ALTER TABLE [dbo].[GoodsTypeFilterPropertyDetail]
+ADD CONSTRAINT [FK_GoodsTypeFilterPropertyGoodsTypeFilterPropertyDetail]
+    FOREIGN KEY ([GoodsTypeFilterPropertyID])
+    REFERENCES [dbo].[GoodsTypeFilterProperty]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_GoodsTypeFilterPropertyGoodsTypeFilterPropertyDetail'
+CREATE INDEX [IX_FK_GoodsTypeFilterPropertyGoodsTypeFilterPropertyDetail]
+ON [dbo].[GoodsTypeFilterPropertyDetail]
+    ([GoodsTypeFilterPropertyID]);
+GO
+
+-- Creating foreign key on [GoodsInfoID] in table 'GoodsInfo_R_GTypeFilters'
+ALTER TABLE [dbo].[GoodsInfo_R_GTypeFilters]
+ADD CONSTRAINT [FK_GoodsInfoGoodsInfo_R_GTypeFilters]
+    FOREIGN KEY ([GoodsInfoID])
+    REFERENCES [dbo].[GoodsInfo]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_GoodsInfoGoodsInfo_R_GTypeFilters'
+CREATE INDEX [IX_FK_GoodsInfoGoodsInfo_R_GTypeFilters]
+ON [dbo].[GoodsInfo_R_GTypeFilters]
+    ([GoodsInfoID]);
+GO
+
+-- Creating foreign key on [GoodsTypeID1] in table 'GoodsTypeFilterProperty'
+ALTER TABLE [dbo].[GoodsTypeFilterProperty]
+ADD CONSTRAINT [FK_GoodsTypeGoodsTypeFilterProperty]
+    FOREIGN KEY ([GoodsTypeID1])
+    REFERENCES [dbo].[GoodsType]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_GoodsTypeGoodsTypeFilterProperty'
+CREATE INDEX [IX_FK_GoodsTypeGoodsTypeFilterProperty]
+ON [dbo].[GoodsTypeFilterProperty]
+    ([GoodsTypeID1]);
+GO
+
+-- Creating foreign key on [GoodsInfoID] in table 'GoodsComment'
+ALTER TABLE [dbo].[GoodsComment]
+ADD CONSTRAINT [FK_GoodsInfoGoodsComment]
+    FOREIGN KEY ([GoodsInfoID])
+    REFERENCES [dbo].[GoodsInfo]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_GoodsInfoGoodsComment'
+CREATE INDEX [IX_FK_GoodsInfoGoodsComment]
+ON [dbo].[GoodsComment]
+    ([GoodsInfoID]);
+GO
+
+-- Creating foreign key on [GoodsInfoID] in table 'GoodsSkuPrice'
+ALTER TABLE [dbo].[GoodsSkuPrice]
+ADD CONSTRAINT [FK_GoodsInfoGoodsSkuPrice]
+    FOREIGN KEY ([GoodsInfoID])
+    REFERENCES [dbo].[GoodsInfo]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_GoodsInfoGoodsSkuPrice'
+CREATE INDEX [IX_FK_GoodsInfoGoodsSkuPrice]
+ON [dbo].[GoodsSkuPrice]
+    ([GoodsInfoID]);
+GO
+
+-- Creating foreign key on [GoodsSkuPriceID] in table 'GoodsSkuPrice_R_GoodsProDetails'
+ALTER TABLE [dbo].[GoodsSkuPrice_R_GoodsProDetails]
+ADD CONSTRAINT [FK_GoodsSkuPriceGoodsSkuPrice_R_GoodsProDetails]
+    FOREIGN KEY ([GoodsSkuPriceID])
+    REFERENCES [dbo].[GoodsSkuPrice]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_GoodsSkuPriceGoodsSkuPrice_R_GoodsProDetails'
+CREATE INDEX [IX_FK_GoodsSkuPriceGoodsSkuPrice_R_GoodsProDetails]
+ON [dbo].[GoodsSkuPrice_R_GoodsProDetails]
+    ([GoodsSkuPriceID]);
 GO
 
 -- --------------------------------------------------

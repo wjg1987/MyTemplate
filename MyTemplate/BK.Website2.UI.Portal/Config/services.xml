@@ -22,4 +22,25 @@
 
   <object name="SiteInfoServices" type="My.Template.BLL.SiteInfoServices, My.Template.BLL" singleton="false" >
   </object>
+
+  <object name="BannerServices" type="My.Template.BLL.BannerServices, My.Template.BLL" singleton="false" >
+  </object>
+
+  <object name="BannerTypeServices" type="My.Template.BLL.BannerTypeServices, My.Template.BLL" singleton="false" >
+  </object>
+
+  <object name="SinglePageServices" type="My.Template.BLL.SinglePageServices, My.Template.BLL" singleton="false" >
+  </object>
+
+  <object name="VideosServices" type="My.Template.BLL.VideosServices, My.Template.BLL" singleton="false" >
+  </object>
+
+  <object name="QAInfosServices" type="My.Template.BLL.QAInfosServices, My.Template.BLL" singleton="false" >
+  </object>
+
+  <object name="NoticeServices" type="My.Template.BLL.NoticeServices, My.Template.BLL" singleton="false" >
+  </object>
+
+  <object name="NewsServices" type="My.Template.BLL.NewsServices, My.Template.BLL" singleton="false" >
+  </object>
 </objects>

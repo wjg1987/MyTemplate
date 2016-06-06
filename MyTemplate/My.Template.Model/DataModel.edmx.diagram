@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="aaefef95e045432683a0992df545eacc" Name="关系图1" ZoomLevel="62" >
+      <Diagram DiagramId="aaefef95e045432683a0992df545eacc" Name="关系图1" ZoomLevel="68" >
         <EntityTypeShape EntityType="DataModel.User" Width="1.75" PointX="0.5" PointY="1.5" />
         <EntityTypeShape EntityType="DataModel.UserInfo" Width="1.5" PointX="3.5" PointY="8" />
         <EntityTypeShape EntityType="DataModel.Role" Width="1.5" PointX="6.875" PointY="0.625" />
@@ -33,12 +33,12 @@
         <EntityTypeShape EntityType="DataModel.Notice" Width="2.375" PointX="35.25" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DataModel.User_ShoppingCart" Width="2.25" PointX="0.5" PointY="12.375" />
         <AssociationConnector Association="DataModel.UserUser_ShoppingCart" />
-        <EntityTypeShape EntityType="DataModel.GoodsInfo" Width="2.125" PointX="10" PointY="15.625" />
-        <EntityTypeShape EntityType="DataModel.GoodsProperty" Width="2.125" PointX="13.5" PointY="15.625" />
-        <EntityTypeShape EntityType="DataModel.GoodsPropertyDetail" Width="2.125" PointX="16.75" PointY="15.625" />
+        <EntityTypeShape EntityType="DataModel.GoodsInfo" Width="2.125" PointX="11.25" PointY="15.375" />
+        <EntityTypeShape EntityType="DataModel.GoodsProperty" Width="2.125" PointX="15.625" PointY="14.125" />
+        <EntityTypeShape EntityType="DataModel.GoodsPropertyDetail" Width="2.125" PointX="19.375" PointY="14.125" />
         <AssociationConnector Association="DataModel.GoodsInfoGoodsProperty" />
         <AssociationConnector Association="DataModel.GoodsPropertyGoodsPropertyDetail" />
-        <EntityTypeShape EntityType="DataModel.GoodsType" Width="2.125" PointX="10.125" PointY="20.5" />
+        <EntityTypeShape EntityType="DataModel.GoodsType" Width="2.125" PointX="10" PointY="20.875" />
         <AssociationConnector Association="DataModel.GoodsInfoGoodsType" />
         <EntityTypeShape EntityType="DataModel.Order" Width="2.25" PointX="5.875" PointY="15.75" />
         <EntityTypeShape EntityType="DataModel.OrderStatus" Width="2.125" PointX="6" PointY="20" />
@@ -55,13 +55,25 @@
         <AssociationConnector Association="DataModel.AreaInfoCommunity" />
         <EntityTypeShape EntityType="DataModel.SampleHouse" Width="1.5" PointX="20.75" PointY="6.875" />
         <EntityTypeShape EntityType="DataModel.HouseArea" Width="1.5" PointX="15.375" PointY="6.75" />
-        <EntityTypeShape EntityType="DataModel.SpHouse_HseArea" Width="1.75" PointX="17.5" PointY="6.875" />
+        <EntityTypeShape EntityType="DataModel.SpHouse_HseArea" Width="1.75" PointX="18.125" PointY="6.75" />
         <AssociationConnector Association="DataModel.SampleHouseSpHouse_HseArea" ManuallyRouted="false" >
         </AssociationConnector>
         <AssociationConnector Association="DataModel.HouseAreaSpHouse_HseArea" />
         <AssociationConnector Association="DataModel.UserUserInfo" />
         <EntityTypeShape EntityType="DataModel.KeywordsRank" Width="1.625" PointX="28.5" PointY="8.625" />
         <EntityTypeShape EntityType="DataModel.KeywordsRecords" Width="1.875" PointX="30.625" PointY="8.625" />
+        <EntityTypeShape EntityType="DataModel.GoodsSkuPrice" Width="2.75" PointX="15.625" PointY="20.625" />
+        <EntityTypeShape EntityType="DataModel.GoodsTypeFilterProperty" Width="2.5" PointX="9.625" PointY="24.75" />
+        <EntityTypeShape EntityType="DataModel.GoodsTypeFilterPropertyDetail" Width="2.875" PointX="15.125" PointY="28.125" />
+        <AssociationConnector Association="DataModel.GoodsTypeFilterPropertyGoodsTypeFilterPropertyDetail" />
+        <EntityTypeShape EntityType="DataModel.GoodsInfo_R_GTypeFilters" Width="2.75" PointX="16.25" PointY="24.25" />
+        <AssociationConnector Association="DataModel.GoodsInfoGoodsInfo_R_GTypeFilters" />
+        <EntityTypeShape EntityType="DataModel.GoodsSkuPrice_R_GoodsProDetails" Width="2.875" PointX="15.625" PointY="17.625" />
+        <EntityTypeShape EntityType="DataModel.GoodsComment" Width="2.625" PointX="11.25" PointY="12.25" />
+        <AssociationConnector Association="DataModel.GoodsTypeGoodsTypeFilterProperty" />
+        <AssociationConnector Association="DataModel.GoodsInfoGoodsComment" />
+        <AssociationConnector Association="DataModel.GoodsInfoGoodsSkuPrice" />
+        <AssociationConnector Association="DataModel.GoodsSkuPriceGoodsSkuPrice_R_GoodsProDetails" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

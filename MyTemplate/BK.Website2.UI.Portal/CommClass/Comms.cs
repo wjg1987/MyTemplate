@@ -142,7 +142,7 @@ namespace My.Template.UI.Portal.CommClass
         //}
 
 
-
+         
         public User IsAdminLogin()
         {
             User loginuser = null;
@@ -168,6 +168,7 @@ namespace My.Template.UI.Portal.CommClass
 
             return loginuser;
         }
+
 
     }
 

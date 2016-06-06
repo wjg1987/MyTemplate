@@ -38,7 +38,53 @@
     <!--name是要注入的属性的名称， ref 是objects节点下复杂类型的object的name的值-->
     <property name="SiteInfoServicesEntity" ref="SiteInfoServices" />
   </object>
+
+  <object type="My.Template.UI.Portal.Areas.Admin.Controllers.BannerController, My.Template.UI.Portal" singleton="false" >
+    <!--name是要注入的属性的名称， ref 是objects节点下复杂类型的object的name的值-->
+    <property name="BannerServicesEntity" ref="BannerServices" />
+    <property name="BannerTypeServicesEntity" ref="BannerTypeServices" />
+  </object>
+
+  <object type="My.Template.UI.Portal.Areas.Admin.Controllers.BannerTypeController, My.Template.UI.Portal" singleton="false" >
+    <!--name是要注入的属性的名称， ref 是objects节点下复杂类型的object的name的值-->
+    <property name="BannerTypeServicesEntity" ref="BannerTypeServices" />
+  </object>
+
+  <object type="My.Template.UI.Portal.Areas.Admin.Controllers.NewsController, My.Template.UI.Portal" singleton="false" >
+    <!--name是要注入的属性的名称， ref 是objects节点下复杂类型的object的name的值-->
+    <property name="NewsServicesEntity" ref="NewsServices" />
+  </object>
+
+
+  <object type="My.Template.UI.Portal.Areas.Admin.Controllers.NoticeController, My.Template.UI.Portal" singleton="false" >
+    <!--name是要注入的属性的名称， ref 是objects节点下复杂类型的object的name的值-->
+    <property name="NoticeServicesEntity" ref="NoticeServices" />
+  </object>
+
+
+  <object type="My.Template.UI.Portal.Areas.Admin.Controllers.QAInfosController, My.Template.UI.Portal" singleton="false" >
+    <!--name是要注入的属性的名称， ref 是objects节点下复杂类型的object的name的值-->
+    <property name="QAInfosServicesEntity" ref="QAInfosServices" />
+  </object>
+
+  <object type="My.Template.UI.Portal.Areas.Admin.Controllers.SinglePageController, My.Template.UI.Portal" singleton="false" >
+    <!--name是要注入的属性的名称， ref 是objects节点下复杂类型的object的name的值-->
+    <property name="SinglePageServicesEntity" ref="SinglePageServices" />
+  </object>
+
+
+  <object type="My.Template.UI.Portal.Areas.Admin.Controllers.VideosController, My.Template.UI.Portal" singleton="false" >
+    <!--name是要注入的属性的名称， ref 是objects节点下复杂类型的object的name的值-->
+    <property name="VideosServicesEntity" ref="VideosServices" />
+  </object>
+
+
+  <object type="My.Template.UI.Portal.Areas.Admin.Controllers.LoginController, My.Template.UI.Portal" singleton="false" >
+    <!--name是要注入的属性的名称， ref 是objects节点下复杂类型的object的name的值-->
+    <property name="UserServicesEntity" ref="UserServices" />
+  </object>
   
+
   <!--===============================admin/controller结束==========================================-->
 
 

@@ -20,6 +20,9 @@ namespace My.Template.Model
         public GoodsInfo()
         {
             this.GoodsProperty = new HashSet<GoodsProperty>();
+            this.GoodsInfo_R_GTypeFilters = new HashSet<GoodsInfo_R_GTypeFilters>();
+            this.GoodsComment = new HashSet<GoodsComment>();
+            this.GoodsSkuPrice = new HashSet<GoodsSkuPrice>();
         }
     
         public int ID { get; set; }
@@ -35,10 +38,17 @@ namespace My.Template.Model
         public string DetailPics { get; set; }
         public int Sequence { get; set; }
         public int DeliveryDate { get; set; }
+        public string SearchKeywords { get; set; }
     
     	[JsonIgnore]
         public virtual ICollection<GoodsProperty> GoodsProperty { get; set; }
     	[JsonIgnore]
         public virtual GoodsType GoodsType { get; set; }
+    	[JsonIgnore]
+        public virtual ICollection<GoodsInfo_R_GTypeFilters> GoodsInfo_R_GTypeFilters { get; set; }
+    	[JsonIgnore]
+        public virtual ICollection<GoodsComment> GoodsComment { get; set; }
+    	[JsonIgnore]
+        public virtual ICollection<GoodsSkuPrice> GoodsSkuPrice { get; set; }
     }
 }

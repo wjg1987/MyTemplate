@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using My.Template.BLL;
+using My.Template.IBLL;
 using My.Template.Model;
 
 
@@ -13,7 +14,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
     {
         //
         // GET: /Admin/BannerType/
-        BannerTypeServices bannerTypeServices = new BannerTypeServices();
+        IBannerTypeServices BannerTypeServicesEntity { get; set; }
 
         public ActionResult Index(int pageSize = 10, int pageIndex = 1, string searchWords = "")
         {
@@ -29,7 +30,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
 
             Func<BannerType, int> orderFunc = (b) => { return b.ID; };
 
-            var tmp = bannerTypeServices.LoadPageEntitys(pageIndex, pageSize, out totalCount, b=>true, orderFunc, true).ToList();
+            var tmp = BannerTypeServicesEntity.LoadPageEntitys(pageIndex, pageSize, out totalCount, b=>true, orderFunc, true).ToList();
 
 
 
@@ -58,7 +59,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
 
             if(ModelState.IsValid)
             {
-               var bt= bannerTypeServices.Add(bannertype);
+               var bt= BannerTypeServicesEntity.Add(bannertype);
                if (bt.ID > 0)
                {
                    return Redirect(returnUrl);
@@ -78,7 +79,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
             //取消返回页面
             ViewBag.returnUrl = Request.UrlReferrer == null ? Url.Action("Index", "BannerType") : Request.UrlReferrer.ToString();
 
-            BannerType bannertype = bannerTypeServices.LoadEntitys(b=>b.ID ==bannertypeId).FirstOrDefault();
+            BannerType bannertype = BannerTypeServicesEntity.LoadEntitys(b=>b.ID ==bannertypeId).FirstOrDefault();
             if (bannertype == null)
             {
                 return Redirect(ViewBag.returnUrl);
@@ -96,7 +97,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
              
-                if (bannerTypeServices.Update(bannertype))
+                if (BannerTypeServicesEntity.Update(bannertype))
                 {
                     return Redirect(returnUrl);
                 }
@@ -112,7 +113,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
 
         public int Delete(int bannnertypeId = 0)
         {
-            BannerType bannertype = bannerTypeServices.LoadEntitys(b => b.ID == bannnertypeId).FirstOrDefault();
+            BannerType bannertype = BannerTypeServicesEntity.LoadEntitys(b => b.ID == bannnertypeId).FirstOrDefault();
             if (bannertype == null)
             {
                 return -1;
@@ -120,7 +121,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
             else
             {
 
-                if (bannerTypeServices.Update(bannertype))
+                if (BannerTypeServicesEntity.Update(bannertype))
                 {
                     return 1;
                 }

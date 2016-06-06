@@ -13,14 +13,10 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
 {
     public class BannerController : BaseController
     {
-       
-        IBannerServices bannerServices = new BannerServices();
-        IBannerTypeServices bannerTypeServices = new BannerTypeServices();
-        //todo:从session中取 当前登陆的用户账号和图片信息  每次在 Action执行之前都会 进行权限校验（session是安全 存放在服务端 所以不需要每次都更新seesion中的当前用户登录信息  不过在 对用户的信息进行编辑操作后 如果操作的是 当前本人的信息 此时不对seesion中的信息进行更新的话 那么如果不注销登录进行重新登陆的话 显示的信息有可能会不正确）
-        //todo:将 登陆用户的菜单数据保存到 session中 。只有在用户 重新登陆或者更新菜单权限的时候才更新 保存的数据 这样就不需要每次都去数据库查询了
-        //todo:将登陆用户的 所有的权限ID 和当前登陆用户保存到同一处。在 进入Action的Filter中 校验用户请求的地址ID是否包含于用户所有权限ID中。只有当 用户重新登陆或者更新了权限操作才更新权限ID列表
-        //todo:左侧导航栏 激活问题解决。 返回当前登陆的权限的顶级ID以及上级路径ID 一一激活 前台判断并添加样式。。
 
+        IBannerServices BannerServicesEntity { get; set; }
+        IBannerTypeServices BannerTypeServicesEntity { get; set; }
+        
         public ActionResult Index(int pageSize = 10, int pageIndex = 1, string searchWords = "")
         {
             //返回前台页数和每页条数
@@ -46,7 +42,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
 
             Func<Banner, int> orderFunc = (b) => { return b.Sequence; };
 
-            var tmp = bannerServices.LoadPageEntitys(pageIndex, pageSize, out totalCount, whereFunc,orderFunc,true).ToList();
+            var tmp = BannerServicesEntity.LoadPageEntitys(pageIndex, pageSize, out totalCount, whereFunc,orderFunc,true).ToList();
 
             //分页字符串
             ViewBag.pageStr = Common.Tools.ShowPageNavigate(pageSize, pageIndex, totalCount, "&searchWords=" + searchWords);
@@ -61,7 +57,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
             ViewBag.returnUrl = Request.UrlReferrer == null ? Url.Action("Index", "Banner") : Request.UrlReferrer.ToString();
 
             #region 获取BannerType类型列表
-            var bannertypeList = bannerTypeServices.LoadEntitys(b=>true).ToList();
+            var bannertypeList = BannerTypeServicesEntity.LoadEntitys(b=>true).ToList();
             List<SelectListItem> list = new List<SelectListItem>();
             foreach (var item in bannertypeList)
             {
@@ -86,7 +82,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
             ViewBag.returnUrl = returnUrl;
 
             #region 获取BannerType类型列表
-            var bannertypeList = bannerTypeServices.LoadEntitys(b => true).ToList();
+            var bannertypeList = BannerTypeServicesEntity.LoadEntitys(b => true).ToList();
             List<SelectListItem> list = new List<SelectListItem>();
             foreach (var item in bannertypeList)
             {
@@ -104,7 +100,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
                 model.AddTime = DateTime.Now;
                 model.IsDelete = false;
 
-                model = bannerServices.Add(model);
+                model = BannerServicesEntity.Add(model);
                 if (model.ID > 0)
                 {
                     return Redirect(returnUrl);
@@ -123,7 +119,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
             ViewBag.returnUrl = Request.UrlReferrer == null ?Url.Action("Index","Banner") : Request.UrlReferrer.ToString();
 
             #region 获取BannerType类型列表
-            var bannertypeList = bannerTypeServices.LoadEntitys(b => true).ToList();
+            var bannertypeList = BannerTypeServicesEntity.LoadEntitys(b => true).ToList();
             List<SelectListItem> list = new List<SelectListItem>();
             foreach (var item in bannertypeList)
             {
@@ -132,7 +128,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
             ViewBag.BannerTypeID = list;
             #endregion
 
-            var model =  bannerServices.LoadEntitys(b => b.ID == id).FirstOrDefault();
+            var model =  BannerServicesEntity.LoadEntitys(b => b.ID == id).FirstOrDefault();
             return View(model);
         }
 
@@ -146,7 +142,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
             ViewBag.returnUrl = returnUrl;
 
             #region 获取BannerType类型列表
-            var bannertypeList = bannerTypeServices.LoadEntitys(b => true).ToList();
+            var bannertypeList = BannerTypeServicesEntity.LoadEntitys(b => true).ToList();
             List<SelectListItem> list = new List<SelectListItem>();
             foreach (var item in bannertypeList)
             {
@@ -163,7 +159,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
                     model.ImgPic = Common.Common.WebSiteUrl + model.ImgPic;
                 }
 
-                if (bannerServices.Update(model))
+                if (BannerServicesEntity.Update(model))
                 {
                     return Redirect(returnUrl);
                 }
@@ -177,13 +173,13 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
         public int Delete(int id)
         {
           
-            var model = bannerServices.LoadEntitys(b => b.ID == id).FirstOrDefault();
+            var model = BannerServicesEntity.LoadEntitys(b => b.ID == id).FirstOrDefault();
             if (model == null)
             {
                 return 0;
             }
             model.IsDelete = true;
-            if (bannerServices.Update(model))
+            if (BannerServicesEntity.Update(model))
             {
                 return 1;
             }

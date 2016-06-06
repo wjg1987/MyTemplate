@@ -11,7 +11,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
 {
     public class NoticeController : BaseController
     {
-        INoticeServices NoticeServices = new NoticeServices();
+        INoticeServices NoticeServicesEntity { get; set; }
 
 
 
@@ -39,7 +39,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
 
             Func<Notice, int> orderFunc = (b) => { return b.ID; };
 
-            var tmp = NoticeServices.LoadPageEntitys(pageIndex, pageSize, out totalCount, whereFunc, orderFunc, false).ToList();
+            var tmp = NoticeServicesEntity.LoadPageEntitys(pageIndex, pageSize, out totalCount, whereFunc, orderFunc, false).ToList();
 
 
 
@@ -76,7 +76,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
             {
                 model.AddTime = DateTime.Now;
                 model.IsDelete = false;
-                model = NoticeServices.Add(model);
+                model = NoticeServicesEntity.Add(model);
                 if (model.ID > 0)
                 {
                     return Redirect(returnUrl);
@@ -96,7 +96,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
             //取消返回页面
             ViewBag.returnUrl = Request.UrlReferrer == null ? Url.Action("Index", "Notice") : Request.UrlReferrer.ToString();
 
-            var model = NoticeServices.LoadEntitys(b => b.ID == id).FirstOrDefault();
+            var model = NoticeServicesEntity.LoadEntitys(b => b.ID == id).FirstOrDefault();
             return View(model);
         }
 
@@ -109,7 +109,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
             ViewBag.returnUrl = returnUrl;
             if (ModelState.IsValid)
             {
-                if (NoticeServices.Update(model))
+                if (NoticeServicesEntity.Update(model))
                 {
                     return Redirect(returnUrl);
                 }
@@ -121,13 +121,13 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
         public int Delete(int id)
         {
 
-            var model = NoticeServices.LoadEntitys(b => b.ID == id).FirstOrDefault();
+            var model = NoticeServicesEntity.LoadEntitys(b => b.ID == id).FirstOrDefault();
             if (model == null)
             {
                 return 0;
             }
             model.IsDelete = true;
-            if (NoticeServices.Update(model))
+            if (NoticeServicesEntity.Update(model))
             {
                 return 1;
             }

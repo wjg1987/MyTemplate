@@ -11,7 +11,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
 {
     public class QAInfosController : BaseController
     {
-        IQAInfosServices qAInfosServices = new QAInfosServices();
+        IQAInfosServices QAInfosServicesEntity { get; set; }
 
         public ActionResult Index(int pageSize = 10, int pageIndex = 1, string searchWords = "")
         {
@@ -37,7 +37,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
 
             Func<QAInfos, int> orderFunc = (b) => { return b.ID; };
 
-            var tmp = qAInfosServices.LoadPageEntitys(pageIndex, pageSize, out totalCount, whereFunc, orderFunc, true).ToList();
+            var tmp = QAInfosServicesEntity.LoadPageEntitys(pageIndex, pageSize, out totalCount, whereFunc, orderFunc, true).ToList();
 
 
 
@@ -75,7 +75,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
                     model.Answer = model.Answer.Replace("src=\"/UserUpload/", "src=\"" + Common.Common.WebSiteUrl + "/UserUpload/");
                 }
                 model.IsDelete = false;
-                model = qAInfosServices.Add(model);
+                model = QAInfosServicesEntity.Add(model);
                
 
                 if (model.ID > 0)
@@ -93,7 +93,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
             //取消返回页面
             ViewBag.returnUrl = Request.UrlReferrer == null ? Url.Action("Index", "QAInfos") : Request.UrlReferrer.ToString();
 
-            var model = qAInfosServices.LoadEntitys(b => b.ID == id).FirstOrDefault();
+            var model = QAInfosServicesEntity.LoadEntitys(b => b.ID == id).FirstOrDefault();
             return View(model);
         }
 
@@ -111,7 +111,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
                     //内容上传图片
                     model.Answer = model.Answer.Replace("src=\"/UserUpload/", "src=\"" + Common.Common.WebSiteUrl + "/UserUpload/");
                 }
-                if (qAInfosServices.Update(model))
+                if (QAInfosServicesEntity.Update(model))
                 {
                     return Redirect(returnUrl);
                 }
@@ -123,13 +123,13 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
         public int Delete(int id)
         {
 
-            var model = qAInfosServices.LoadEntitys(b => b.ID == id).FirstOrDefault();
+            var model = QAInfosServicesEntity.LoadEntitys(b => b.ID == id).FirstOrDefault();
             if (model == null)
             {
                 return 0;
             }
             model.IsDelete = true;
-            if (qAInfosServices.Update(model))
+            if (QAInfosServicesEntity.Update(model))
             {
                 return 1;
             }

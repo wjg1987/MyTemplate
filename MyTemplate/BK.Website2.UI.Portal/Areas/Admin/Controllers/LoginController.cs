@@ -15,7 +15,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
 {
     public class LoginController : Controller
     {
-        IUserServices userServices = new UserServices();
+        IUserServices UserServicesEntity { get; set; }
 
         public ActionResult Index()
         {
@@ -42,7 +42,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
 
                 #region 验证用户名和密码 以及角色的有效性
                
-                var dbUser = userServices.LoadEntitys(
+                var dbUser = UserServicesEntity.LoadEntitys(
                     u => string.Equals(u.Account, user.Account)
                          && u.IsDelete == false
                     ).FirstOrDefault();
@@ -160,7 +160,7 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
                 string pwd = Request.Cookies["cp2"].Value;
 
                 //判断cookie中存储的用户名和密码是否正确
-                var dbuser = userServices.LoadEntitys(u => u.Account == account).FirstOrDefault();
+                var dbuser = UserServicesEntity.LoadEntitys(u => u.Account == account).FirstOrDefault();
                 if (dbuser != null)
                 {
                     //比较密码 数据库中的密码和 cookie中的存储的密码都是加密过的

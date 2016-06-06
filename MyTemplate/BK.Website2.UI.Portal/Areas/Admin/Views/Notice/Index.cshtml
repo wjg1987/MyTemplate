@@ -43,7 +43,7 @@
                                                 </select> / 页
                                             </label>
                                         </div>
-                                        <a href="@Url.Action("Add", "Notice", new {pageNum=ViewBag.pageNum})" class="btn btn-success btn-rect">添加</a>
+                                        <a href="@Url.Action("Add", "Notice", new {pageNum=ViewBag.pageNum})" class="btn btn-success btn-sm btn-flat  btn-rect">添加</a>
                                     </div>
                                 <div class="col-sm-6">
                                     <div id="dataTables-example_filter" class="dataTables_filter"><label>搜索:<input type="search" id="searchBtn" value="@ViewBag.searchWords" class="form-control input-sm" aria-controls="dataTables-example"></label>
@@ -98,7 +98,7 @@
                                             <td>@Model[i].AddTime.ToString("yyyy-MM-dd")</td>
                                             <td>@Model[i].ExpireTime.ToString("yyyy-MM-dd")</td>
                                             <td><a href="@Url.Action("Edit", "Notice", new {id = Model[i].ID,pageNum=ViewBag.pageNum})" class="btn btn-success btn-rect">编辑</a>
-                                                <input type="button" value="删除" data-delid="@Model[i].ID" class="btn btn-danger btn-rect btn-del" data-toggle="modal" data-target="#buttonedModal"/>
+                                                <input type="button" value="删除" data-delid="@Model[i].ID" class="btn btn-danger btn-sm btn-flat  btn-rect btn-del" data-toggle="modal" data-target="#buttonedModal"/>
 
                                             </td>
                                         </tr>
