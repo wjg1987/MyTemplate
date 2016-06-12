@@ -3703,10 +3703,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\My.Template.AdoNetDAL\My.Template.AdoNetDAL.csproj">
-      <Project>{0503c564-0860-410b-8430-630d0febd522}</Project>
-      <Name>My.Template.AdoNetDAL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\My.Template.BLL\My.Template.BLL.csproj">
       <Project>{8a4166be-d11d-4d13-9bdb-0a13b9c31485}</Project>
       <Name>My.Template.BLL</Name>

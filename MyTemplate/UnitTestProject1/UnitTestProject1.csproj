@@ -60,30 +60,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\My.Template.BLL\My.Template.BLL.csproj">
-      <Project>{8A4166BE-D11D-4D13-9BDB-0A13B9C31485}</Project>
-      <Name>My.Template.BLL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\My.Template.Common\My.Template.Common.csproj">
-      <Project>{13F70F6D-B7CE-45F2-9313-AB1205FB4034}</Project>
-      <Name>My.Template.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\My.Template.EFDAL\My.Template.EFDAL.csproj">
-      <Project>{6988DD05-AC3E-4117-81AA-3915934CD489}</Project>
-      <Name>My.Template.EFDAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\My.Template.IBLL\My.Template.IBLL.csproj">
-      <Project>{CB23B52C-1489-4DCA-A825-744376984D46}</Project>
-      <Name>My.Template.IBLL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\My.Template.IDAL\My.Template.IDAL.csproj">
-      <Project>{DC05AA90-932D-4A13-A046-D54111DF5B97}</Project>
-      <Name>My.Template.IDAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\My.Template.Model\My.Template.Model.csproj">
-      <Project>{e8645d2b-6c77-473f-a2fc-31e5e8505652}</Project>
-      <Name>My.Template.Model</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BK.Website2.UI.Portal\My.Template.UI.Portal.csproj">
       <Project>{D0F771B0-6F17-4617-BAA9-E6F057B53F4E}</Project>
       <Name>My.Template.UI.Portal</Name>

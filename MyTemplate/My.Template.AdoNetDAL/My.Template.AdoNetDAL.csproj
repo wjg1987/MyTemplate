@@ -50,16 +50,6 @@
     <Compile Include="BaseDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\My.Template.IDAL\My.Template.IDAL.csproj">
-      <Project>{dc05aa90-932d-4a13-a046-d54111df5b97}</Project>
-      <Name>My.Template.IDAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\My.Template.Model\My.Template.Model.csproj">
-      <Project>{e8645d2b-6c77-473f-a2fc-31e5e8505652}</Project>
-      <Name>My.Template.Model</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

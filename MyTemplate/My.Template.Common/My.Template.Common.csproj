@@ -106,13 +106,13 @@
     <Compile Include="ValidateCode.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\My.Template.Model\My.Template.Model.csproj">
       <Project>{e8645d2b-6c77-473f-a2fc-31e5e8505652}</Project>
       <Name>My.Template.Model</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
