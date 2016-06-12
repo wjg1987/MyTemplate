@@ -43,6 +43,7 @@ namespace My.Template.Model
         public string AlipayAccount { get; set; }
         public string BankNumber { get; set; }
         public string BankName { get; set; }
+        public int RegistType { get; set; }
     
     	[JsonIgnore]
         public virtual ICollection<User_Role> User_Role { get; set; }

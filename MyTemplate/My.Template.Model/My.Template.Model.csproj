@@ -64,6 +64,7 @@
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AdminDataModel\ActionEnum.cs" />
+    <Compile Include="AdminDataModel\CommonEnum.cs" />
     <Compile Include="AdminDataModel\LoginAdminInfo.cs" />
     <Compile Include="AreaInfo.cs">
       <DependentUpon>DataModel.tt</DependentUpon>

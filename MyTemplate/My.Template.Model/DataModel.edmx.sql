@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 05/31/2016 15:07:58
+-- Date Created: 06/12/2016 09:47:12
 -- Generated from EDMX file: F:\task\template\MyTemplate\MyTemplate\My.Template.Model\DataModel.edmx
 -- --------------------------------------------------
 
@@ -82,6 +82,24 @@ IF OBJECT_ID(N'[dbo].[FK_HouseAreaSpHouse_HseArea]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_UserUserInfo]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_UserUserInfo];
+GO
+IF OBJECT_ID(N'[dbo].[FK_GoodsTypeFilterPropertyGoodsTypeFilterPropertyDetail]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GoodsTypeFilterPropertyDetail] DROP CONSTRAINT [FK_GoodsTypeFilterPropertyGoodsTypeFilterPropertyDetail];
+GO
+IF OBJECT_ID(N'[dbo].[FK_GoodsInfoGoodsInfo_R_GTypeFilters]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GoodsInfo_R_GTypeFilters] DROP CONSTRAINT [FK_GoodsInfoGoodsInfo_R_GTypeFilters];
+GO
+IF OBJECT_ID(N'[dbo].[FK_GoodsTypeGoodsTypeFilterProperty]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GoodsTypeFilterProperty] DROP CONSTRAINT [FK_GoodsTypeGoodsTypeFilterProperty];
+GO
+IF OBJECT_ID(N'[dbo].[FK_GoodsInfoGoodsComment]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GoodsComment] DROP CONSTRAINT [FK_GoodsInfoGoodsComment];
+GO
+IF OBJECT_ID(N'[dbo].[FK_GoodsInfoGoodsSkuPrice]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GoodsSkuPrice] DROP CONSTRAINT [FK_GoodsInfoGoodsSkuPrice];
+GO
+IF OBJECT_ID(N'[dbo].[FK_GoodsSkuPriceGoodsSkuPrice_R_GoodsProDetails]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GoodsSkuPrice_R_GoodsProDetails] DROP CONSTRAINT [FK_GoodsSkuPriceGoodsSkuPrice_R_GoodsProDetails];
 GO
 
 -- --------------------------------------------------
@@ -190,6 +208,24 @@ GO
 IF OBJECT_ID(N'[dbo].[KeywordsRecords]', 'U') IS NOT NULL
     DROP TABLE [dbo].[KeywordsRecords];
 GO
+IF OBJECT_ID(N'[dbo].[GoodsSkuPrice]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GoodsSkuPrice];
+GO
+IF OBJECT_ID(N'[dbo].[GoodsTypeFilterProperty]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GoodsTypeFilterProperty];
+GO
+IF OBJECT_ID(N'[dbo].[GoodsTypeFilterPropertyDetail]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GoodsTypeFilterPropertyDetail];
+GO
+IF OBJECT_ID(N'[dbo].[GoodsInfo_R_GTypeFilters]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GoodsInfo_R_GTypeFilters];
+GO
+IF OBJECT_ID(N'[dbo].[GoodsSkuPrice_R_GoodsProDetails]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GoodsSkuPrice_R_GoodsProDetails];
+GO
+IF OBJECT_ID(N'[dbo].[GoodsComment]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GoodsComment];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -213,6 +249,7 @@ CREATE TABLE [dbo].[User] (
     [AlipayAccount] nvarchar(max)  NULL,
     [BankNumber] nvarchar(max)  NULL,
     [BankName] nvarchar(256)  NULL,
+    [RegistType] int  NOT NULL,
     [UserInfo_ID] int  NOT NULL
 );
 GO

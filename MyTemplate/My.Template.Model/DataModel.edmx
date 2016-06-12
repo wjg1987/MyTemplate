@@ -179,6 +179,7 @@
     <Property Name="AlipayAccount" Type="nvarchar(max)" Nullable="true" />
     <Property Name="BankNumber" Type="nvarchar(max)" Nullable="true" />
     <Property Name="BankName" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="RegistType" Type="int" Nullable="false" />
     <Property Name="UserInfo_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="UserInfo">
@@ -1157,6 +1158,11 @@
           <NavigationProperty Name="User_ShoppingCart" Relationship="DataModel.UserUser_ShoppingCart" FromRole="User" ToRole="User_ShoppingCart" />
           <NavigationProperty Name="RecAddress" Relationship="DataModel.UserRecAddress" FromRole="User" ToRole="RecAddress" />
           <NavigationProperty Name="UserInfo" Relationship="DataModel.UserUserInfo" FromRole="User" ToRole="UserInfo" />
+          <Property Type="Int32" Name="RegistType" Nullable="false" >
+            <Documentation>
+              <Summary>注册来路 电脑端，电脑后台，手机端，还是别的地方注册</Summary>
+            </Documentation>
+          </Property>
         </EntityType>
         <EntityType Name="UserInfo">
           <Key>
@@ -2248,6 +2254,7 @@ DueMoney  = ActualPay + BalanceChange + CouponValue
           <ScalarProperty Name="AlipayAccount" ColumnName="AlipayAccount" />
           <ScalarProperty Name="BankNumber" ColumnName="BankNumber" />
           <ScalarProperty Name="BankName" ColumnName="BankName" />
+          <ScalarProperty Name="RegistType" ColumnName="RegistType" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

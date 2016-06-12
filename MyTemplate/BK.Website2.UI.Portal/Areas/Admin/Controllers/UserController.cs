@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using My.Template.BLL;
 using My.Template.IBLL;
 using My.Template.Model;
+using My.Template.Model.AdminDataModel;
 using Newtonsoft.Json.Linq;
 
 namespace My.Template.UI.Portal.Areas.Admin.Controllers
@@ -108,7 +109,9 @@ namespace My.Template.UI.Portal.Areas.Admin.Controllers
                 model.IsDelete = false;
                 model.UserInfo = uinfo;
                 model.CreateTime = DateTime.Now;
-          
+                model.RegistType = Convert.ToInt32(RegistTypeEnum.AdminRegist);
+
+
                 model = UserServicesEntity.Add(model);
                 if (model.ID > 0)
                 {

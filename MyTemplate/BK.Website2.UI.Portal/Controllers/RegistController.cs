@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using My.Template.BLL;
 using My.Template.IBLL;
 using My.Template.Model;
+using My.Template.Model.AdminDataModel;
 
 namespace My.Template.UI.Portal.Controllers
 {
@@ -28,9 +29,7 @@ namespace My.Template.UI.Portal.Controllers
         [HttpPost]
         public ActionResult Index(User user, string vilidateCode)
         {
-            #region 测试使用 固定的验证码
-            //Session.Add("18503083235regist", "123456");
-            #endregion
+
             if (string.IsNullOrEmpty(vilidateCode) || Session[user.Account + "regist"] == null)
             {
                 ViewBag.ErrorInfo = "验证码无效";
@@ -74,14 +73,15 @@ namespace My.Template.UI.Portal.Controllers
                 user.CreateTime = DateTime.Now;
                 user.Balance = 0;
                 user.FrozenBlance = 0;
+                user.RegistType = Convert.ToInt32(RegistTypeEnum.NormalRegist);
 
 
                 //ShoppingCart sc = new ShoppingCart();
                 //sc.User = user;
                 //user.ShoppingCart = sc;
 
-                //int dbuserid = userServices.AddUser(user, uinfo, sc);
-                int dbuserid = 1;
+                //todo:cancel test
+                int dbuserid = userServices.AddUser(user, uinfo);
                 if (dbuserid > 0)
                 {
                     Session["CurLoginUserID"] = dbuserid;
